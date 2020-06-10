@@ -1,0 +1,18 @@
+.logoWhite{
+    height: 60px;
+}
+.colorNavbar{
+    background: white;
+    color: black;
+}
+.fontColor:focus, .fontColor:hover {
+    text-decoration: underline;
+    color: white;
+}
+a:hover {
+    text-decoration: underline;
+    color: white;
+}
+.dropdown-toggle::after {
+    display: none;
+}

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+$active-tab-color: #000;
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #ABAAAA !important;
+    color: #ffffff;
+}
+body .ui-table .ui-sortable-column.ui-state-highlight {
+    background-color: #ABAAAA;
+    color: #ffffff;
+}
+@import "~ngx-tabset/ngx-tabset";

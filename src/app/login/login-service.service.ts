@@ -7,14 +7,19 @@ import { HttpClient } from '@angular/common/http';
 export class LoginServiceService {
 
   constructor(
-    private http : HttpClient
+    private http: HttpClient
   ) { }
 
-  loginAppearance(customerData){
-    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration',customerData);
+  loginAppearance(customerData) {
+    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration', customerData);
   }
 
-  login(userData){
+  login(userData) {
     return this.http.post('skulocity/api/v1/login', userData);
   }
+
+  logout(){
+    return this.http.post('skulocity/api/v1/logout',{});
+  }
+
 }

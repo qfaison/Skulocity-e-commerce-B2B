@@ -1,1 +1,99 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-md fixed-top whitenavbar fixed colorNavbar" [style.background]="color">
+    <div class="container-fluid">
+      <div class="mobilemenubar">
+        <button class="navbar-toggler forMenu">
+          <div class="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <a class="navbar-brand d-md-none" href="index.html">
+          <img [src]='logo' class="logoWhite" alt="">
+        </a>
+        <span class="shoppingcart mybagopnbtn">
+          <img class="cart__white" *ngIf="!logoDark" src="../../assets/images/lasio/img/shoppingcart.svg" alt="">
+          <img class="cart__white" *ngIf="logoDark" src="../../assets/images/lasio/img/shoppingcartWhite.svg" alt="">
+        </span>
+      </div>
+  
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/']" data-id="upcomingsection">Quick Add</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/orderHistory']" data-id="upcomingsection">Order History</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/shoppingList']" data-id="upcomingsection">Shopping List</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/request']" data-id="upcomingsection">Requests</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/quotes']" data-id="upcomingsection">Quotes</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" [style.color]="fontColor" routerLinkActive="active" [routerLink]="['/dashboard/messages']" data-id="upcomingsection">Messages</a>
+          </li> -->
+
+          <li class="nav-item ">
+            <div class="dropdown nav-link fontColor">
+              <a class="dropdown-toggle" [style.color]="fontColor" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shop
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Shop 1</button>
+                <button class="dropdown-item" type="button">Shop 2</button>
+                <button class="dropdown-item" type="button">Shop 3</button>
+              </div>
+            </div>
+          </li>
+          <!-- <li class="nav-item ">
+            <a class="nav-link" [routerLink]="['/dashboard/wholesale']">Wholesale</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard/affiliates']">Affiliates</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" [style.color]="fontColor" [routerLink]="['/dashboard/faq']">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [style.color]="fontColor" [routerLink]="['/dashboard/about']">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [style.color]="fontColor" [routerLink]="['/dashboard/contact']">Contact</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard/catalog']">Catalog</a>
+          </li> -->
+        </ul>
+        <a class="navbar-brand navbarinside__logo logoshifting" [routerLink]="['/dashboard/']">
+          <img [src]='logo' class="logoWhite" alt="">
+        </a>
+        <ul class="navbar-nav ml-auto">
+        
+          <li class="nav-item dropdownCstm">
+            <div class="dropdown nav-link fontColor">
+              <a class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user" [style.color]="fontColor" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">View Profile</button>
+                <button class="dropdown-item" type="button">Order History</button>
+                <button class="dropdown-item" type="button">Shopping List</button>
+                <button class="dropdown-item" type="button">Request</button>
+                <button class="dropdown-item" type="button">Quotes</button>
+                <button class="dropdown-item" type="button">Messages</button>
+                <button class="dropdown-item" type="button" (click)="logout()">Sign Out</button>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item mob-dnone">
+            <span class="nav-link" [style.color]="fontColor">MY BAG (0)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

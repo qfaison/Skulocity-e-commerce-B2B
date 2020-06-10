@@ -1,1 +1,144 @@
-<p>dashboard works!</p>
+<app-header></app-header>
+<div class="container-fluid main">
+    <div class="row rowMain">
+        <div class="col-md-3 paddingNoneSidebar">
+            <!-- Main sidebar -->
+            <div id="sidebar-main" class="sidebar sidebar-default sidebar-separate sidebar-fixed">
+                <div class="sidebar-content">
+                    <!-- /Sidebar Category -->
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>Shop</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="#other-fruits" class="nav-link" data-toggle="collapse" role="button"
+                                        aria-expanded="false" aria-controls="other-fruits">
+                                        Catalog
+                                    </a>
+                                    <ul id="other-fruits" class="flex-column collapse">
+                                        <li class="nav-item" *ngFor="let catalog of catalogs">
+                                            <a href="#other" class="nav-link" data-toggle="collapse" (click)="catalogFunction(catalog)"
+                                                role="button" aria-expanded="false" aria-controls="other">
+                                                <b>{{catalog.catalogName}}</b>
+                                            </a>
+                                            <ul id="other" class="flex-column collapse">
+                                                <li class="nav-item" *ngFor="let category of categories"
+                                                    (click)="selectCategory(category)">
+                                                    <a class="nav-link">
+                                                        {{category.categoryName}} {{category.description}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!-- /Sub Nav -->
+                                </li>
+
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+                    <!-- /Sidebar Category -->
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>SPECIAL OFFER!</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul id="sidebar-editable-nav" class="nav flex-column">
+                                <li class="nav-item" *ngFor="let promo of promos">
+                                    <span class="nav-link spanText">
+                                        <b>Details</b> {{promo.promoText}}
+                                    </span>
+                                </li>
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>BROWSE FORUMS</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul id="sidebar-editable-nav" class="nav flex-column">
+                                <li class="nav-item" *ngFor="let content of contents">
+                                    <a class="nav-link">
+                                        {{content.contentName}}
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>BROWSE CONTENT</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul id="sidebar-editable-nav" class="nav flex-column">
+                                <li class="nav-item" *ngFor="let contentCat of contentcategorylist">
+                                    <a class="nav-link">
+                                        {{contentCat.contentName}}
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>BROWSE BLOGS</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul id="sidebar-editable-nav" class="nav flex-column">
+                                <li class="nav-item" *ngFor="let blog of blogList">
+                                    <a class="nav-link">
+                                        {{blog.contentName}}
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+
+                    <div class="sidebar-category sidebar-default">
+                        <div class="category-title" [style.background]="color">
+                            <span><b>DID YOU KNOW?</b></span>
+                        </div>
+                        <div class="category-content">
+                            <ul id="sidebar-editable-nav" class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/customers" class="nav-link">
+                                        Gizmos are our most popular item.
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/resettest" class="nav-link">
+                                        The resale value of widgets after five years is 46% higher than that of
+                                        competitors.
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /Nav -->
+                        </div>
+                        <!-- /Category Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- /main sidebar -->
+        </div>
+        <div class="col-md-9 paddingNone">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,55 @@
+.Box-container{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    a{
+        font-size: 12px;
+        margin-left: 15px;
+    }
+}
+.productImage{
+    height: 100px;
+}
+.productImages{
+    height: 200px;
+}
+.card-title{
+    text-align: left;
+    font-size: 80%;
+}
+.card-text:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+}
+.productName{
+    margin-top: 10px;
+}
+.subCategories{
+    display: flex;
+}
+.products{
+    width: auto;
+}
+.card.productCategory{
+    width: calc(100%/3);
+}
+.tabHistory{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 2px;
+}
+.Spacer{
+    height: 10px;
+}
+.SpacerMenu{
+    height: 5px;
+}
+.paddingNone{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

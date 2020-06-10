@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <span class="pull-left mr15 title">Widget Quick Add</span>
+        </div>
+        <div class="col-md-3">
+            <!-- <select class="form-control dropdown" chosen="productCategoryList">
+                <option value=" "></option>
+                <option value="{{productCategory.productCategoryId}}"
+                    *ngFor="let productCategory of productCategoryList">
+                    {{productCategory.categoryName}}</option>
+            </select> -->
+            <select class="form-control dropdown" [(ngModel)]="categoryId">
+                <option *ngFor="let productCategory of productCategoryList" [ngValue]=productCategory.productCategoryId>{{productCategory.categoryName}}</option>
+            </select>              
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary" [style.background]="color" (click)="quickAdd(categoryId)">Choose Quick Add Category</button>
+        </div>
+    </div>
+    <div class="row spacer">
+
+    </div>
+    <div class="row">
+        <p-table [columns]="cols" styleClass="ui-table" [value]="productCategoryMap" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" class="header" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns" class="columnTable">
+                        <div *ngIf="col.field == 'image'">
+                            <img src="{{rowData[col.field]}}" style="width: 60px; height: 60px;">
+                        </div>
+                        <div *ngIf="col.field != 'image'">
+                            {{rowData[col.field]}}
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
