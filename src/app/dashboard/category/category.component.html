@@ -40,18 +40,24 @@
         </div>
         <div class="col-md-12 subCategories" *ngIf="categoryData">
             <div style="display: flex; flex-wrap: wrap;">
-                <div class="card productCategory" *ngFor="let category of categoryData">
+                <div class="card productCategory" *ngFor="let category of categoryData; let i=index">
                     <img src="../../../assets/images/product.png" class="card-img-top productImages" alt="...">
                     <div class="card-body">
                         <div style="display: flex; justify-content: space-between;">
-                            <h5 class="card-title" [style.color]="color"><b>{{category.product.internalName}}</b></h5>
+                            <h5 class="card-title" [style.color]="color" style="height: 30px;"><b>{{category.product.internalName}}</b></h5>
                             <span><i class="fa fa-compress" aria-hidden="true"></i></span>
                         </div>
-                        <p class="card-text">{{category.product.description}}</p>
-                    </div>
-                    <div>$44.59</div>
-                    <div class="card-body">
-                        <button [style.background]="color" class="btn btn-success">Add to cart</button>
+                        <p class="card-text" style="margin: 0px;">{{category.product.description}}</p>
+                        <div class="card-body" *ngIf="category.productSummary.price">
+                            <input type="number" [(ngModel)]="quantity[i]" name="quantity" min="1" max="5">
+                            <div>${{category.productSummary.price.basePrice}}</div>
+                            <button [style.background]="color" class="btn btn-success" (click)="addProductToCart(quantity[i],category.product.productId)">Add to cart</button>
+                        </div>
+                        <div class="card-body" *ngIf="!category.productSummary.price">
+                            <!-- <input type="number" [(ngModel)]="quantity[i]" name="quantity" min="1" max="5"> -->
+                            <div><b>Price Not Available</b></div>
+                            <!-- <button [style.background]="color" class="btn btn-success" (click)="addProductToCart(quantity[i],category.product.productId)">Add to cart</button> -->
+                        </div>
                     </div>
                 </div>
             </div>

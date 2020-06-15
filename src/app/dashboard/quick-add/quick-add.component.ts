@@ -79,8 +79,6 @@ export class QuickAddComponent implements OnInit {
         this.productCategoryMap.push(productMap);
       }
 
-      console.log('here',this.productCategoryMap);
-
     })
   }
 

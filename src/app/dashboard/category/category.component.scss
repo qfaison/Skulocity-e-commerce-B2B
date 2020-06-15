@@ -8,6 +8,9 @@
         margin-left: 15px;
     }
 }
+.card-body{
+    text-align: center;
+}
 .productImage{
     height: 100px;
 }
@@ -18,17 +21,15 @@
     text-align: left;
     font-size: 80%;
 }
-.card-text:last-child {
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 0;
 }
 .productName{
     margin-top: 10px;
-}
-.subCategories{
-    display: flex;
 }
 .products{
     width: auto;

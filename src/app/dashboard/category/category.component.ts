@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardServiceService } from '../dashboard-service.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-category',
@@ -15,6 +16,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
   longDescription;
   subCategoryData;
   categoryData;
+  quantity = [];
+  productCategoryId;
+  cartItemCount;
 
   constructor(
     private dashboardService: DashboardServiceService,
@@ -27,43 +31,60 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.getCategoryData();
   }
 
-  getCategoryData(): void{
-    this.urlSubscriber = this.route.paramMap.subscribe((data: any )=>{
+  getCategoryData(): void {
+    this.urlSubscriber = this.route.paramMap.subscribe((data: any) => {
       const categoryId = data.params.categoryId;
-      this.dashboardService.getCategory(categoryId).subscribe((res)=>{
-        console.log(res);
-        if(res['data']['productDetails']['productCategoryName'])
-        {
+      this.dashboardService.getCategory(categoryId).subscribe((res) => {
+        if (res['data']['productDetails']['productCategoryName']) {
           this.productName = res['data']['productDetails']['productCategoryName'];
         }
-        else{
+        else {
           this.productName = ""
         }
-        if(res['data']['productDetails']['productCategory']['longDescription'])
-        {
+        if (res['data']['productDetails']['productCategory']['longDescription']) {
           this.longDescription = res['data']['productDetails']['productCategory']['longDescription'];
         }
-        else{
+        else {
           this.longDescription = ""
         }
-        if(res['data']['subCategory'].length >= 1)
-        {
+        if (res['data']['subCategory'].length >= 1) {
           this.subCategoryData = res['data']['subCategory'];
         }
-        else{
+        else {
           this.subCategoryData = [];
         }
-        if(res['data']['productDetails'])
-        {
+        if (res['data']['productDetails']) {
           this.categoryData = res['data']['productDetails']['productCategoryMembers'];
         }
-        else{
+        else {
           this.categoryData = [];
         }
-        
-        
+
+        console.log("test",this.categoryData);
       })
     });
+  }
+
+  addProductToCart(quantity: any, productId: string): void {
+    if (!quantity) {
+      swal.fire('Oops...', 'Quantity must be greater than 0!', 'error');
+    }
+    else {
+      let data = {
+        'add_product_id': productId,
+        'quantity': quantity + ""
+      }
+      this.dashboardService.addItem(data).subscribe((res) => {
+        console.log(res);
+        this.getCartCount();
+      })
+    }
+  }
+
+  getCartCount(): void {
+    this.dashboardService.getCartDetail().subscribe((res) => {
+      this.dashboardService.addValueToCart(res['data']['cart']['shoppingCartSize']);
+    })
   }
 
   ngOnDestroy(): void {

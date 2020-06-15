@@ -4,12 +4,6 @@
             <span class="pull-left mr15 title">Widget Quick Add</span>
         </div>
         <div class="col-md-3">
-            <!-- <select class="form-control dropdown" chosen="productCategoryList">
-                <option value=" "></option>
-                <option value="{{productCategory.productCategoryId}}"
-                    *ngFor="let productCategory of productCategoryList">
-                    {{productCategory.categoryName}}</option>
-            </select> -->
             <select class="form-control dropdown" [(ngModel)]="categoryId">
                 <option *ngFor="let productCategory of productCategoryList" [ngValue]=productCategory.productCategoryId>{{productCategory.categoryName}}</option>
             </select>              

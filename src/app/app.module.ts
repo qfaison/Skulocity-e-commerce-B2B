@@ -29,6 +29,7 @@ import { RequestsComponent } from './dashboard/requests/requests.component';
 import { QuotesComponent } from './dashboard/quotes/quotes.component';
 import { MessagesComponent } from './dashboard/messages/messages.component';
 import { CategoryComponent } from './dashboard/category/category.component';
+import { ViewQuotesComponent } from './dashboard/view-quotes/view-quotes.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CategoryComponent } from './dashboard/category/category.component';
     RequestsComponent,
     QuotesComponent,
     MessagesComponent,
-    CategoryComponent
+    CategoryComponent,
+    ViewQuotesComponent
   ],
   imports: [
     BrowserModule,

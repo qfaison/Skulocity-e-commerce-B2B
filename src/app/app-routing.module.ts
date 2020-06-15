@@ -17,6 +17,7 @@ import { QuotesComponent } from './dashboard/quotes/quotes.component';
 import { MessagesComponent } from './dashboard/messages/messages.component';
 import { AuthGuardServiceGuard } from './auth-guard-service.guard';
 import { CategoryComponent } from './dashboard/category/category.component';
+import { ViewQuotesComponent } from './dashboard/view-quotes/view-quotes.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,6 @@ const routes: Routes = [
     { path: 'request', component: RequestsComponent},
     { path: 'quotes', component: QuotesComponent},
     { path: 'messages', component: MessagesComponent}, 
-     
     { path: 'home', component: HomeComponent},
     { path: 'contact', component: ContactUsComponent},
     { path: 'about', component: AboutUsComponent},
@@ -37,7 +37,8 @@ const routes: Routes = [
     { path: 'affiliates', component: AffiliatesComponent},
     { path: 'faq', component: FaqComponent},
     { path: 'catalog/:catalogId', component: CatalogComponent},
-    { path: 'category/:categoryId', component: CategoryComponent}
+    { path: 'category/:categoryId', component: CategoryComponent},
+    { path: 'viewQuotes/:quoteId', component: ViewQuotesComponent}
   ] },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: "**", redirectTo: '/' }
