@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
     "angular-chosen": "^1.0.8",
+    "ngx-cookie-service": "^3.0.4",
     "ngx-mat-select-search": "^2.2.0",
     "ngx-tabset": "^2.2.0",
     "ngx-toastr": "^12.1.0",

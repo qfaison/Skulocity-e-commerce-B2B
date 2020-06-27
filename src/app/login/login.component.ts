@@ -1,8 +1,9 @@
 import { LoginServiceService } from './login-service.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,15 @@ export class LoginComponent implements OnInit {
     public http: HttpClient,
     private formBuilder: FormBuilder,
     private loginService: LoginServiceService,
-    private routeActivated: ActivatedRoute
+    private routeActivated: ActivatedRoute,
+    private cookie : CookieService
   ) { }
 
   logo = '../../assets/images/bluechip.jpg'
   color = `radial-gradient( #ffffff, #005eba)`;
   fontColor = '#005eba';
   customerPartyId;
+  private cookieValue : string;
 
   loginForm: FormGroup = this.formBuilder.group({
     'username': ['', Validators.required],
@@ -54,8 +57,14 @@ export class LoginComponent implements OnInit {
 
     let customerData = { "customerPartyId": this.customerPartyId };
 
-    this.loginService.loginAppearance(customerData).subscribe((response) => {
-      console.log(response['data']);
+    this.loginService.loginAppearance(customerData).subscribe((response: HttpResponse<any>) => {
+
+      let cookie = response.headers.get("Set-Cookie");
+      let cookie1 = response.body;
+      //this.cookie.set('cookie','');
+      //this.cookieValue = this.cookie.get('cookie');
+      console.log(cookie);
+      console.log(cookie1);
       if (response['data']) {
         if (response['data']['partyIdentifier'] == 'jma') {
           this.logo = '../../assets/images/JMA Logo_PNG.png';
