@@ -1,6 +1,8 @@
 .card-container.card {
     max-width: 350px;
     padding: 15px 40px;
+    background: transparent;
+    border: 0px !important;
 }
 
 .btn {
@@ -19,6 +21,10 @@
     height: 100vh;
 }
 
+.mg0{
+    margin: 0px;
+    padding: 0px;
+}
 
 /*
  * Card component

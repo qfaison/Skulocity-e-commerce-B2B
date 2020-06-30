@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g id="ic_play_circle_outline_48px" opacity="0.604">
+    <path id="Path" d="M0,0H96V96H0Z" fill="none"/>
+    <path id="Shape" d="M40,80A40.011,40.011,0,0,1,24.426,3.142,40.013,40.013,0,0,1,55.573,76.858,39.774,39.774,0,0,1,40,80ZM40,8A32,32,0,1,0,72,40,32.036,32.036,0,0,0,40,8ZM32,58V22L56,40,32,58Z" transform="translate(8 8)" fill="#fff"/>
+  </g>
+</svg>

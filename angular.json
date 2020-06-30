@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ecommerceFrontend": {
+    "B2B": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ecommerceFrontend",
+            "outputPath": "dist/B2B",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,10 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -69,19 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ecommerceFrontend:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "browserTarget": "B2B:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ecommerceFrontend:build:production"
+              "browserTarget": "B2B:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ecommerceFrontend:build"
+            "browserTarget": "B2B:build"
           }
         },
         "test": {
@@ -96,10 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -121,19 +114,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ecommerceFrontend:serve"
+            "devServerTarget": "B2B:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ecommerceFrontend:serve:production"
+              "devServerTarget": "B2B:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ecommerceFrontend",
+  "defaultProject": "B2B",
   "cli": {
-    "analytics": "91569989-435b-47ff-9ea2-fa48388ffaad"
+    "analytics": "457b2298-f7f6-49ab-82a9-43761480b07a"
   }
 }

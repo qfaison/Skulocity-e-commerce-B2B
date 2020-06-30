@@ -14,11 +14,11 @@
 }
 body {
   text-rendering: optimizeLegibility;
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Avenir Next LT Pro';
   font-size: 15px;
   color: #1A1A1A;
 }
@@ -191,20 +191,12 @@ img {
   margin: 0 auto;
 }
 
-.fixed .logoshifting .logoBlck {
-  display: none;
-}
-
 .logoshifting .logoWhite {
   display: none;
 }
 
 .fixed .logoshifting .logoWhite {
   display: block;
-}
-
-.navbar--colorWhite .logoBlck {
-  display: none;
 }
 
 .navbar--colorWhite .logoWhite {
@@ -421,7 +413,7 @@ img {
 
 /* homepage baner */
 .homepagebaner {
-  height: 1024px;
+  height: 972px;
   position: relative;
 }
 
@@ -1242,7 +1234,7 @@ footer ul li a:hover {
   display: -ms-flexbox;
   display: flex;
   max-width: 1500px;
-  margin: 0 auto;
+  margin: 87px auto;
 }
 
 .sidebarmain {
@@ -2151,9 +2143,14 @@ body.fakescroll-grabbed {
 
 .aboutbnnr__bannerContent {
   width: 508px;
-  margin-top: -120px;
+  margin-top: -487px;
 }
-
+.unillax-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 .aboutbnnr__btnhldr {
   text-align: left;
   padding: 10px 0;
@@ -2386,7 +2383,7 @@ body.fakescroll-grabbed {
 
 /*Forms 27-1-20*/
 .whiteBoxSection {
-  padding: 60px 0 90px;
+  padding: 112px 0 90px;
   position: relative;
   min-height: 100vh;
 }

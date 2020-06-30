@@ -1,0 +1,384 @@
+<div>
+    <nav class="navbar navbar-expand-md fixed-top navbar--colorWhite fixed" [style.background]="color">
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" [routerLink]="['/dashboard/shopAll']"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">shop</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" [routerLink]="['/dashboard/keratin']"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}"
+                            data-id="upcomingsection">EDUCATION</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/dashboard/faq']"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">faq</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/dashboard/about']"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">about</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/dashboard/contact']"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">contact</a>
+                    </li>
+                </ul>
+                <a class="navbar-brand navbarinside__logo logoshifting" href="javascript:void(0);">
+                    <img [routerLink]="['/dashboard/']" style="max-width: 230%;" [src]="logo" alt="">
+                </a>
+                <ul class="navbar-nav ml-auto">
+
+                    <li *ngIf="isLogin" class="nav-item dropdownCstm">
+                        <a class="nav-link" href="javascript:void(0)"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">More</a>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/quickAdd']">Quick Add</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/orderHistory']">Order History</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/shoppingList']">ShoppingLists</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/requests']">Requests</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/quotes']">Quotes</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item"
+                                    [routerLink]="['/dashboard/messages']">Messages</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdownCstm">
+                        <a class="nav-link" href="javascript:void(0);"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">MY
+                            ACCOUNT</a>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li style="list-style-type: none;"><a class="dropdown-item" [routerLink]="['/dashboard/profile']">My Profile</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item" href="javascript:void(0)"
+                                        (click)="signOut()">Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item mob-dnone">
+                        <span class="nav-link mybagopnbtn" (click)="showBag()"
+                            [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">MY BAG ({{cartSize}})</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!------- Checkout pages --------->
+
+<div class="checkout" *ngIf="toggleShow">
+    <div id="myBag" *ngIf="myBag">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
+            <div class="shoppopup__producthldr">
+                <div class="shopprdct__img">
+                    <img src="../../../assets/img/Masque.png" alt="">
+                </div>
+                <div class="shopprdct__cntnt">
+                    <h6>{{cart.product.productName}}</h6>
+                    <span class="price"><b>$ {{cart.price}}</b></span>
+                </div>
+            </div>
+            <div class="quantityholder numbers-row">
+                <b>Quantity:</b> {{cart.quantity}}
+            </div>
+        </div>
+
+        <div class="promocode__holder">
+            <label for="promocode"> Promo code</label>
+            <input type="text" id="promocode">
+        </div>
+        <div class="totalbftax">
+            <h6> Total before tax: </h6>
+            <span> $150.00 </span>
+        </div>
+        <div class="slidepopBtn formButton  text-right">
+            <a id="checkoutBag" href="javaScript:;" class="blackBtn hoverblck" (click)="checkoutOptions();">CHECKOUT</a>
+            <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
+        </div>
+    </div>
+
+    <div id="checkoutBagShow" *ngIf="checkoutBagShow" class="shoppopup--large">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__headingHldr">
+            <div class="headinghldr text-left">
+                <h1>CHECKOUT</h1>
+            </div>
+        </div>
+        <div class="comonformOuter">
+            <div class="col-md-12 subheading">
+                <h5>Who are we shipping this to?</h5>
+            </div>
+            <form action="">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">First Name*</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['toName']}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Last Name*</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['attnName']}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Email*</label>
+                            <input type="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Phone Number</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 subheading ">
+                    <h5>Where are we shipping your order?</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Shipping Street Address*</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address1']}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Apt/Suite</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address2']}}">
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                    <label for="">City*</label>
+                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['city']}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                    <label for="">Zip/Postal Code*</label>
+                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['postalCode']}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Shipping Method*</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Country*</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['countryGeoId']}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">State/Province*</label>
+                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['stateProvinceGeoId']}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="form-group form-check m-0">
+                            <input type="checkbox" class="form-check-input" id="Check3">
+                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
+                                    Conditions</u></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 formButton slidepopBtn text-right">
+                        <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPaymentClick" href="javascript:;"
+                            class="blackBtn hoverblck  blackBtn__large" (click)="checkoutOptionsCheckoutPageShippingAddress()">CONTINUE</a>
+                        <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="orderConfirmationPaymentShow" *ngIf="orderConfirmationPaymentShow" class="shoppopup--large">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__headingHldr px-0">
+            <div class="headinghldr text-left mb-5">
+                <h1>ENTER PAYMENT INFO</h1>
+            </div>
+        </div>
+        <div class="comonformOuter paymentInfoSctn">
+            <form action="">
+                <div class="row">
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="patmentinfo__Heading ">
+                            <h3>Items</h3>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Product Name</h3>
+                                    <span> Quantity: 2</span>
+                                </div>
+                                <div class="invoiceCntnt__price">$100.00</div>
+                            </div>
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Product Name</h3>
+                                    <span> Quantity: 2</span>
+                                </div>
+                                <div class="invoiceCntnt__price">$50.00</div>
+                            </div>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Ship To:</h3>
+                                    <address>
+                                        <span> 1234 Street </span>
+                                        <span> Los Angeles </span>
+                                        <span> CA, 12345, USA </span>
+                                    </address>
+                                </div>
+                                <div class="changePssTxt">
+                                    <a id="shippingAddress" href="javascript:;">edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Discounts</h3>
+                                </div>
+                                <div class="invoiceCntnt__price">-$10.00</div>
+                            </div>
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Shipping</h3>
+                                </div>
+                                <div class="invoiceCntnt__price">$15.00</div>
+                            </div>
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Tax</h3>
+                                </div>
+                                <div class="invoiceCntnt__price">$3.00</div>
+                            </div>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">TOTAL: </h3>
+                                </div>
+                                <div class="invoiceCntnt__price"> $158.00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="patmentinfo__Heading pl-15">
+                            <h3>Pay with</h3>
+                        </div>
+                        <div class="patmentinfo__Heading pl-15">
+                            <h5>Credit Card</h5>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Holder Name</label>
+                            <input type="text" class="form-control" value="Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Number</label>
+                            <input type="text" class="form-control" value="Doe">
+                        </div>
+                        <div class="DOB">
+                            <div class="form-group">
+                                <div class="row no-gutters justify-content-between">
+                                    <div class="col-md-6 col-8">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label>Expiration Date</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group px-0">
+                                                    <input type="text" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group px-0">
+                                                    <input type="text" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-4">
+                                        <div class="col-12 pr-0">
+                                            <label for="">CVV</label>
+                                        </div>
+                                        <div class="col-12 pr-0">
+                                            <div class="form-group px-0">
+                                                <input type="text" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="patmentinfo__Heading pl-15">
+                            <h5>- OR -</h5>
+                        </div>
+                        <div class="othrpymntoptn">
+                            <ul class="othrpymntoptn__list">
+                                <li> <button class="btntransparent"><img src="img/apple_pay.svg" alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="img/samsungpay.png" alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="img/PayPal.svg" alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="img/affirm.png" alt=""></button></li>
+                            </ul>
+                        </div>
+                        <div class="separator"></div>
+                    </div>
+                </div>
+                <div class="formButton m-0">
+                    <!-- <input type="submit" value="PLACE OrDER" name=""> -->
+                    <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large">PLACE OrDER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="bagFinishShow" *ngIf="bagFinishShow">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+        </div>
+        <div class="bagfinalmain">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <h1>CONGRATS!</h1>
+                </div>
+            </div>
+            <div class="bagfinalmain__cntnt">
+                <p>We’ve sent you an email with all the details. </p>
+                <p>Your order is now being processed and will soon be on its way to your doorstep!</p>
+            </div>
+            <a href="index.html" class="blackBtn hoverblck">YASSS!</a>
+        </div>
+    </div>
+
+</div>

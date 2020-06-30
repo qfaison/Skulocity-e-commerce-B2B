@@ -1,0 +1,28 @@
+<br>
+<div style="margin-top: 5%;margin-bottom: 5%;">
+<h3 style="margin-left: 13%;">Request History</h3>
+<br>
+<table class="table table-striped" style="width: 73%;margin-left: 12%;">
+    <thead>
+    <tr>
+      <th scope="col">Request Id</th>
+      <th scope="col" style="width: 25%;">Type</th>
+      <th scope="col" style="width: 25%;">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requestList">
+        <th scope="row"> 
+            {{request.custRequestId}}</th>
+        <td>
+          {{request.custRequestTypeId}}
+        </td>
+        <td>{{request.custRequestName}}</td>
+        <td>{{request.description}}</td>
+        <td> {{request.statusId}}</td>
+      </tr> 
+    </tbody>
+  </table>
+</div>

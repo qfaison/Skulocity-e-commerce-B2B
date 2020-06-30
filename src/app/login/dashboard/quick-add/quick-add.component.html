@@ -1,0 +1,26 @@
+<br>
+<div style="margin-top: 5%;margin-bottom: 5%;">
+<h3 style="margin-left: 13%;">Quick Add Category</h3>
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col" style="width: 25%;">List Price</th>
+      <th scope="col" style="width: 25%;">Normal Price </th>
+      <th scope="col">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let quickadd of quickAddCategory">
+      <th scope="row"> <img style="width: 6%;" src="assets/img/refrigerator_PNG9062.png" alt="">
+          {{quickadd.product.productId}}<br>{{quickadd.product.internalName}}</th>
+      <td>
+        ${{quickadd.productSummary.price.averageCost}}
+      </td>
+      <td>${{quickadd.productSummary.price.basePrice}}</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

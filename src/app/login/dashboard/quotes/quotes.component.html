@@ -1,0 +1,33 @@
+<br><br>
+
+<div style="margin-top: 5%;margin-bottom: 5%;">
+<h3 style="margin-left: 13%;">Quote History</h3>
+<br>
+<table class="table table-striped" style="width: 73%;margin-left: 12%;">
+    <thead>
+    <tr>
+      <th scope="col">Quotes No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+
+      <th scope="col">Quote Issue Date </th>
+      <th scope="col">Valid From Date </th>
+      <th scope="col">Valid Thru Date </th>
+      <th scope="col">View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let list of quotesList">
+      <td>{{list.quoteId}}</td>
+      <td>{{list.quoteName}}</td>
+      <td></td>
+      <td>{{list.statusDesc}}</td>
+      <td>{{list.issueDate|date}}</td>
+      <td>{{list.validFromDate|date}}</td>
+      <td>{{list.validThruDate|date}}</td>
+      <td (click)="ViewQuote(list.quoteId)" style="color: #0b8dcb;cursor: pointer;"> View</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
