@@ -23,6 +23,7 @@ export class ShopAllComponent implements OnInit {
   showSubCategory: boolean = false;
   quantity = [];
   quantityProduct = [];
+  customerPartyId;
 
   constructor(
     private service : ShopAllService,
@@ -30,6 +31,7 @@ export class ShopAllComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.customerPartyId = localStorage.getItem("customerPartyId")
     this.main();
     this.getSpecialCategory();
   }
