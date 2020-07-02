@@ -13,5 +13,8 @@ export class ViewQuotesService {
   getViewQoute(quoteId){
     return this.http.get('skulocity/api/v1/ecommerce/viewquote?quoteId='+quoteId);
   }
+  postViewQoute(itemList){
+    return this.http.post('skulocity/api/v1/ecommerce/setQuoteApproval',itemList)
+  }
 
 }

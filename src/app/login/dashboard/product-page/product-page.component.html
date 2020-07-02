@@ -1,0 +1,622 @@
+<section class="productSliderSection" id="home">
+  <div class="productSlider slick-initialized slick-slider slick-dotted" role="toolbar" style="background-color: coral;">
+    <!-- <div aria-live="polite" class="slick-list draggable" style="height: 993px;">
+      <div class="slick-track" style="opacity: 1; width: 6745px; transform: translate3d(-1349px, 0px, 0px);"
+        role="listbox">
+        <div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 1349px;"
+          tabindex="-1">
+          <div class="commonbackground productSlider__background"
+            style="background: url(assets/img/productpagebckgrnd.jpg);">
+          </div>
+        </div>
+        <div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false"
+          style="width: 1349px;" tabindex="-1" role="option" aria-describedby="slick-slide00">
+          <div class="commonbackground productSlider__background"
+            style="background: url(assets/img/productpagebckgrnd.jpg);">
+          </div>
+        </div>
+        <div class="slick-slide" data-slick-index="1" aria-hidden="true" style="width: 1349px;" tabindex="-1"
+          role="option" aria-describedby="slick-slide01">
+          <div class="commonbackground productSlider__background" style="background: url(assets/img/productpagebckgrnd.jpg);">
+          </div>
+        </div>
+        <div class="slick-slide" data-slick-index="2" aria-hidden="true" style="width: 1349px;" tabindex="-1"
+          role="option" aria-describedby="slick-slide02">
+          <div class="commonbackground productSlider__background"
+            style="background: url(assets/img/productpagebckgrnd.jpg);">
+          </div>
+        </div>
+        <div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" style="width: 1349px;"
+          tabindex="-1">
+          <div class="commonbackground productSlider__background"
+            style="background: url(assets/img/productpagebckgrnd.jpg);">
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <ul class="slick-dots" style="display: flex;" role="tablist">
+      <li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation00"
+        id="slick-slide00"><button type="button" data-role="none" role="button" tabindex="0">1</button></li>
+      <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation01" id="slick-slide01">
+        <button type="button" data-role="none" role="button" tabindex="0">2</button></li>
+      <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation02" id="slick-slide02">
+        <button type="button" data-role="none" role="button" tabindex="0">3</button></li>
+    </ul>
+  </div>
+  <div class="productSlider__cntntHldr">
+    <div class="container-fluid">
+      <div class="row no-gutters">
+        <div class="col-md-7">
+          <div class="productSlider__emptyprtn" style="margin: 0px auto">
+            <img [src]="productData?.s3LargeImageUrl" style="width: 60%;margin-top: 10%;margin-left: 10%;">
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="productSliderCntnt">
+            <div class="productSliderCntnt__titleHldr">
+              <h1 class="productSliderCntnt__title">{{productData?.title}}</h1>
+              <span class="productSliderCntnt__price desktop-dnone">${{productData?.price.defaultPrice}}</span>
+            </div>
+            <h3 class="productSliderCntnt__subtitle">{{productData?.metaDescription}}</h3>
+            <!-- <div class="productSliderCntnt__paragraph mob__Dnone">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. (16oz)</p>
+              </div> -->
+            <ul class="productSliderCntnt__btnhldr desktop-dnone">
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">HOW TO</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">FAQS</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">INGREDIENTS</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">PAIR WITH</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">REVIEWS</a></li>
+            </ul>
+            <ul class="productSliderCntnt__btnhldr mob__Dnone">
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">HOW TO</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">FAQS</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">INGREDIENTS</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">PAIR WITH</a></li>
+              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">REVIEWS</a></li>
+            </ul>
+            <div class="productSliderCntnt__priceHolder">
+              <p class="productSliderCntnt__priceholder mob__Dnone">${{productData?.price.defaultPrice}}</p>
+              <div class="productSliderCntnt__qnttyBtn">
+                <div class="quantityholder numbers-row">
+                  <input type="number" name="partridge" [(ngModel)]="quantity" class="num-box" id="partridge" value="1">
+                </div>
+                <button class="blackBtn whitebtn" (click)="addToCart(quantity)">ADD TO BAG</button>
+              </div>
+            </div>
+            <div class="FtrSocialMedia productSliderCntnt__socialmedia d-flex justify-content-between">
+              <span class="msrpPrice">MSRP: ${{productData?.price.defaultPrice}}</span>
+              <ul class="mob__Dnone">
+                <li>SHARE</li>
+                <li><a href="https://facebook.com/lasioprofessionalhaircare" target="_blank"><img
+                      src="assets/img/facebook.svg" alt=""></a></li>
+                <li><a href="https://www.messenger.com/" target="_blank"><img src="assets/img/messenger.svg" alt=""></a>
+                </li>
+                <li><a
+                    href="mailto:no-one@snai1mai1.com?subject=Check Out LASIO’s {Product Name} Here!&amp;body=Hey love,%0D%0A %0D%0A I wanted to share LASIO’s $productName with you.%0D%0A %0D%0A Take a look here:%0D%0A %0D%0A $productURL %0D%0A %0D%0A Thanks, I’m hoping you love it as much as I do! %0D%0A %0D%0A Love,%0D%0A Me ;-) %0D%0A"
+                    target="_blank"><img src="assets/img/email.svg" alt=""></a></li>
+                <li><a href="https://pinterest.com/LASIOPRO/" target="_blank"><img src="assets/img/pinterest.svg"
+                      alt=""></a>
+                </li>
+                <li><a href="https://twitter.com/lasio_pro" target="_blank"><img src="assets/img/twitter.svg"
+                      alt=""></a>
+                </li>
+              </ul>
+            </div>
+            <div class="videoHolder mob__Dnone">
+              <img src="assets/img/productpagevideoimg.jpg" alt="">
+              <a href="#" class="videoHolder__playbtn" data-toggle="modal" data-target="#videopopup">
+                <img src="assets/img/playbtn.svg" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section class="productpageMob desktop-dnone">
+  <div class="productSliderCntnt__paragraph  ">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. (16oz)</p>
+  </div>
+  <div class="videoHolder">
+    <img src="assets/img/productpagevideoimg.jpg" alt="">
+    <a href="#" class="videoHolder__playbtn" data-toggle="modal" data-target="#videopopup">
+      <img src="assets/img/playbtn.svg" alt="">
+    </a>
+  </div>
+  <div class="FtrSocialMedia productSliderCntnt__socialmedia">
+    <h3>SHARE</h3>
+    <ul>
+      <li>
+        <a href="https://facebook.com/lasioprofessionalhaircare" target="_blank">
+          <img src="assets/img/facebook-black.svg" alt="">
+        </a>
+      </li>
+      <li><a href="#" target="_blank"><img src="assets/img/messanger-black.svg" alt=""></a></li>
+      <li><a href="#" target="_blank"><img src="assets/img/mail-black.svg" alt=""></a></li>
+      <li>
+        <a href="https://pinterest.com/LASIOPRO/" target="_blank"><img src="assets/img/Pinterest-black.svg" alt=""></a>
+      </li>
+      <li><a href="https://twitter.com/lasio_pro" target="_blank"><img src="assets/img/twitter-black.svg" alt=""></a>
+      </li>
+    </ul>
+  </div>
+  <ul class="nav nav-tabs productpageTab" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="howto-tab" data-toggle="tab" href="#howto" role="tab" aria-controls="howto"
+        aria-selected="true">how to</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="faqs-tab" data-toggle="tab" href="#faqs" role="tab" aria-controls="faqs"
+        aria-selected="false">faqs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="ingredients-tab" data-toggle="tab" href="#ingredients" role="tab"
+        aria-controls="ingredients" aria-selected="false">ingredients</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
+        aria-selected="false">reviews</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="howto" role="tabpanel" aria-labelledby="howto-tab">
+      <div class="stepholder prductpahgehow">
+        <img src="assets/img/productpagehowtouse.jpg" alt="">
+        <div class="prductpahgehwfq__cntnt">
+          <h2> HOW TO USE</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="faqs" role="tabpanel" aria-labelledby="faqs-tab">
+      <div class="stepholder prductpahgehFaq">
+        <div class=" ">
+          <div class="headinghldr">
+            <h1>FAQ</h1>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Lorem ipsum dolor sit amet?</h3>
+            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Ut enim ad minim veniam?</h3>
+            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Malesuada fames ac turpis egestas sed?</h3>
+            <p>Feugiat nibh sed pulvinar proin. Curabitur gravida arcu ac tortor. </p>
+          </div>
+          <a href="/submit-question" class="blackBtn hoverblck blackBtn__large">ASK A QUESTION</a>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="ingredients" role="tabpanel" aria-labelledby="ingredients-tab">
+      <div class="ingredientsctn">
+        <div class="container">
+          <div class="headinghldr">
+            <h1>INGREDIENTS</h1>
+          </div>
+          <div class="ingredientsctn__listhldr">
+            <ul class="ingredientsctn_list">
+              <li> Lorem ipsum </li>
+              <li> Dolor sit amet </li>
+              <li> Consectetur adipiscing elit </li>
+              <li> Sed do eiusmod </li>
+              <li> Tempor incididunt </li>
+              <li> Ut labore et dolore </li>
+              <li> Magna aliqua </li>
+              <li> Ut enim ad minim </li>
+              <li> Veniam quis nostrud </li>
+              <li> Exercitation ullamco </li>
+              <li> Laboris nisi ut aliquip </li>
+              <li> Ex ea commodo consequat. </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+      <div class="reviewSection">
+        <div class="container">
+          <div class="headinghldr">
+            <h1>WHAT’S GREAT ABOUT IT</h1>
+          </div>
+          <div class="ratingDivCntnr">
+            <div class="bigratingstarHldr">
+              <ul class="ratigStar">
+                <li><img src="assets/img/Star.svg" alt=""></li>
+                <li><img src="assets/img/Star.svg" alt=""></li>
+                <li><img src="assets/img/Star.svg" alt=""></li>
+                <li><img src="assets/img/Star.svg" alt=""></li>
+                <li><img src="assets/img/halfstar.svg" alt=""></li>
+              </ul>
+            </div>
+            <div class="blckratingBox">
+              <div class="blckratingBox__hldr">
+                <div class="blckratingBox__starrtng">
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <div class="blckratingBox__orogress">
+                  <div class="blckratingBox__orogressBox">
+                    <span style="width: 100%;"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="blckratingBox__hldr">
+                <div class="blckratingBox__starrtng">
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <div class="blckratingBox__orogress">
+                  <div class="blckratingBox__orogressBox">
+                    <span style="width: 80%;"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="blckratingBox__hldr">
+                <div class="blckratingBox__starrtng">
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <div class="blckratingBox__orogress">
+                  <div class="blckratingBox__orogressBox">
+                    <span style="width: 60%;"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="blckratingBox__hldr">
+                <div class="blckratingBox__starrtng">
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <div class="blckratingBox__orogress">
+                  <div class="blckratingBox__orogressBox">
+                    <span style="width: 40%;"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="blckratingBox__hldr">
+                <div class="blckratingBox__starrtng">
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/whitestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                    <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <div class="blckratingBox__orogress">
+                  <div class="blckratingBox__orogressBox">
+                    <span style="width: 20%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="reviewmain">
+              <div class="reviewmain__innerbox">
+                <div class="reviewmain__row">
+                  <div class="reviewmain__userdetail">
+                    <h6 class="reviewmain__username">Reviewer</h6>
+                    <span class="reviewmain__dateReview"> 10/19/19</span>
+                  </div>
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/halfstar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.
+                </p>
+              </div>
+              <div class="reviewmain__innerbox">
+                <div class="reviewmain__row">
+                  <div class="reviewmain__userdetail">
+                    <h6 class="reviewmain__username">Reviewer</h6>
+                    <span class="reviewmain__dateReview"> 10/19/19</span>
+                  </div>
+                  <ul class="ratigStar">
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/Star.svg" alt=""></li>
+                    <li><img src="assets/img/halfstar.svg" alt=""></li>
+                  </ul>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#home" id="arrow" class="productscroll mob__Dnone"><img src="assets/img/scrollup.svg" alt=""></a>
+      </div>
+    </div>
+  </div>
+  <div id="addtobag" class="addtobag">
+    <div class="addtobag__cntnt">
+      <h3> PRODUCT NAME</h3>
+      <span> $50.00</span>
+    </div>
+    <div class="addtobag__btnHolder">
+      <button class="blackBtn hoverblck">ADD TO BAG</button>
+    </div>
+  </div>
+</section>
+<section class="stepSection kertainstepsctn  mob__Dnone">
+  <div class="row no-gutters">
+    <div class="col-md-7">
+      <div class="stepholder prductpahgehow" id="howto1">
+        <img src="assets/img/productpagehowtouse.jpg" alt="">
+        <div class="prductpahgehwfq__cntnt">
+          <h2> HOW TO USE</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="stepholder prductpahgehFaq" id="faqs1">
+        <div class=" ">
+          <div class="headinghldr">
+            <h1>FAQ</h1>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Lorem ipsum dolor sit amet?</h3>
+            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Ut enim ad minim veniam?</h3>
+            <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p>
+          </div>
+          <div class="faqholder">
+            <h3 class="faqholder__question">Malesuada fames ac turpis egestas sed?</h3>
+            <p>Feugiat nibh sed pulvinar proin. Curabitur gravida arcu ac tortor. </p>
+          </div>
+          <a href="/submit-question" class="blackBtn hoverblck blackBtn__large">ASK A QUESTION</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ingredientsctn mob__Dnone" id="ingredients1">
+  <div class="container">
+    <div class="headinghldr">
+      <h1>INGREDIENTS</h1>
+    </div>
+    <div class="ingredientsctn__listhldr">
+      <ul class="ingredientsctn_list">
+        <li> Lorem ipsum </li>
+        <li> Dolor sit amet </li>
+        <li> Consectetur adipiscing elit </li>
+        <li> Sed do eiusmod </li>
+        <li> Tempor incididunt </li>
+        <li> Ut labore et dolore </li>
+        <li> Magna aliqua </li>
+        <li> Ut enim ad minim </li>
+        <li> Veniam quis nostrud </li>
+        <li> Exercitation ullamco </li>
+        <li> Laboris nisi ut aliquip </li>
+        <li> Ex ea commodo consequat. </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="common-section pairproductSctn" id="pairwith">
+  <div class="container">
+    <div class="pairproductSctn__borderBtm">
+      <div class="headinghldr">
+        <h1>PAIR THIS PRODUCT WITH</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-6" *ngFor="let prod of alsoBoughtProducts">
+          <div class="shopprdct">
+            <a href="#">
+              <div class="shopprdct__img">
+                <img [src]="prod.s3LargeImageUrl" alt="{{prod.product.internalName}}">
+              </div>
+              <div class="shopprdct__cntnt">
+                <p>{{prod.product.internalName}}</p>
+                <p>${{prod.productSummary.price.defaultPrice}}</p>
+              </div>
+            </a>
+            <button class="blackBtn hoverblck" (click)="addToCartAddOns()">ADD TO BAG</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="reviewSection mob__Dnone" id="reviews1">
+  <div class="container">
+    <div class="headinghldr">
+      <h1>WHAT’S GREAT ABOUT IT</h1>
+    </div>
+    <div class="ratingDivCntnr">
+      <div class="bigratingstarHldr">
+        <ul class="ratigStar">
+          <li><img src="assets/img/Star.svg" alt=""></li>
+          <li><img src="assets/img/Star.svg" alt=""></li>
+          <li><img src="assets/img/Star.svg" alt=""></li>
+          <li><img src="assets/img/Star.svg" alt=""></li>
+          <li><img src="assets/img/halfstar.svg" alt=""></li>
+        </ul>
+      </div>
+      <div class="blckratingBox">
+        <div class="blckratingBox__hldr">
+          <div class="blckratingBox__starrtng">
+            <ul class="ratigStar">
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <div class="blckratingBox__orogress">
+            <div class="blckratingBox__orogressBox">
+              <span style="width: 100%;"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blckratingBox__hldr">
+          <div class="blckratingBox__starrtng">
+            <ul class="ratigStar">
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <div class="blckratingBox__orogress">
+            <div class="blckratingBox__orogressBox">
+              <span style="width: 80%;"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blckratingBox__hldr">
+          <div class="blckratingBox__starrtng">
+            <ul class="ratigStar">
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+            </ul>
+          </div>
+          <div class="blckratingBox__orogress">
+            <div class="blckratingBox__orogressBox">
+              <span style="width: 60%;"></span>
+            </div>
+          </div>
+        </div>
+        <div class="blckratingBox__hldr order-md-2">
+          <div class="blckratingBox__starrtng">
+            <ul class="ratigStar">
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <div class="blckratingBox__orogress">
+            <div class="blckratingBox__orogressBox">
+              <span style="width: 40%;"></span>
+            </div>
+          </div>
+        </div>
+        <div class="blckratingBox__hldr order-md-4">
+          <div class="blckratingBox__starrtng">
+            <ul class="ratigStar">
+              <li><img src="assets/img/whitestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+              <li><img src="assets/img/whiteoutlinestar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <div class="blckratingBox__orogress">
+            <div class="blckratingBox__orogressBox">
+              <span style="width: 20%;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviewmain">
+        <div class="reviewmain__innerbox">
+          <div class="reviewmain__row">
+            <div class="reviewmain__userdetail">
+              <h6 class="reviewmain__username">Reviewer</h6>
+              <span class="reviewmain__dateReview"> 10/19/19</span>
+            </div>
+            <ul class="ratigStar">
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/halfstar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
+        </div>
+        <div class="reviewmain__innerbox">
+          <div class="reviewmain__row">
+            <div class="reviewmain__userdetail">
+              <h6 class="reviewmain__username">Reviewer</h6>
+              <span class="reviewmain__dateReview"> 10/19/19</span>
+            </div>
+            <ul class="ratigStar">
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/Star.svg" alt=""></li>
+              <li><img src="assets/img/halfstar.svg" alt=""></li>
+            </ul>
+
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <a href="#home" class="productscroll scrolltopbtn"><img src="assets/img/scrollup.svg" alt=""></a>
+</section>

@@ -13,11 +13,13 @@ import { QuickAddComponent } from './login/dashboard/quick-add/quick-add.compone
 import { OrderHistoryComponent } from './login/dashboard/order-history/order-history.component';
 import { ShoppingListComponent } from './login/dashboard/shopping-list/shopping-list.component';
 import { RequestsComponent } from './login/dashboard/requests/requests.component';
-import { Quote } from '@angular/compiler';
 import { QuotesComponent } from './login/dashboard/quotes/quotes.component';
 import { MessagesComponent } from './login/dashboard/messages/messages.component';
 import { AuthGuardGuard } from './login/auth-guard.guard';
 import { ViewQuotesComponent } from './login/dashboard/quotes/view-quotes/view-quotes.component';
+import { ProductPageComponent } from './login/dashboard/product-page/product-page.component';
+import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
+import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 
 
 const routes: Routes = [
@@ -37,6 +39,9 @@ const routes: Routes = [
     { path:'quotes', component: QuotesComponent },
     { path:'view-quotes/:quoteId', component: ViewQuotesComponent },
     { path:'messages', component: MessagesComponent },
+    { path:'product-page/:productId', component: ProductPageComponent},
+    { path:'view-request/:requestId', component: ViewRequestComponent},
+    { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
   ]}
 ];
 

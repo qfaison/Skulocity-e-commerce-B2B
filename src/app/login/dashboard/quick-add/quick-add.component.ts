@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuickAddService } from './quick-add.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quick-add',
@@ -10,12 +11,14 @@ export class QuickAddComponent implements OnInit {
 
   quickAddCategory;
   quickAdd: string;
+  quantity = [];
 
   constructor(
-    private service: QuickAddService
+    private service: QuickAddService,
+    private route : Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.quickAdd='CATALOG1_QUICKADD1';
     this.getQuickAdd(this.quickAdd)
   }
@@ -27,6 +30,10 @@ export class QuickAddComponent implements OnInit {
       console.log( this.quickAddCategory)
    
     })
+  }
+
+  productPage(productId):void {
+    this.route.navigate(['/dashboard/product-page', productId]);
   }
 
 }

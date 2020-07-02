@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ViewQuotesService } from './view-quotes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-quotes',
@@ -13,6 +14,9 @@ export class ViewQuotesComponent implements OnInit {
   private sub: any;
   viewQuote;
   viewQuoteList;
+  postViewRetailResponse;
+  quoteItems = [];
+  color;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +24,7 @@ export class ViewQuotesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.color = localStorage.getItem('fontColor');
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['quoteId'];
       this.getQuoteView(this.id);
@@ -33,6 +38,34 @@ export class ViewQuotesComponent implements OnInit {
 
 
     })
+  }
+  saveRetailView(itemList) {
+
+    for (let c of itemList) {
+      let postData = {
+
+        "quoteId": c.quoteId,
+        "quoteItemSeqId": c.quoteItemSeqId,
+        "productId": c.productId,
+        "isApproved": c.quoteApproval.isApproved,
+        "comments": c.quoteApproval.comments
+
+
+      }
+      this.quoteItems.push(postData);
+    }
+    let quoteData = {
+      "quoteItemsApprovalList": this.quoteItems
+    }
+
+    this.service.postViewQoute(quoteData).subscribe((res) => {
+      this.postViewRetailResponse = res['data']['responseMessage'];
+      if (this.postViewRetailResponse = "success") {
+        Swal.fire("Success");
+      }
+    }
+    )
+
   }
 
 }

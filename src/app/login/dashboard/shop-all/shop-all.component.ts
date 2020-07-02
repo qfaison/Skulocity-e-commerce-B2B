@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ShopAllService } from './shop-all.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-all',
@@ -24,7 +25,8 @@ export class ShopAllComponent implements OnInit {
   quantityProduct = [];
 
   constructor(
-    private service : ShopAllService
+    private service : ShopAllService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +82,10 @@ export class ShopAllComponent implements OnInit {
       document.getElementById(catalog+""+index).style.display = "none";
     }
     
+  }
+
+  openProduct(productId): void{
+    this.router.navigate(['/dashboard/product-page', productId]);
   }
 
   getSpecialCategory():void {

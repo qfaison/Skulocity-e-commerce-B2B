@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 export class APIInterceptor implements HttpInterceptor {
 
     url = 'https://development.skulocity.org';
+    //url = 'http://localhost:8080';
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let newHeaders = req.headers;

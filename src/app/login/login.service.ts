@@ -10,16 +10,15 @@ export class LoginService {
     private http: HttpClient
   ) { }
 
-  
   loginAppearance(customerData) {
-    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration', customerData, {observe: 'response'});
+    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration', customerData, { observe: 'response' });
   }
 
   login(userData) {
     return this.http.post('skulocity/api/v1/login', userData);
   }
 
-  logout(){
-    return this.http.post('skulocity/api/v1/logout',{});
+  logout() {
+    return this.http.post('skulocity/api/v1/logout', {});
   }
 }

@@ -1,81 +1,61 @@
 <br><br><br><br>
-<div>
-    <h3 style="margin: 0px auto; width: 73%;">Order History</h3>
-    <br>
-    <div style="margin: 0px auto; width: 73%;">
-        <button style="border: none;width: 25%; padding: 1%;color: white;" [ngClass]="{'w3-border-red': tab1== true}"
-            (click)="orderEntered();" [style.background]='color'>Your Order history</button>
-        <button style="border: none;width: 36%; padding: 1%;color: white;" [ngClass]="{'w3-border-red': tab2== true}"
-            (click)="orderSent();" [style.background]='color'>Order history for orders send to you</button>
-        <button style="border: none;width: 23%; padding: 1%;color: white;" [ngClass]="{'w3-border-red': tab3== true}"
-            (click)="downloadAvailable();" [style.background]='color'>Downloads Available Title</button>
-    </div>
-    <br>
-    <br>
-    <table class="table table-striped" style="width: 73%; margin: 0px auto" *ngIf="tab1 == true">
-        <thead>
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col" style="width: 25%;">Order No</th>
-                <th scope="col" style="width: 25%;">Amount</th>
-                <th scope="col">Status</th>
-                <th scope="col">Invoices</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"> </th>
-                <td>
+<div style="margin-top: 5%;margin-bottom: 5%;">
+  <h3 style="margin-left: 13%;">Order History</h3>
+  <br>
+  <div style="margin-left: 11%; display: flex;">
+    <button style="border: none;width: 25%; 
+padding: 1%;" [ngClass]="{'w3-border-red': tab1== true}" (click)="orderEntered();"
+      [ngStyle]="{'background-color':tab1 == true ? color : 'white'}">Order history for orders entered By
+      You</button>
+    <button style="border: none;width: 24%;
+padding: 1%;" [ngClass]="{'w3-border-red': tab2== true}" (click)="orderSent();"
+      [ngStyle]="{'background-color':tab2 == true ? color : 'white'}">Order history for orders send to you</button>
+  </div>
+  <br>
+  <br>
+  <table class="table table-striped" style="width: 73%;margin-left: 12%;" *ngIf="tab1 == true">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col" style="width: 25%;">Order No</th>
+        <th scope="col" style="width: 25%;">Amount</th>
+        <th scope="col">Status</th>
+        <th scope="col">Invoices</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orderList">
+        <td>{{order.orderDate| date}}</td>
+        <td>
+          {{order.orderId}}
+        </td>
+        <td>{{order.grandTotal}}</td>
+        <td>{{order.orderStatusDescription}}</td>
+        <td><span *ngFor="let invoice of order.invoices"><a href="javascript:void(0)">{{invoice.invoiceId}}</a><br></span></td>
+        <td style="cursor:pointer" (click)="viewOrder(order.orderId)">View</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" style="width: 73%;margin-left: 12%;" *ngIf="tab2 == true">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col" style="width: 25%;">Order No</th>
+        <th scope="col" style="width: 25%;">Amount</th>
+        <th scope="col">Status</th>
 
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-striped" style="width: 73%;margin-left: 12%;" *ngIf="tab2 == true">
-        <thead>
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col" style="width: 25%;">Order No</th>
-                <th scope="col" style="width: 25%;">Amount</th>
-                <th scope="col">Status</th>
-
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"> </th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-striped" style="width: 73%;margin-left: 12%;" *ngIf="tab3 == true">
-        <thead>
-            <tr>
-
-                <th scope="col" style="width: 25%;">Order No</th>
-                <th scope="col" style="width: 25%;">Product Name</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"> </th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"> </th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

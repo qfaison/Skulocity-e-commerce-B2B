@@ -1,4 +1,4 @@
-<br>
+<br><br><br><br>
 <div style="margin-top: 5%;margin-bottom: 5%;">
 <h3 style="margin-left: 13%;">Request History</h3>
 <br>
@@ -10,6 +10,10 @@
       <th scope="col" style="width: 25%;">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Status</th>
+      <th scope="col">Request Date</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Last Modified Date</th>
+      <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -22,6 +26,12 @@
         <td>{{request.custRequestName}}</td>
         <td>{{request.description}}</td>
         <td> {{request.statusId}}</td>
+        <td>
+          {{request.custRequestDate|date}}
+        </td>
+        <td>{{request.createdDate|date}}</td>
+        <td>{{request.lastModifiedDate|date}}</td>
+        <td style="cursor:pointer" (click)="viewRequest(request.custRequestId)">View</td>
       </tr> 
     </tbody>
   </table>

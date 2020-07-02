@@ -1,116 +1,72 @@
-<br>
+<br><br><br><br>
 <div style="margin-top: 5%;margin-bottom: 5%;">
-<h3 style="margin-left: 13%;"><span>Quote  #{{this.id}}</span>&nbsp;&nbsp;
-  <span>Related Documents</span> </h3>
-<br>
-<div style="margin-left: 13%;">
-  <span>Customer:</span><span></span>&nbsp;<span>Job Name:</span><span></span>&nbsp;
-  <span>Contact:</span><span></span>&nbsp;<span>Address:</span><span></span>
-</div>
-<br><br><br>
-<table class="table table-striped" style="width: 73%;margin-left: 12%;">
-  <thead>
-  <tr>
-    <th scope="col">Quantity</th>
-    <th scope="col">Description</th>
-    <th scope="col">Stock Picture</th>
-    <th scope="col" >Unit Price</th>
-    <th scope="col" >Extended</th>
-    <th scope="col">Customer Comments</th>
-    <th scope="col">Approval</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr >
-  <td></td>
-    <td>
-    </td>
-    <td></td>
-    <td></td>
-    <td>
-    </td>
-    <td></td>
-    <td></td>
-  </tr>
-  </tbody>
-</table>
-
-<!-- <div class="comonformOuter">
-    <form action="">
-      <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-6 myAccount--Inner">
-          <p><strong>Type:</strong> {{ this.viewQuote.auoteTypeDesc}}</p>
-          <p><strong>Sales Channel:</strong>{{this.viewQuote.salesChannelEnumId}}</p>
-          <p><strong>Status:</strong>{{this.viewQuote.statusDesc}}</p>
-          <p><strong>Party ID:</strong>{{this.viewQuote.partyId}}</p>
-          <p><strong>Quote Name:</strong>{{this.viewQuote.quoteName}}</p>
-          <p><strong>Description:</strong>{{this.viewQuote.description}}</p>
-          <p><strong>Currency:</strong>{{this.viewQuote.currencyDesc}}</p>
-          <p><strong>Product Store:</strong>{{this.viewQuote.productStoreDesc}}</p>
-          <hr class="separator">
-          <p class="mb-5"><strong>Date</strong></p> 
-          <p><strong>Quote Issue Date:</strong> </p>
-          <p><strong>Valid From Date:</strong>{{this.viewQuote.validFromDate|date}}</p>
-          <p><strong>Valid Thru Date:</strong>{{this.viewQuote.validThruDate|date}}</p>
-          <hr class="separator">
-          <p class="mb-5"><strong>Quote Roles</strong></p> 
-          <p><strong>Request Taker:</strong>{{this.viewQuote.quoteRoles[0].rolePartyNameResult.fullName}}</p>
-        
-         
-        </div>
-        
-      </div>
-    </form>
+  <h3 style="margin-left: 13%;"><span>Quote #{{id}}</span>&nbsp;&nbsp;
+    <span>Related Documents</span> </h3>
+  <br>
+  <div style="margin-left: 13%;">
+    <span><b>Customer:</b>{{viewQuote?.partySummary.firstName}} {{viewQuote?.partySummary.middleName}} {{viewQuote?.partySummary.lastName}}</span>
+    &nbsp;&nbsp;<span><b>Job Name:</b>{{viewQuote?.quoteName}}</span>
+    &nbsp;&nbsp;<span><b>Contact:</b>{{viewQuote?.contactPartyId}}</span>
+    &nbsp;&nbsp;<span><b>Address:</b>{{viewQuote?.address1}} {{viewQuote?.address2}}</span>
   </div>
-  <div style="margin-top: 5%;margin-bottom: 5%;">
-    <h3 style="margin-left: 13%;">Quote Items</h3>
-    <br>
-    <table class="table table-striped" style="width: 73%;margin-left: 12%;">
-        <thead>
-        <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Product</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Sel Amount</th>
-    
-          <th scope="col">Quote Unit Price </th>
-          <th scope="col">Adjustments </th>
-          <th scope="col">Subtotals</th>
-         
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let list of viewQuoteList">
-        
-         
-          <td>{{list.quoteItemSeqId}}<a style="color: teal;" (click)="quotesProductPage(list.productId)">{{list.productId}}</a></td>
-          <td>{{list.productContent.product.internalName}}</td>
-          
-          <td>{{list.quantity}}</td>
-          <td>{{list.selectedAmount}}</td>
-          
-          <td>{{list.quoteUnitPrice}}</td>
-          <td></td>
-          
-          <td>{{list.quoteUnitPrice}}</td>
-          
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="margin-left: 76%;">
-      <p><strong>Subtotal:</strong> {{ this.viewQuote.total}}</p>
-      <p><strong>Total:</strong>{{this.viewQuote.total}}</p>
-</div> -->
-</div>
-<div class="headinghldr text-right">
-  <button style="padding:1%;
+  <br><br><br>
+  <table class="table table-striped" style="width: 90%;margin: 0px auto">
+    <thead>
+      <tr>
+        <th scope="col">Quantity</th>
+        <th scope="col">Description</th>
+        <th scope="col">Stock Picture</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Extended</th>
+        <th scope="col">Customer Comments</th>
+        <th scope="col" style="width: 10%;">Approval</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="this.viewQuoteList!=[]">
+      <tr *ngFor="let itemList of viewQuoteList;let i= index;">
+        <td>{{itemList.quantity}}</td>
+        <td>{{itemList.description}}{{itemList.productId}}</td>
+        <td>
+          <img src="{{itemList.productContent.imageMap.s3SmallImageUrl}}" style="max-width: 30%;" alt="">
+        </td>
+        <td>{{itemList.quoteUnitPrice}}</td>
+        <td>{{itemList.quoteUnitPrice*itemList.quantity}}</td>
+        <td> <input id="customerComments{{i}}" *ngIf="itemList.quoteApproval" [(ngModel)]="itemList.quoteApproval.comments" type="text">
+        </td>
+        <td>
+          <input name="approval{{i}}" [checked]="itemList.quoteApproval.isApproved=='Y'"
+            [(ngModel)]="itemList.quoteApproval.isApproved" value="Y" type="radio">Yes
+          <input name="approval{{i}}" [checked]="!itemList.quoteApproval||itemList.quoteApproval.isApproved=='N'"
+            [(ngModel)]="itemList.quoteApproval.isApproved" value="N" type="radio">No
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button [style.background]="color" style="padding:1%; color:white;float: right;
+  margin-right: 5%;
   border: none;
-  width: 6%;
-  background-color: #0b8dcb;" >Save</button>
+  width: 6%;" (click)="saveRetailView(viewQuoteList)">Save</button>
+
 </div>
-<div style="margin-left: 23%;">
-  <span>Ship to address: , , ,</span><span></span>&nbsp;&nbsp;&nbsp;
-  <span>Subtotal:</span><span></span>&nbsp;<span>Grandtotal:</span><span></span>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+      <span><b>Ship to address:</b> </span>
+    </div>
+    <div class="col-md-4">
+      <span><b>Subtotal:</b></span>
+      <span><b>Grandtotal:</b></span>
+      <span><b>Tax:</b></span>
+    </div>
+  </div>
 </div>
+<!-- <div style="margin-left: 23%;">
+  <span><b>Ship to address:</b> </span><span>
+  </span>&nbsp;&nbsp;&nbsp;
+  <span><b>Subtotal:</b></span><span></span>&nbsp;<span><b>Grandtotal:</b></span><span></span>
+</div> -->
 <br>

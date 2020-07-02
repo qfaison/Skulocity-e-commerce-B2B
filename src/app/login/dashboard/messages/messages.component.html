@@ -2,7 +2,7 @@
 <div style="margin-top: 5%;margin-bottom: 5%;">
 <h3 style="margin-left: 13%;">Messages</h3>
 <br>
-<table class="table table-striped" style="width: 73%;margin-left: 12%;">
+<table class="table table-striped" style="width: 80%;margin: 0px auto;">
     <thead>
     <tr>
       <th scope="col">From</th>
@@ -13,15 +13,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr >
-      <th scope="row"> 
-          </th>
-      <td>
-      
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let message of messageList">
+     
+      <td>{{message.partyIdFromDesc}}</td>
+      <td>{{message.partyIdToDesc}}</td>
+      <td>{{message.subject}}</td>
+      <td>{{message.entryDate|date}}</td>
+      <td (click)="viewMessage(message.communicationEventId)" style="color:#0b8dcb;cursor: pointer;">Read</td>
     </tr>
     </tbody>
   </table>

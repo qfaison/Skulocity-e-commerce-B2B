@@ -1,0 +1,61 @@
+<br><br><br><br>
+<div>
+<h3 style="margin-left: 13%;">Request Items</h3>
+<br>
+<table class="table table-striped" style="width: 73%;margin: 0px auto">
+    <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Maximum Amount</th>
+    
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of viewTableRequest">
+      <th scope="row"> 
+          {{request.custRequestItemSeqId}}</th>
+      <td>
+        {{request.internalName}}{{request.productId}}
+      </td>
+      <td>{{request.quantity}}</td>
+      <td></td>
+      <td> {{request.selectedAmount}}</td>
+    
+    </tr>  
+    
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div class="comonformOuter">
+      <div>
+        <h3 style="margin-left: 13%;">Request {{viewRequest?.custRequestId}} Information</h3>
+
+      </div>
+      <br>
+    <form action="">
+      <div class="row justify-content-center" style="margin : 0px">
+        <div class="col-lg-5 col-md-6 myAccount--Inner">
+          <p><strong>Type:</strong>   {{viewRequest?.custTypeDesc}}</p>
+          <p><strong>Status:</strong>   {{viewRequest?.statusDesc}}</p>
+          <p><strong>Party ID:</strong>   {{viewRequest?.fromPartyId}}</p>
+          <p><strong>Name:</strong>   {{viewRequest?.custRequestName}}</p>
+          <p><strong>Description:</strong>   {{viewRequest?.description}}</p>
+          <p><strong>Currency:</strong>   {{viewRequest?.currencyDesc}}</p>
+          <p><strong>Product Store:</strong>   {{viewRequest?.productStoreDesc}}</p>
+          <p><strong>Internal Comment:</strong>   {{viewRequest?.internalComment}}</p>
+          <p><strong>Reason:</strong>   {{viewRequest?.reason}}</p>
+          <hr class="separator">
+          <p class="mb-5"><strong>Date</strong></p> 
+          <p><strong>Request Date:</strong>  {{viewRequest?.custRequestDate|date}}</p>
+          <p><strong>Valid From Date:</strong>   {{viewRequest?.createdDate|date}}</p>
+          <p><strong>Last Modified Date:</strong>   {{viewRequest?.lastModifiedDate|date}}</p>
+         
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

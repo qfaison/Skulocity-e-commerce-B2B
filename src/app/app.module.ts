@@ -24,6 +24,9 @@ import { RequestsComponent } from './login/dashboard/requests/requests.component
 import { QuotesComponent } from './login/dashboard/quotes/quotes.component';
 import { MessagesComponent } from './login/dashboard/messages/messages.component';
 import { ViewQuotesComponent } from './login/dashboard/quotes/view-quotes/view-quotes.component';
+import { ProductPageComponent } from './login/dashboard/product-page/product-page.component';
+import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
+import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { ViewQuotesComponent } from './login/dashboard/quotes/view-quotes/view-q
     RequestsComponent,
     QuotesComponent,
     MessagesComponent,
-    ViewQuotesComponent
+    ViewQuotesComponent,
+    ProductPageComponent,
+    ViewRequestComponent,
+    ViewOrderHistoryComponent
   ],
   imports: [
     BrowserModule,

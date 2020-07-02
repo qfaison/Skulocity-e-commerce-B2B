@@ -58,7 +58,7 @@
                             ACCOUNT</a>
                         <div class="dropdown-menu">
                             <ul>
-                                <li style="list-style-type: none;"><a class="dropdown-item" [routerLink]="['/dashboard/profile']">My Profile</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item" *ngIf="isLogin" [routerLink]="['/dashboard/profile']">My Profile</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item" href="javascript:void(0)"
                                         (click)="signOut()">Sign Out</a></li>
                             </ul>

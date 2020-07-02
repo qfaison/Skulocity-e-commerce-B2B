@@ -1,0 +1,208 @@
+<br><br><br><br>
+<section class="faqpagesection whiteBoxSection myAccount">
+    <div class="container">
+        <div class="comonformOuter">
+            <div class="col-md-12 pl0 pr0 clearfix">
+                <div class="box-collateral order-history mb15">
+                    <div class="panel-heading">
+                        <h2 class="mb15 ng-binding">Order Nbr<a class="li pointer"
+                                (click)="currentPageReload()">{{this.id}} </a> Information [ <a class="pointer"
+                                (click)="printPdf(this.id)">PDF</a> ]</h2>
+                    </div>
+                    <div class="widget-quick-add-row clearfix p10">
+                        <ul class="customer-order-info">
+                            <li> <span class="bold ng-binding">PartyName:</span>
+                                <span class="ng-binding ng-scope">{{placecustomer?.placingCustomerPerson.personalTitle}}
+                                    {{placecustomer?.placingCustomerPerson.firstName}}
+                                    {{placecustomer?.placingCustomerPerson.middleName}}
+                                    {{placecustomer?.placingCustomerPerson.lastName}}
+                                </span>
+                            </li>
+                            <li> <span class="bold ng-binding">Status:</span>
+                                <span *ngIf="placecustomer?.StatusString!=null"
+                                    class="ng-binding ng-scope">{{placecustomer?.StatusString}}</span>
+                            </li>
+                            <li class="ng-binding">
+                                <span class="bold ng-binding">Date:</span> {{placecustomer?.orderHeader.entryDate|date}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="box-collateral order-history mb15">
+                <div class="panel-heading">
+                    <h2 class="mb15 ng-binding">Shipping Information</h2>
+                </div>
+                <div class="widget-quick-add-row clearfix p10 ng-scope" *ngFor="let itemship of orderItemShipGroups"
+                    ng-repeat="shipGroup in orderItemShipGroups">
+                    <ul class="customer-order-info">
+                        <li> <span class="clearfix mb5 block ng-binding">Destination <span
+                                    class="ng-binding">{{itemship.groupNumber}}
+                                </span>
+                            </span>
+
+                            <!--  <span class="clearfix block ng-binding">
+                                <span *ngIf="itemship.shippingStateGeo!={}" 
+                                class="ng-binding ng-scope">{{itemship.shippingStateGeo}}
+
+                                </span>
+                            </span> -->
+                        </li>
+                        <li> <span class="bold ng-binding">Method:</span>
+                        </li>
+                        <li> <span class="bold ng-binding">Splitting Preference:</span>
+                            <span *ngIf="itemship.maySplit=='N'" class="ng-binding ng-scope">Please wait until the
+                                entire order is ready before shipping.</span> </li>
+                        <li class="ng-binding">Gift?
+                            <span *ngIf="itemship.isGift=='N'" class="ng-binding ng-scope">This order is not a
+                                gift.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <div class="box-collateral order-history">
+                <div class="panel-heading">
+                    <h2 class="mb15 ng-binding">Order Items</h2>
+                    <span class="pm-info-link ng-scope">
+                        <a class="pull-left pointer" (click)="selectAll()">Add All to Cart</a>
+                        <a class="pull-left pointer" (click)="addCheckedToCart()">Add Checked to Cart</a>
+                        <a class="pull-left pointer">Send me this every month</a>
+                    </span>
+                </div>
+                <div class="box-collateral-content">
+                    <table class="history-orders-table order-items">
+                        <thead>
+                            <tr>
+                                <th [style.background]="color"> <label class="mb0i">
+                                        <input type="checkbox" name="checkbox" 
+                                            (click)="selectAll()"
+                                            class="ng-pristine ng-untouched ng-valid">
+                                        <span class="lbl padding-8"></span> </label>
+                                </th>
+                                <th [style.background]="color">Product </th>
+                                <th [style.background]="color">Qty Ordered </th>
+                                <th [style.background]="color">Qty Picked </th>
+                                <th [style.background]="color">Qty Shipped </th>
+                                <th [style.background]="color">Qty Cancelled </th>
+                                <th [style.background]="color">Unit Price </th>
+                                <th [style.background]="color">Adjustments </th>
+                                <th [style.background]="color">Subtotal </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let view of viewOrder; let i = index" class="ng-scope">
+                            <tr>
+                                <td>
+                                    <label class="mb0i">
+                                        <input type="checkbox" (click)="addSelected(view)">
+                                        <span class="lbl padding-8"></span>
+                                    </label>
+                                </td>
+                                <td class="pointer">
+                                    <span class="clearfix"><a ng-click="productDetails(orderItem.productId)"
+                                            class="ng-binding">{{view.productId}}{{view.itemDescription}}</a>
+                                    </span>
+                                </td>
+                                <td>{{view.quantity}}</td>
+                                <td>{{view.pickedQty}}</td>
+                                <td>{{view.shippedQty}}</td>
+                                <td> </td>
+                                <td>{{view.unitPrice}}</td>
+                                <td>{{view.getOrderItemAdjustmentsTotal}}</td>
+                                <td>{{view.getOrderItemTotal}}</td>
+                            </tr>
+                            <tr *ngFor="let viewShip of view.orderItemShipGroupAssocs" class="ng-scope">
+                                <td>&nbsp; </td>
+                                <td class="ng-binding">Ship Group: {{viewShip.shipGroupSeqId}}</td>
+                                <td class="ng-binding">{{viewShip.quantity}}</td>
+                                <td colspan="6">&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <div>
+                                        <form [formGroup]="cancelOrderForm" (ngSubmit)="cancelOrder(view)">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+
+                                                        <div class="col-md-4">
+                                                            <div class="form-group" style="padding: 10px;">
+                                                                <label style="display: block;">Calculate Reason</label>
+                                                                <select class="form-control" formControlName="Reason">
+                                                                    <option>Choose…</option>
+                                                                    <option value="OICR_CHANGE_MIND" class="ng-binding">
+                                                                        Changed Mind </option>
+                                                                    <option value="OICR_MISORDER_ITEM"
+                                                                        class="ng-binding">Mis-Ordered Item </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group" style="padding: 10px;">
+                                                                <label style="display: block;">Comments</label>
+                                                                <input class="form-control" type="text"
+                                                                    formControlName="Comments">
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-4">
+                                                            <div class="form-group justify-content-end">
+                                                                <button (click)="cancelOrder(view)"
+                                                                    class="btn btn-sm btn-danger ng-binding">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <tfoot>
+                            <tr class="total">
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td colspan="3"><span class="pull-left fw600 mr15 ng-binding">Subtotal</span> </td>
+                                <td class="fw600 ng-binding">$0 </td>
+                            </tr><!-- ngIf: headerAdjustmentsToShow.length>0 -->
+                            <tr class="total">
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td colspan="3"><span class="pull-left fw600 mr15 ng-binding">Shipping and
+                                        Handling</span> </td>
+                                <td class="fw600 ng-binding">$0 </td>
+                            </tr>
+                            <tr class="total">
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td colspan="3"><span class="pull-left fw600 mr15 ng-binding">Sales Tax</span> </td>
+                                <td class="fw600 ng-binding">$0 </td>
+                            </tr>
+                            <tr class="total">
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td>&nbsp; </td>
+                                <td colspan="3"><span class="pull-left fw600 mr15 ng-binding">Grand Total</span> </td>
+                                <td class="fw600 ng-binding">$0 </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,114 @@
+.order-history {
+    border: 1px solid #e0e4f6;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.order-history h2 {
+    padding: 10px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    background: #f8fafc;
+    color: #333;
+    border-bottom: #e4e4e4 1px solid;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    text-transform: capitalize;
+}
+.customer-order-info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.p10 {
+    padding: 10px;
+}
+.pr0 {
+    padding-right: 0;
+}
+.pl0 {
+    padding-left: 0;
+}
+.history-orders-table th {
+    
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    color: #fff;
+    font-weight: 500;
+}
+.history-orders-table {
+    border-spacing: 0;
+    width: 100%;
+    font-size: 12px;
+}
+.history-orders-table {
+    border-spacing: 0;
+    width: 100%;
+    font-size: 12px;
+}
+.panel-heading {
+    background: 0 0;
+    padding: 0;
+    margin: 0;
+    border-bottom: 0;
+}
+.pm-info-link a {
+    position: relative!important;
+    top: 0!important;
+    right: 0!important;
+    border-right: #d8d8d8 1px solid;
+    padding: 0 5px;
+    font-size: 12px;
+}
+.pm-info-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 1;
+}
+.pull-left {
+    float: left!important;
+}
+.order-history a {
+    color: #27CCC0;
+}
+.history-orders-table td, .history-orders-table th {
+    padding: 10px;
+    text-align: left;
+}
+.bb {
+    border-bottom: 1px solid #e4e4e4;
+}
+.panel-heading {
+    color: #fff;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    position: relative;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.text-lefti {
+    text-align: left!important;
+}
+.form-control {
+    height: 30px;
+    padding: 6px;
+    font-size: 11px;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d96557;
+    border-color: #d96557;
+}
+.btn-group-sm>.btn, .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+    margin-top: 15%;
+}
+.pointer{
+    cursor: pointer;
+}
