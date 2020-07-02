@@ -31,7 +31,7 @@ export class ShopAllComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.customerPartyId = localStorage.getItem("customerPartyId")
+    this.customerPartyId = localStorage.getItem("customerPartyId");
     this.main();
     this.getSpecialCategory();
   }
