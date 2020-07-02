@@ -1,5 +1,6 @@
 <section class="productSliderSection" id="home">
-  <div class="productSlider slick-initialized slick-slider slick-dotted" role="toolbar" style="background-color: coral;">
+  <div class="productSlider slick-initialized slick-slider slick-dotted" role="toolbar"
+    style="background-color: coral;">
     <!-- <div aria-live="polite" class="slick-list draggable" style="height: 993px;">
       <div class="slick-track" style="opacity: 1; width: 6745px; transform: translate3d(-1349px, 0px, 0px);"
         role="listbox">
@@ -50,21 +51,25 @@
       <div class="row no-gutters">
         <div class="col-md-7">
           <div class="productSlider__emptyprtn" style="margin: 0px auto">
-            <img [src]="productData?.s3LargeImageUrl" style="width: 60%;margin-top: 10%;margin-left: 10%;">
+            <img *ngIf="productData?.s3LargeImageUrl" [src]="productData?.s3LargeImageUrl"
+              style="width: 60%;margin-top: 10%;margin-left: 10%;">
+            <img *ngIf="!productData?.s3LargeImageUrl" src="../../../../assets/img/no_product_image.png"
+              style="width: 30%;margin-top: 20%;margin-left: 30%;">
           </div>
         </div>
         <div class="col-md-5">
           <div class="productSliderCntnt">
             <div class="productSliderCntnt__titleHldr">
               <h1 class="productSliderCntnt__title">{{productData?.title}}</h1>
-              <span class="productSliderCntnt__price desktop-dnone">${{productData?.price.defaultPrice}}</span>
+              <span class="productSliderCntnt__price desktop-dnone">${{productData?.price.price}}</span>
             </div>
             <h3 class="productSliderCntnt__subtitle">{{productData?.metaDescription}}</h3>
-            <!-- <div class="productSliderCntnt__paragraph mob__Dnone">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. (16oz)</p>
-              </div> -->
+            <div *ngFor="let item of productData.productContentWrapperMap | keyvalue">
+              <div class="productSliderCntnt__paragraph mob__Dnone"
+                *ngIf="item.key != 'productName' && item.key != 'description' && item.key != 'ADDITIONAL_IMAGE_1' && item.key != 'DIGITAL_DOWNLOAD'">
+                <p>{{item.value}}</p>
+              </div>
+            </div>
             <ul class="productSliderCntnt__btnhldr desktop-dnone">
               <li><a href="javascript:void(0);" class="productSliderCntnt__btn">HOW TO</a></li>
               <li><a href="javascript:void(0);" class="productSliderCntnt__btn">FAQS</a></li>
@@ -80,7 +85,7 @@
               <li><a href="javascript:void(0);" class="productSliderCntnt__btn">REVIEWS</a></li>
             </ul>
             <div class="productSliderCntnt__priceHolder">
-              <p class="productSliderCntnt__priceholder mob__Dnone">${{productData?.price.defaultPrice}}</p>
+              <p class="productSliderCntnt__priceholder mob__Dnone">${{productData?.price.price}}</p>
               <div class="productSliderCntnt__qnttyBtn">
                 <div class="quantityholder numbers-row">
                   <input type="number" name="partridge" [(ngModel)]="quantity" class="num-box" id="partridge" value="1">
@@ -89,7 +94,7 @@
               </div>
             </div>
             <div class="FtrSocialMedia productSliderCntnt__socialmedia d-flex justify-content-between">
-              <span class="msrpPrice">MSRP: ${{productData?.price.defaultPrice}}</span>
+              <span class="msrpPrice">MSRP: ${{productData?.price.price}}</span>
               <ul class="mob__Dnone">
                 <li>SHARE</li>
                 <li><a href="https://facebook.com/lasioprofessionalhaircare" target="_blank"><img
@@ -118,7 +123,7 @@
       </div>
     </div>
   </div>
-  
+
 </section>
 <section class="productpageMob desktop-dnone">
   <div class="productSliderCntnt__paragraph  ">
@@ -460,7 +465,7 @@
               </div>
               <div class="shopprdct__cntnt">
                 <p>{{prod.product.internalName}}</p>
-                <p>${{prod.productSummary.price.defaultPrice}}</p>
+                <p>${{prod.productSummary.price.price}}</p>
               </div>
             </a>
             <button class="blackBtn hoverblck" (click)="addToCartAddOns()">ADD TO BAG</button>

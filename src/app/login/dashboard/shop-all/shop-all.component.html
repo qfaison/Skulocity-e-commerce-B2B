@@ -68,15 +68,16 @@
                   <div class="shopprdct">
                     <a href="javascript:void(0)">
                       <div class="shopprdct__img">
-                        <img src="{{productList.largeImageUrl}}" alt="">
+                        <img *ngIf="productList.largeImageUrl" src="{{productList.largeImageUrl}}" alt="">
+                        <img *ngIf="!productList.largeImageUrl" src="../../../../assets/img/no_product_image.png">
                       </div>
                       <div>
                         <input type="number" [(ngModel)]="quantityProduct[i]" placeholder="Qty" style="width: 26%;margin: auto;float: none; margin-top: 5px;" class="form-control w50 mr10 pull-left" min="1">
                       </div>
                       <div class="shopprdct__cntnt">
                         <h6>{{productList.productName}}</h6>
-                        <span class="price" *ngIf="productList.fixedAmount != null">{{productList.fixedAmount}}</span>
-                        <span class="price" *ngIf="productList.fixedAmount == null"><b>Price Not Available</b></span>
+                        <span class="price" *ngIf="productList.price != null">{{productList.price}}</span>
+                        <span class="price" *ngIf="productList.price == null"><b>Price Not Available</b></span>
                       </div>
                     </a>
                     <button class="blackBtn hoverblck" (click)='addProductToCart(quantityProduct[i],productList.productId)'>ADD TO BAG</button>
@@ -98,7 +99,8 @@
                   <div class="shopprdct">
                     <a href="javascript:void(0)">
                       <div class="shopprdct__img">
-                        <img src="{{subCategory.categoryImageUrl}}" alt="{{subCategory.categoryName}}">
+                        <img *ngIf="subCategory.categoryImageUrl" src="{{subCategory.categoryImageUrl}}" alt="{{subCategory.categoryName}}">
+                        <img *ngIf="!subCategory.categoryImageUrl" src="../../../../assets/img/no_product_image.png">
                       </div>
                       <div class="shopprdct__cntnt">
                         <h6><b>{{subCategory.categoryName}}</b></h6>
@@ -117,15 +119,16 @@
                   <div class="shopprdct">
                     <a href="javascript:void(0)">
                       <div class="shopprdct__img">
-                        <img src="{{productListSubCategory.s3ImageUrl}}" (click)="openProduct(productListSubCategory.product.productId);" alt="{{productListSubCategory.product.productName}}">
+                        <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}" (click)="openProduct(productListSubCategory.product.productId);" alt="{{productListSubCategory.product.productName}}">
+                        <img *ngIf="!productListSubCategory.s3ImageUrl" src="../../../../assets/img/no_product_image.png" (click)="openProduct(productListSubCategory.product.productId);" >
                       </div>
                       <div>
                         <input type="number" [(ngModel)]="quantity[i]" placeholder="Qty" style="width: 26%;margin: auto;float: none; margin-top: 5px;" class="form-control w50 mr10 pull-left" min="1">
                       </div>
                       <div class="shopprdct__cntnt">
                         <h6>{{productListSubCategory.product.productName}}</h6>
-                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.listPrice != null"><b>${{productListSubCategory.productSummary.price.listPrice}}</b></span>
-                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.listPrice == null"><b>${{productListSubCategory.productSummary.price.defaultPrice}}</b></span>
+                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price != null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
+                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price == null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
   
                         <span class="price" *ngIf="productListSubCategory.productSummary.responseMessage == 'error'"><b>Price Not Available</b></span>
                       </div>
