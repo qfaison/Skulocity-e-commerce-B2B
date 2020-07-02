@@ -14,6 +14,7 @@ export class OrderHistoryComponent implements OnInit {
   tab3: boolean=false;
   color: string;
   orderList;
+  blob;
 
   constructor(
     private router:Router,
@@ -52,6 +53,18 @@ export class OrderHistoryComponent implements OnInit {
   viewOrder(custRequestId){
     this.router.navigate(['/dashboard/view-order', custRequestId]);
 
+  }
+
+  downloadPdf(invoiceId): void{
+    this.service.downloadPdfInvoice(invoiceId).subscribe((res: any)=>{
+      this.blob = new Blob([res], {type: 'application/pdf'});
+
+      var downloadURL = window.URL.createObjectURL(res);
+      var link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = "order_"+invoiceId;
+      link.click();
+    })
   }
 
 }

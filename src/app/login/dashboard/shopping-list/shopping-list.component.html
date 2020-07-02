@@ -1,200 +1,208 @@
-<br>
-<section class="faqpagesection ErrorPage">
-    <div class="container">
-      <div>
-         <h1 class="headinghldr text-left" >Shopping Lists</h1>
-         <h6 style="color: #0b8dcb;" class="headinghldr text-right">Create new</h6>
-        
+<br><br>
+<br><br>
+<section class="faqpagesection whiteBoxSection ErrorPage">
+  <div class="container" *ngIf="shopingList">
+    <form [formGroup]="shopingEditForm">
+      <div class="box-collateral order-history mb15">
+        <div class="panel-heading">
+          <h2 class="mb15 ng-binding">Shopping Lists</h2> <span class="pm-info-link"> <a class="pull-left pointer" [style.color]="color"
+              (click)="getCreateNew(productStoreId)">Create New</a> </span>
+        </div>
+        <div class="widget-quick-add-row pt10 pb10 clearfix">
+          <div class="col-md-12 selectBox">
+            <select class="form-control w30p pull-left ng-pristine ng-untouched ng-valid" (change)="shoppingListId(editShopingData.shoppingListId)"
+              formControlName="shopingListControl" [(ngModel)]="editShopingData.shoppingListId">
+              <option>Choose…</option>
+              <option *ngFor="let slist of shopingList" selected [value]="slist.shoppingListId">
+                {{slist.listName}}
+              </option>
+
+            </select>
+            <div class="chosen-container chosen-container-single" style="width: 248px;" title="">
+
+
+            </div> <button [style.background]="color" (click)="editShoppigList()" class="comm-btn ml15 ng-binding">Edit</button>
+          </div>
+        </div>
       </div>
-    
-      <div class="comonformOuter">
-        <form action="">
-          <div class="row justify-content-end">
-            <div class="col-lg-10 col-md-12">
-              <div class="row mb-5">
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="">Shopping List</label>
-                      <select>
-                        <option>Choose…</option>
-                        <option>Frequently Ordered Products</option>
-                        
-                      </select>
-                    </div>
-                  </div>
-                <div class="col-md-6">
-                    <div style="    margin-top: 6%;"> 
-                        <!-- <input type="submit" value="EDIT" name=""> -->
-                        <div class="form-group">
-                          <button style="padding: 2%; border: none;width: 17%;background-color: #0b8dcb;"  (click)="downloadAvailable();">Edit</button>
-                        </div>
-                     </div>
-                </div>
-               
-                <div class="col-md-6">
-                  <div>
-                    <h6 class="headinghldr text-left">Shopping List Detail New Shopping List</h6>
-                   
-                 </div>
-                </div>
-                <div class="col-md-6">
-                  <h6 style="color: #0b8dcb;" class="headinghldr text-right"><a>Create a Request For Quote |</a>
-                  <a>Create New Quote</a></h6>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="">List Name</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">List Type</label>
-                        <input type="text" class="form-control">
-                      </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="">Parent List</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="">Description</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-               
-                <div class="col-md-6"></div>
-                <div class="col-md-12 DOB">
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-md-3 col-6">
-                        <div class="form-group">
-                          <label for="">Public</label>
-                          <select>
-                            <option>Choose…</option>
-                            <option>Y</option>
-                            <option>N</option>
-                          
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-6">
-                        <div class="form-group">
-                          <label for="">Active</label>
-                          <select>
-                            <option>Y</option>
-                            <option>N</option>
-                          </select>
-                        </div>
-                      </div>
-                     
-                    </div>
-                  </div>
-                </div>
-                <hr class="separator">
-                <div class="form-group">
-                  <button style="    padding: 26%;
-                  border: none;
-                  width: 164%;
-                  margin-left: 345%;
-                  background-color: #0b8dcb;"  (click)="downloadAvailable();">Save</button>
-                </div>
+    </form>
+    <form [formGroup]="shopingListSaveForm">
+      <div class="box-collateral order-history mb15">
+        <div class="panel-heading">
+          <h2 class="mb15 ng-binding">Shopping List Detail {{editShopingData.listName}}</h2> <span class="pm-info-link"> <a
+              class="pull-left pointer" [style.color]="color" (click)="createRequestQuotes(editShopingData.shoppingListId)">Create a Request For Quote</a> <a
+              class="pull-left pointer" [style.color]="color" (click)="createNewQuotes(editShopingData.shoppingListId)">Create New Quote</a> </span>
+        </div>
+        <div class="widget-quick-add-row pt10 pb10 clearfix">
+          <div class="col-md-4 form-group">
+            <label for="">List Name</label>
+            <input [(ngModel)]="editShopingData.listName" type="text" formControlName="listName" class="form-control">
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="ng-binding">List Type</label>
+            <select class="form-control ng-pristine ng-untouched ng-valid" formControlName="shoppingListTypeId"
+              [(ngModel)]="editShopingData.shoppingListTypeId">
+              <option>Choose…</option>
+              <option *ngFor="let typelist of listType" [value]="typelist.shoppingListTypeId">
+                {{typelist.description}} </option>
+
+            </select>
+
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="ng-binding">Parent List</label>
+
+            <select class="form-control ng-pristine ng-untouched ng-valid" formControlName="parentShoppingListId">
+              <option>Choose…</option>
+              <option *ngFor="let slist of parentListType" [value]="slist.shoppingListId">{{slist.listName}}
+              </option>
+
+            </select>
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="">Description</label>
+            <textarea type="text" [(ngModel)]="editShopingData.description" formControlName="description"
+              class="form-control"></textarea>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="ng-binding">Public</label>
+                <select class="form-control ng-pristine ng-untouched ng-valid" formControlName="isPublic"
+                  [(ngModel)]="editShopingData.isPublic">
+                  <option>Choose…</option>
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="ng-binding">Active</label>
+                <select class="form-control ng-pristine ng-untouched ng-valid" formControlName="isActive"
+                  [(ngModel)]="editShopingData.isActive">
+                  <option>Choose…</option>
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select>
               </div>
             </div>
           </div>
-        </form>     
+          <div class="col-md-12">
+
+            <button [style.background]="color" (click)="updateShopingData()" class="comm-btn ng-binding">Save</button>
+          </div>
+        </div>
       </div>
-      <div style="margin-top: -10%;">
-      <div >
-        <h6 style="margin-left: 13%;">List Items New Shopping List</h6></div><br>
-      <table class="table table-striped" style="width: 73%;margin-left: 12%;" >
-        <thead>
-        <tr>
-          <th scope="col">Product</th>
-          <th scope="col" >Start Date</th>
-          <th scope="col" >No. of Days</th>
-          <th scope="col">No. of Persons</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
-          <th scope="col">Total</th>
-          <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr >
-          <th scope="row"> </th>
-          <td>
+    </form>
+    <br>
+
+    <div class="box-collateral order-history mb10">
+      <h2 class="mb10 ng-binding">List Items New Shopping List</h2>
+      <div class="widget-quick-add-row clearfix table-wrapper p10">
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline no-footer">
          
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <br> <br>
-    <div>
-    <div >
-      <h6 style="margin-left: 13%;">Quick Add To Shopping List</h6></div><br>
-      <div class="comonformOuter">
-        <form action="">
-          <div class="row justify-content-end">
-            <div class="col-lg-10 col-md-12">
-              <div class="row mb-5">
-                
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="">Product Id</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="">Quantity</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-               
-                <div class="col-md-6"></div>
-                <hr class="separator">
-                <div class="form-group" style="margin-top: -7%;">
-                  <button style="padding: 9%;
-                  border: none;
-                  width: 100%;
-                  margin-left: 282%;
-                  background-color: #0b8dcb;"  (click)="downloadAvailable();">Add to shoping list</button>
-                </div>
-              </div>
-            </div>
+          <div class="table-responsive">
+            <br>
+            <table class="history-orders-table list-items-table ng-isolate-scope dataTable no-footer" datatable="ng"
+              style="display: table;" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+              <thead>
+                <tr role="row">
+                  <th [style.background]="color" width="20%" class="ng-binding sorting_asc" tabindex="0" aria-controls="DataTables_Table_0"
+                    rowspan="1" colspan="1" aria-sort="ascending"
+                    aria-label="Product : activate to sort column descending" style="width: 160px;">Product </th>
+                  <th [style.background]="color" width="12%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="Start Date : activate to sort column ascending" style="width: 88px;">Start
+                    Date </th>
+                  <th [style.background]="color" width="12%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="No. Days : activate to sort column ascending" style="width: 88px;">No. Days
+                  </th>
+                  <th [style.background]="color" width="12%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="No. Persons : activate to sort column ascending" style="width: 88px;">No.
+                    Persons </th>
+                  <th [style.background]="color" width="10%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="Quantity : activate to sort column ascending" style="width: 70px;">Quantity
+                  </th>
+                  <th [style.background]="color" width="5%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="Price : activate to sort column ascending" style="width: 30px;">Price </th>
+                  <th [style.background]="color" width="6%" class="ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                    colspan="1" aria-label="Total : activate to sort column ascending" style="width: 34px;">Total </th>
+                  <th [style.background]="color" width="14%" class="text-center ng-binding sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                    rowspan="1" colspan="1" aria-label="Action   : activate to sort column ascending"
+                    style="width: 108px;">Action </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemData">
+                  <td>{{item.product.productId}} {{item.product.internalName}}
+                    {{item.product.description}}
+                  </td>
+                  <td>
+                    {{item.product.createdDate}}
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>{{item.shoppingListItem.quantity}}</td>
+                  <td>{{item.unitPrice}}</td>
+                  <td>{{item.totalPrice}}</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <!-- ngIf: shoppingListData.shoppingListItemDatas -->
+              </tfoot>
+            </table>
           </div>
-        </form>     
+
+        </div>
       </div>
     </div>
-    <div style="margin-top: -7%;">
-      <div >
-        <h6 style="margin-left: 13%;">Shopping List Price Totals - New Shopping List</h6></div>
-        <br>
-        <form action="">
-          <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-6 myAccount--Inner">
-              <p><strong>Child List Total Price:</strong> Monica Doe</p>
-              <p><strong>List Items Total Price:</strong> monica@email.com</p>
-              <p><strong>Grand Total:</strong> 000-000-0000</p>
-             
-            
-             
-            </div>
-            
+
+    <br>
+
+    <div class="box-collateral order-history mb15">
+      <h2 class="mb10 ng-binding">Quick Add To Shopping List</h2>
+      <div class="widget-quick-add-row clearfix pt10">
+        <div class="col-md-4">
+          <div class="form-group selectBox">
+            <label for="">Product Id</label>
+            <input class="form-control ng-pristine ng-untouched ng-valid" type="text" class="form-control"
+              [(ngModel)]="prodId">
           </div>
-        </form>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group selectBox">
+            <label for="">Quantity</label>
+            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" class="form-control"
+              [(ngModel)]="quan">
+          </div>
+        </div>
+        <div class="col-md-4 mt25"><button [style.background]="color" class="comm-btn ng-binding" (click)="addProduct(prodId,quan,editShopingData.shoppingListId);">Add to
+            Shopping List</button></div>
+        <br>
+      </div>
     </div>
+    <br>
+    <div class="col-md-12">
+      <div class="box-collateral order-history">
+        <h2 class="mb10 ng-binding">Shopping List Price Totals - New Shopping List</h2>
+        <div class="widget-quick-add-row clearfix pl10 pr10">
+          <div class="block text-right fw500 pb10 pt10 bb clearfix ng-binding"> <span class="pull-left ng-binding">Child
+              List Total Price</span>0
+            <!-- ngIf: shoppingListData.shoppingListChildTotal -->
+          </div>
+          <div class="block text-right fw500 pb10 pt10 bb clearfix ng-binding"> <span class="pull-left ng-binding">List
+              Items Total Price</span> 0
+            <!-- ngIf: shoppingListData.shoppingListItemTotal -->
+          </div>
+          <div class="block text-right fw500 pb10 pt10 clearfix ng-binding"> <span class="pull-left ng-binding">Grand
+              Total</span> 0
+            <!-- ngIf: shoppingListData.shoppingListTotalPrice -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br> <br>
+  
   </div>
-  </section>
+</section>

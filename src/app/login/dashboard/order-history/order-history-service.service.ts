@@ -35,4 +35,8 @@ export class OrderHistoryServiceService {
   cancelOrderItem(data){
     return this.http.post('skulocity/api/v1/ecommerce/cancelOrderItem',data);
   }
+
+  downloadPdfInvoice(invoiceId){
+    return this.http.get('skulocity/api/v1/ecommerce/order/invoice/pdf?invoiceId='+invoiceId, this.httpOptions);
+  }
 }

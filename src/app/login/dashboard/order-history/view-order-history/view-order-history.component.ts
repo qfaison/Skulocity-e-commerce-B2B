@@ -67,7 +67,7 @@ export class ViewOrderHistoryComponent implements OnInit {
       var downloadURL = window.URL.createObjectURL(res);
       var link = document.createElement('a');
       link.href = downloadURL;
-      link.download = "help.pdf";
+      link.download = "order_"+orderid;
       link.click();
      })
   }
