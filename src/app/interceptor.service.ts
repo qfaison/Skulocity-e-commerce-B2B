@@ -10,10 +10,10 @@ export class APIInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let newHeaders = req.headers;
-        if (localStorage.getItem("authenticationToken")) {
+        if (localStorage.getItem("token")) {
             req = req.clone(
                 { 
-                    headers: new HttpHeaders({'Authorization': localStorage.getItem('authenticationToken')}),
+                    headers: new HttpHeaders({'Authorization': localStorage.getItem('token')}),
                     url: `${this.url}/${req.url}`
                 }
             );
