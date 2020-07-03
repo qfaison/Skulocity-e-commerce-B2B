@@ -73,6 +73,8 @@ export class ProductPageComponent implements OnInit {
     })
   
   
+  }
+
   scroll(id) {
     let el = document.getElementById(id);
     el.scrollIntoView(false);
