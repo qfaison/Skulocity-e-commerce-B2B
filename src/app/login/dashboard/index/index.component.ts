@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShopAllService } from '../shop-all/shop-all.service';
 
 @Component({
   selector: 'app-index',
@@ -8,11 +9,32 @@ import { Component, OnInit } from '@angular/core';
 export class IndexComponent implements OnInit {
 
   color;
+  CatalogId;
 
-  constructor() { }
+  constructor(
+    private service : ShopAllService
+  ) { }
 
   ngOnInit(): void {
     this.color = localStorage.getItem("fontColor");
+    this.main();
+  }
+
+  main(): void {
+    if (localStorage.getItem('catalogId') == null) {
+      this.service.main().subscribe((res) => {
+        this.CatalogId = res['data']['currentCatalogId'];
+        localStorage.setItem('catalogId',res['data']['currentCatalogId']);
+      })
+    }
+    else {
+      let catalogId = {
+        'CURRENT_CATALOG_ID': localStorage.getItem('catalogId')
+      };
+      this.service.getMainCatalogId(catalogId).subscribe((res) => {
+        this.CatalogId = res['data']['currentCatalogId'];
+      })
+    }
   }
 
 }
