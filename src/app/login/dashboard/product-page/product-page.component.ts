@@ -71,6 +71,11 @@ export class ProductPageComponent implements OnInit {
       this.productData = res['data'];
       Swal.fire("Product added successfully..!!")
     })
+  
+  
+  scroll(id) {
+    let el = document.getElementById(id);
+    el.scrollIntoView(false);
   }
 
 }

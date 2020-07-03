@@ -64,25 +64,12 @@
               <span class="productSliderCntnt__price desktop-dnone">${{productData?.price.price}}</span>
             </div>
             <h3 class="productSliderCntnt__subtitle">{{productData?.metaDescription}}</h3>
-            <div *ngFor="let item of productData.productContentWrapperMap | keyvalue">
-              <div class="productSliderCntnt__paragraph mob__Dnone"
-                *ngIf="item.key != 'productName' && item.key != 'description' && item.key != 'ADDITIONAL_IMAGE_1' && item.key != 'DIGITAL_DOWNLOAD'">
-                <p>{{item.value}}</p>
-              </div>
-            </div>
-            <ul class="productSliderCntnt__btnhldr desktop-dnone">
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">HOW TO</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">FAQS</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">INGREDIENTS</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">PAIR WITH</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">REVIEWS</a></li>
-            </ul>
             <ul class="productSliderCntnt__btnhldr mob__Dnone">
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">HOW TO</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">FAQS</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">INGREDIENTS</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">PAIR WITH</a></li>
-              <li><a href="javascript:void(0);" class="productSliderCntnt__btn">REVIEWS</a></li>
+              <li *ngFor="let item of productData?.productContentWrapperMap | keyvalue">
+                <a *ngIf="item.key != 'productName' && item.key != 'description' && item.key != 'ADDITIONAL_IMAGE_1' && item.key != 'DIGITAL_DOWNLOAD'"
+                  href="javascript:void(0);" (click)="scroll(item.key)"
+                  class="productSliderCntnt__btn">{{item.key | uppercase}}</a>
+              </li>
             </ul>
             <div class="productSliderCntnt__priceHolder">
               <p class="productSliderCntnt__priceholder mob__Dnone">${{productData?.price.price}}</p>
@@ -428,25 +415,17 @@
   </div>
 </section>
 <section class="ingredientsctn mob__Dnone" id="ingredients1">
-  <div class="container">
-    <div class="headinghldr">
-      <h1>INGREDIENTS</h1>
-    </div>
-    <div class="ingredientsctn__listhldr">
-      <ul class="ingredientsctn_list">
-        <li> Lorem ipsum </li>
-        <li> Dolor sit amet </li>
-        <li> Consectetur adipiscing elit </li>
-        <li> Sed do eiusmod </li>
-        <li> Tempor incididunt </li>
-        <li> Ut labore et dolore </li>
-        <li> Magna aliqua </li>
-        <li> Ut enim ad minim </li>
-        <li> Veniam quis nostrud </li>
-        <li> Exercitation ullamco </li>
-        <li> Laboris nisi ut aliquip </li>
-        <li> Ex ea commodo consequat. </li>
-      </ul>
+  <div class="container" *ngFor="let item of productData?.productContentWrapperMap | keyvalue">
+    <div class="pairproductSctn" id="{{item.key}}"
+      *ngIf="item.key != 'productName' && item.key != 'description' && item.key != 'ADDITIONAL_IMAGE_1' && item.key != 'DIGITAL_DOWNLOAD'">
+      <div class="headinghldr">
+        <h1>{{item.key | uppercase}}</h1>
+      </div>
+      <div class="ingredientsctn__listhldr">
+        <ul class="ingredientsctn_list">
+          <li> {{item.value}} </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
