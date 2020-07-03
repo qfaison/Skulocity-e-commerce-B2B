@@ -70,6 +70,8 @@
                   href="javascript:void(0);" (click)="scroll(item.key)"
                   class="productSliderCntnt__btn">{{item.key | uppercase}}</a>
               </li>
+              <li><a href="javascript:void(0);" (click)="scroll('PairWith')" class="productSliderCntnt__btn">PAIR WITH</a></li>
+              <li><a href="javascript:void(0);" (click)="scroll('Reviews')" class="productSliderCntnt__btn">REVIEWS</a></li>
             </ul>
             <div class="productSliderCntnt__priceHolder">
               <p class="productSliderCntnt__priceholder mob__Dnone">${{productData?.price.price}}</p>
@@ -429,7 +431,7 @@
     </div>
   </div>
 </section>
-<section class="common-section pairproductSctn" id="pairwith">
+<section class="common-section pairproductSctn" id="PairWith">
   <div class="container">
     <div class="pairproductSctn__borderBtm">
       <div class="headinghldr">
@@ -454,7 +456,7 @@
     </div>
   </div>
 </section>
-<section class="reviewSection mob__Dnone" id="reviews1">
+<section class="reviewSection mob__Dnone" id="Reviews">
   <div class="container">
     <div class="headinghldr">
       <h1>WHAT’S GREAT ABOUT IT</h1>
