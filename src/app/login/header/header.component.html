@@ -65,7 +65,7 @@
                         </div>
                     </li>
                     <li class="nav-item mob-dnone">
-                        <span class="nav-link mybagopnbtn" (click)="showBag()"
+                        <span class="nav-link mybagopnbtn" (click)="showCart();showBag()"
                             [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">MY BAG ({{cartSize}})</span>
                     </li>
                 </ul>
@@ -392,6 +392,7 @@
             <button class="closeShoppopup" (click)="hideBag()">X</button>
             <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
         </div>
+        {{cartDetailsList}}
         <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
             <div class="shoppopup__producthldr">
                 <div class="shopprdct__img">

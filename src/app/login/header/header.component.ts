@@ -61,8 +61,9 @@ export class HeaderComponent implements OnInit {
   }
 
   showCart(): void {
+
     this.service.showCart().subscribe((res) => {
-      this.cartSize = res['data']['cart']['shoppingCart'];
+      this.cartSize = res['data']['cart']['shoppingCartSize'];
       this.cartDetailsList = res['data']['cart']['shoppingCart'];
       this.grandTotalAmount = res['data']['getItemList']['getDisplayGrandTotalAmount']
     })
@@ -196,7 +197,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  clearCart():void {
+  clearCart(): void {
     this.service.emptyCart().subscribe((res) => {
       if (res['data'] === "success") {
         this.showCart();
