@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
 
   showCart(): void {
     this.service.showCart().subscribe((res) => {
-      this.cartSize = res['data']['cart']['shoppingCartSize'];
+      this.cartSize = res['data']['cart']['shoppingCart'];
       this.cartDetailsList = res['data']['cart']['shoppingCart'];
       this.grandTotalAmount = res['data']['getItemList']['getDisplayGrandTotalAmount']
     })
