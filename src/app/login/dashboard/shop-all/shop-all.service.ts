@@ -19,7 +19,7 @@ export class ShopAllService {
   }
 
   getMainCatalogId(catalogId){
-    return this.http.post('skulocity/api/v1/public/ecommerce/main',catalogId);
+    return this.http.post('skulocity/api/v1/public/ecommerce/main?CURRENT_CATALOG_ID='+ catalogId.CURRENT_CATALOG_ID,catalogId);
   }
 
   getCatalog(){
