@@ -12,7 +12,7 @@ export class IndexComponent implements OnInit {
   CatalogId;
 
   constructor(
-    private service : ShopAllService
+    readonly service : ShopAllService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class IndexComponent implements OnInit {
       })
     }
     else {
-      let catalogId = {
+      const catalogId = {
         'CURRENT_CATALOG_ID': localStorage.getItem('catalogId')
       };
       this.service.getMainCatalogId(catalogId).subscribe((res) => {

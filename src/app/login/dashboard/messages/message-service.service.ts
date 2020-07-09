@@ -7,10 +7,10 @@ import { HttpClient } from '@angular/common/http';
 export class MessageServiceService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getMessage(condition,partyId,start,viewSize){
-    return this.http.get('skulocity/api/v1/ecommerce/messages/communicationEvent?condition='+condition+'&partyId='+partyId+'&start='+start+'&viewSize='+viewSize);
+    return this.http.get(`skulocity/api/v1/ecommerce/messages/communicationEvent?condition=${condition}&partyId=${partyId}&start=${start}&viewSize=${viewSize}`);
   }  
 }

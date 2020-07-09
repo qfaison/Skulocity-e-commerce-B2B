@@ -14,8 +14,8 @@ export class QuickAddComponent implements OnInit {
   quantity = [];
 
   constructor(
-    private service: QuickAddService,
-    private route : Router
+    readonly service: QuickAddService,
+    readonly route : Router
   ) { }
 
   ngOnInit() {

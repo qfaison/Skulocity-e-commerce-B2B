@@ -18,18 +18,18 @@ export class ViewOrderHistoryComponent implements OnInit {
   placecustomer;
   pdf: any;
   orderItemShipGroups;
-  itemSelected:[];
-  vierOrder=[];
+  itemSelected: [];
+  vierOrder = [];
   color;
   blob;
-  isSelectAll:boolean = false;
+  isSelectAll = false;
   selectedItemList = [];
-  irm={};
-  icm={};
+  irm = {};
+  icm = {};
 
   constructor(
-    private route: ActivatedRoute,
-    private service : OrderHistoryServiceService
+    readonly route: ActivatedRoute,
+    readonly service: OrderHistoryServiceService
   ) { }
 
   cancelOrderForm = new FormGroup({
@@ -39,126 +39,113 @@ export class ViewOrderHistoryComponent implements OnInit {
   ngOnInit() {
     this.color = localStorage.getItem('fontColor');
     this.sub = this.route.params.subscribe(params => {
-      this.id =params['ordrid'];
+      this.id = params['ordrid'];
       this.getViewOrder(this.id);
-     
+
     });
   }
 
-  getViewOrder(orderId):void {
-    this.service.getViewOrder(orderId).subscribe((res)=>{
-     this.placecustomer=res['data'];
+  getViewOrder(orderId): void {
+    this.service.getViewOrder(orderId).subscribe((res) => {
+      this.placecustomer = res['data'];
       this.viewOrder = res['data']['orderItems'];
       this.payment = res['data']['paymentMethodType'];
-      this.orderItemShipGroups=res['data']['orderItemShipGroups']
-     
-   
+      this.orderItemShipGroups = res['data']['orderItemShipGroups']
+
+
     })
   }
-  currentPageReload(){
+  currentPageReload() {
     this.getViewOrder(this.id);
 
   }
-  
-  printPdf(orderid){
-    this.service.downloadPdf(orderid).subscribe((res: any)=>{
-      this.blob = new Blob([res], {type: 'application/pdf'});
 
-      var downloadURL = window.URL.createObjectURL(res);
-      var link = document.createElement('a');
+  printPdf(orderid) {
+    this.service.downloadPdf(orderid).subscribe((res: any) => {
+      this.blob = new Blob([res], { type: 'application/pdf' });
+
+      const downloadURL = window.URL.createObjectURL(res);
+      const link = document.createElement('a');
       link.href = downloadURL;
-      link.download = "order_"+orderid;
+      link.download = "order_" + orderid;
       link.click();
-     })
+    })
   }
- 
-  cancelOrder(view){
-    
-    var key1="irm_"+view.orderItemSeqId;
-    var itemReasonMap={};
-    itemReasonMap[key1]=this.irm[view.orderItemSeqId];
 
-    var key2="icm_"+view.orderItemSeqId;
-    var itemCommentMap={};
-    itemCommentMap[key2]=this.icm[view.orderItemSeqId];
-    
-    var data={
-      "orderId":this.id,
-      "orderItemSeqId":view.orderItemSeqId
+  cancelOrder(view) {
+
+    const key1 = "irm_" + view.orderItemSeqId;
+    const itemReasonMap = {};
+    itemReasonMap[key1] = this.irm[view.orderItemSeqId];
+
+    const key2 = "icm_" + view.orderItemSeqId;
+    const itemCommentMap = {};
+    itemCommentMap[key2] = this.icm[view.orderItemSeqId];
+
+    const data = {
+      "orderId": this.id,
+      "orderItemSeqId": view.orderItemSeqId
     }
-    data['itemReasonMap']=itemReasonMap;
-    data['itemCommentMap']=itemCommentMap;
+    data['itemReasonMap'] = itemReasonMap;
+    data['itemCommentMap'] = itemCommentMap;
 
-    this.service.cancelOrderItem(data).subscribe((res)=>{
-      if(res['data']['responseMessage'] == 'success')
-      {
+    this.service.cancelOrderItem(data).subscribe((res) => {
+      if (res['data']['responseMessage'] == 'success') {
         Swal.fire("Cancelled order item successfully");
         this.getViewOrder(this.id);
       }
     })
   }
 
-  addSelected(order):void {
-    order.selected = order.selected ? false : true;    
+  addSelected(order): void {
+    order.selected = order.selected ? false : true;
   }
 
-  addCheckedToCart():void {
-
-    let data = {
-      "add_all":"false",
-      "orderId":this.id
+  addCheckedToCart(): void {
+    const data = {
+      "add_all": "false",
+      "orderId": this.id
     }
-
     let checkedData = "";
-    for(let key in this.viewOrder)
-    {
-      if(this.viewOrder[key]['selected'] == true)
-      {
+    for (const key in this.viewOrder) {
+      if (this.viewOrder[key]['selected'] === true) {
         let seqId = "orderItemSeqId=";
         seqId += this.viewOrder[key]['orderItemSeqId'];
         checkedData += seqId;
       }
     }
-
-    if(checkedData == "")
-    {
-      Swal.fire('Oops!!','Please select atleast one order','error');
+    if (checkedData === "") {
+      Swal.fire('Oops!!', 'Please select atleast one order', 'error');
     }
-    else
-    {
-      this.service.addAllToCart(checkedData,data).subscribe((res)=>{
-        if(res['data'] == "success")
-        {
+    else {
+      this.service.addAllToCart(checkedData, data).subscribe((res) => {
+        if (res['data'] === "success") {
           Swal.fire("Added to cart successfully")
         }
       })
     }
-   
   }
 
   selectAll(): void {
     this.isSelectAll = !this.isSelectAll;
-    let data = {
-      "add_all":"true",
-      "orderId":this.id
+    const data = {
+      "add_all": "true",
+      "orderId": this.id
     }
-    if(this.isSelectAll == true)
-    {
+    if (this.isSelectAll === true) {
       let orderItemSeqId = '';
-      for(let key in this.viewOrder)
-      {
+      for (const key in this.viewOrder) {
         let seqId = "orderItemSeqId=";
         seqId += this.viewOrder[key]['orderItemSeqId'];
         orderItemSeqId += seqId;
       }
-      this.service.addAllToCart(orderItemSeqId,data).subscribe((res)=>{
-        if(res['data'] == "success")
-        {
+      this.service.addAllCart(orderItemSeqId, data).subscribe((res) => {
+        if (res['data'] === "success") {
           Swal.fire("Added to cart successfully")
         }
       })
     }
-    else{
+    else {
       alert("all not selected");
     }
 

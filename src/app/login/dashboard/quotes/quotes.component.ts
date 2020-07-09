@@ -12,7 +12,7 @@ export class QuotesComponent implements OnInit {
   quotesList;
 
   constructor(
-    private service : QuotesService ,private router:Router
+    readonly service : QuotesService ,readonly router:Router
   ) { }
 
   ngOnInit(): void {

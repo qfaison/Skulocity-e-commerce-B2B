@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class RequestService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getRequestHistory(){

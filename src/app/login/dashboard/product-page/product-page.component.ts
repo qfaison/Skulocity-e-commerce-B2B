@@ -17,43 +17,41 @@ export class ProductPageComponent implements OnInit {
   alsoBoughtProducts;
 
   constructor(
-    private route : ActivatedRoute,
-    private service : ProductPageServiceService
+    readonly route: ActivatedRoute,
+    readonly service: ProductPageServiceService
   ) { }
 
   ngOnInit(): void {
     this.getProductDetails()
   }
 
-  getProductDetails(): void{
+  getProductDetails(): void {
     this.productId = this.route.snapshot.params['productId'];
-    let catalogId = localStorage.getItem("catalogId");
+    const catalogId = localStorage.getItem("catalogId");
 
-    let data = {
-      "CURRENT_CATALOG_ID" : catalogId,
-      "product_id" : this.productId
+    const data = {
+      "CURRENT_CATALOG_ID": catalogId,
+      "product_id": this.productId
     }
 
-    this.service.openProduct(data).subscribe((res)=>{
+    this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
     })
   }
 
-  addToCart(quantity): void{
+  addToCart(quantity): void {
 
-    if(quantity == undefined || quantity == null)
-    {
+    if (quantity === undefined || quantity === null) {
       Swal.fire('Oops...', 'Please enter the quantity!', 'error')
     }
-    else
-    {
-      let data = {
-        'add_product_id' : this.productId,
-        'quantity' : quantity
+    else {
+      const data = {
+        'add_product_id': this.productId,
+        'quantity': quantity
       }
-  
-      this.service.addProductToCart(data).subscribe((res)=>{
+
+      this.service.addProductToCart(data).subscribe((res) => {
         this.productData = res['data'];
         Swal.fire("Product added successfully..!!")
       })
@@ -61,22 +59,22 @@ export class ProductPageComponent implements OnInit {
 
   }
 
-  addToCartAddOns(): void{
-    let data = {
-      'add_product_id' : this.productId,
-      'quantity' : 1
+  addToCartAddOns(): void {
+    const data = {
+      'add_product_id': this.productId,
+      'quantity': 1
     }
 
-    this.service.addProductToCart(data).subscribe((res)=>{
+    this.service.addProductToCart(data).subscribe((res) => {
       this.productData = res['data'];
       Swal.fire("Product added successfully..!!")
     })
-  
-  
+
+
   }
 
   scroll(id) {
-    let el = document.getElementById(id);
+    const el = document.getElementById(id);
     el.scrollIntoView(true);
   }
 
