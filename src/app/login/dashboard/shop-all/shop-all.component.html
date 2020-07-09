@@ -74,7 +74,7 @@
                   <a href="javascript:void(0)">
                     <div class="shopprdct__img">
                       <img *ngIf="productList.largeImageUrl" src="{{productList.largeImageUrl}}" alt="">
-                      <img *ngIf="!productList.largeImageUrl" src="../../../../assets/img/no_product_image.png">
+                      <img *ngIf="!productList.largeImageUrl" src="assets/img/no_product_image.png">
                     </div>
                     <div>
                       <input type="number" [(ngModel)]="quantityProduct[i]" placeholder="Qty"
@@ -109,7 +109,7 @@
                     <div class="shopprdct__img">
                       <img *ngIf="subCategory.categoryImageUrl" src="{{subCategory.categoryImageUrl}}"
                         alt="{{subCategory.categoryName}}">
-                      <img *ngIf="!subCategory.categoryImageUrl" src="../../../../assets/img/no_product_image.png">
+                      <img *ngIf="!subCategory.categoryImageUrl" src="assets/img/no_product_image.png">
                     </div>
                     <div class="shopprdct__cntnt">
                       <h6><b>{{subCategory.categoryName}}</b></h6>
@@ -132,7 +132,7 @@
                       <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}"
                         (click)="openProduct(productListSubCategory.product.productId);"
                         alt="{{productListSubCategory.product.productName}}">
-                      <img *ngIf="!productListSubCategory.s3ImageUrl" src="../../../../assets/img/no_product_image.png"
+                      <img *ngIf="!productListSubCategory.s3ImageUrl" src="assets/img/no_product_image.png"
                         (click)="openProduct(productListSubCategory.product.productId);">
                     </div>
                     <div>
