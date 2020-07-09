@@ -1,151 +1,167 @@
 <section class="findSaloon">
-    <div class="sidebarholder sidebarholder--shoppage">
-      <div class="sidebarmain sidebarmain--shoppage">
-        <div class="mainSidebar">
-          <h1 class="mainSidebar__title mb-5">
-            <img src="assets/img/mainSidebar__arrow.svg" class="mainSidebar__arrow desktop-dnone" alt=""> SHOP</h1>
-          <div class="responsivedropdown">
-            <ul class="sidebarMenu">
-              <li *ngFor="let catalog of catalogsList; let i= index" id="{{catalog.prodCatalogId}}"
-                [ngClass]="{'sidebarDropdown' : CatalogId == currentCatalogId && categoryList }">
-                <a (click)='showCategories(catalog.prodCatalogId,i);'>{{catalog.catalogName}}</a>
-                <div class="sidebarDropdown__content" id="{{catalog.prodCatalogId}}{{i}}"
-                  *ngIf="CatalogId == currentCatalogId">
-                  <ul>
-                    <li *ngFor="let category of categoryList">
-                      <a
-                        (click)="getSubcategories(category.productCategoryId)">{{category.categoryName}}{{category.description}}</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-            <div class="searchbox desktop-dnone">
-              <input type="search" placeholder="QUICK SEARCH">
-              <button type="submit"><img src="assets/img/search.svg" alt=""></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="sidebarholder__cntnt">
-        <div class="searchbox text-right mob__Dnone">
-          <input type="search" placeholder="QUICK SEARCH">
-          <button type="submit"><img src="assets/img/search.svg" alt=""></button>
-        </div>
-        <div class=" ">
-          <div *ngIf="customerPartyId == 'jma'" class="shopallSctn_bnnr mob__Dnone" style="background: url(assets/img/jma.png);">
-            <h3></h3>
-            <!-- <a href="#" class="blackBtn whitebtn"></a> -->
-          </div>
-          <div *ngIf="customerPartyId == 'dw'" class="shopallSctn_bnnr mob__Dnone" style="background: url(assets/img/dw.jpg);">
-            <h3></h3>
-            <!-- <a href="#" class="blackBtn whitebtn"></a> -->
-          </div>
-  
-          <div *ngIf="!showSubCategory">
-            <div class="shopcontainer">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-6" *ngFor="let categoryList of categoryListCatalog">
-                  <h6>Categories</h6>
-                  <div class="shopprdct">
-                    <a href="javascript:void(0)">
-                      <div class="shopprdct__img">
-                        <img src="assets/img/Masque.png">
-                      </div>
-                      <div class="shopprdct__cntnt">
-                        <h6>Hypersilk Revitalizing Masque</h6>
-                        <span class="price">$32.00</span>
-                      </div>
-                    </a>
-                    <button class="blackBtn hoverblck">ADD TO BAG</button>
-                  </div>
-                </div>
+  <div class="sidebarholder sidebarholder--shoppage">
+    <div class="sidebarmain sidebarmain--shoppage">
+      <div class="mainSidebar">
+        <h1 class="mainSidebar__title mb-5">
+          <img src="assets/img/mainSidebar__arrow.svg" class="mainSidebar__arrow desktop-dnone" alt=""> SHOP</h1>
+        <div class="responsivedropdown">
+          <ul class="sidebarMenu">
+            <li *ngFor="let catalog of catalogsList; let i= index" id="{{catalog.prodCatalogId}}"
+              [ngClass]="{'sidebarDropdown' : CatalogId == currentCatalogId && categoryList }">
+              <a (click)='showCatData(catalog.prodCatalogId,i);'>{{catalog.catalogName}}</a>
+              <div class="sidebarDropdown__content" id="{{catalog.prodCatalogId}}-{{i}}">
+                <ul>
+                  <li *ngFor="let category of categoryList">
+                    <a
+                      (click)="getSubcategories(category.productCategoryId)">{{category.categoryName}}{{category.description}}</a>
+                  </li>
+                </ul>
               </div>
-            </div>
-  
-            <hr>
-  
-            <div class="shopcontainer">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-6" *ngFor="let productList of productListCatalog; let i=index">
-                  <h1><b><u>Products</u></b></h1>
-                  <div class="shopprdct">
-                    <a href="javascript:void(0)">
-                      <div class="shopprdct__img">
-                        <img *ngIf="productList.largeImageUrl" src="{{productList.largeImageUrl}}" alt="">
-                        <img *ngIf="!productList.largeImageUrl" src="../../../../assets/img/no_product_image.png">
-                      </div>
-                      <div>
-                        <input type="number" [(ngModel)]="quantityProduct[i]" placeholder="Qty" style="width: 26%;margin: auto;float: none; margin-top: 5px;" class="form-control w50 mr10 pull-left" min="1">
-                      </div>
-                      <div class="shopprdct__cntnt">
-                        <h6>{{productList.productName}}</h6>
-                        <span class="price" *ngIf="productList.price != null">{{productList.price}}</span>
-                        <span class="price" *ngIf="productList.price == null"><b>Price Not Available</b></span>
-                      </div>
-                    </a>
-                    <button class="blackBtn hoverblck" (click)='addProductToCart(quantityProduct[i],productList.productId)'>ADD TO BAG</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </li>
+          </ul>
+          <div class="searchbox desktop-dnone">
+            <input type="search" placeholder="QUICK SEARCH">
+            <button type="submit"><img src="assets/img/search.svg" alt=""></button>
           </div>
-  
-  
-  <!--- Product wise categories-->
-  
-  
-          <div *ngIf="showSubCategory">
-            <div class="shopcontainer">
-              <h3>Sub Categories</h3>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-6" *ngFor="let subCategory of subCategoryList">
-                  <div class="shopprdct">
-                    <a href="javascript:void(0)">
-                      <div class="shopprdct__img">
-                        <img *ngIf="subCategory.categoryImageUrl" src="{{subCategory.categoryImageUrl}}" alt="{{subCategory.categoryName}}">
-                        <img *ngIf="!subCategory.categoryImageUrl" src="../../../../assets/img/no_product_image.png">
-                      </div>
-                      <div class="shopprdct__cntnt">
-                        <h6><b>{{subCategory.categoryName}}</b></h6>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <hr>
-  
-            <div class="shopcontainer">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-6" *ngFor="let productListSubCategory of subCategoryProductsList; let i=index">
-                  <div class="shopprdct">
-                    <a href="javascript:void(0)">
-                      <div class="shopprdct__img">
-                        <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}" (click)="openProduct(productListSubCategory.product.productId);" alt="{{productListSubCategory.product.productName}}">
-                        <img *ngIf="!productListSubCategory.s3ImageUrl" src="../../../../assets/img/no_product_image.png" (click)="openProduct(productListSubCategory.product.productId);" >
-                      </div>
-                      <div>
-                        <input type="number" [(ngModel)]="quantity[i]" placeholder="Qty" style="width: 26%;margin: auto;float: none; margin-top: 5px;" class="form-control w50 mr10 pull-left" min="1">
-                      </div>
-                      <div class="shopprdct__cntnt">
-                        <h6>{{productListSubCategory.product.productName}}</h6>
-                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price != null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
-                        <span class="price" *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price == null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
-  
-                        <span class="price" *ngIf="productListSubCategory.productSummary.responseMessage == 'error'"><b>Price Not Available</b></span>
-                      </div>
-                    </a>
-                    <button class="blackBtn hoverblck" (click)='addProductToCart(quantity[i],productListSubCategory.product.productId)'>ADD TO BAG</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-  
         </div>
       </div>
     </div>
-  </section>
+    <div class="sidebarholder__cntnt">
+      <div class="searchbox text-right mob__Dnone">
+        <input type="search" placeholder="QUICK SEARCH">
+        <button type="submit"><img src="assets/img/search.svg" alt=""></button>
+      </div>
+      <div class=" ">
+        <div *ngIf="customerPartyId == 'jma'" class="shopallSctn_bnnr mob__Dnone"
+          style="background: url(assets/img/jma.png);">
+          <h3></h3>
+          <!-- <a href="#" class="blackBtn whitebtn"></a> -->
+        </div>
+        <div *ngIf="customerPartyId == 'dw'" class="shopallSctn_bnnr mob__Dnone"
+          style="background: url(assets/img/dw.jpg);">
+          <h3></h3>
+          <!-- <a href="#" class="blackBtn whitebtn"></a> -->
+        </div>
+
+        <div *ngIf="!showSubCategory">
+          <div class="shopcontainer">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-6" *ngFor="let categoryList of categoryListCatalog">
+                <h6>Categories</h6>
+                <div class="shopprdct">
+                  <a href="javascript:void(0)">
+                    <div class="shopprdct__img">
+                      <img src="assets/img/Masque.png">
+                    </div>
+                    <div class="shopprdct__cntnt">
+                      <h6>Hypersilk Revitalizing Masque</h6>
+                      <span class="price">$32.00</span>
+                    </div>
+                  </a>
+                  <button class="blackBtn hoverblck">ADD TO BAG</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="shopcontainer">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-6" *ngFor="let productList of productListCatalog; let i=index">
+                <h1><b><u>Products</u></b></h1>
+                <div class="shopprdct">
+                  <a href="javascript:void(0)">
+                    <div class="shopprdct__img">
+                      <img *ngIf="productList.largeImageUrl" src="{{productList.largeImageUrl}}" alt="">
+                      <img *ngIf="!productList.largeImageUrl" src="../../../../assets/img/no_product_image.png">
+                    </div>
+                    <div>
+                      <input type="number" [(ngModel)]="quantityProduct[i]" placeholder="Qty"
+                        style="width: 26%;margin: auto;float: none; margin-top: 5px;"
+                        class="form-control w50 mr10 pull-left" min="1">
+                    </div>
+                    <div class="shopprdct__cntnt">
+                      <h6>{{productList.productName}}</h6>
+                      <span class="price" *ngIf="productList.price != null">{{productList.price}}</span>
+                      <span class="price" *ngIf="productList.price == null"><b>Price Not Available</b></span>
+                    </div>
+                  </a>
+                  <button class="blackBtn hoverblck"
+                    (click)='addProductToCart(quantityProduct[i],productList.productId)'>ADD TO BAG</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--- Product wise categories-->
+
+
+        <div *ngIf="showSubCategory">
+          <div class="shopcontainer">
+            <h3>Sub Categories</h3>
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-6" *ngFor="let subCategory of subCategoryList">
+                <div class="shopprdct">
+                  <a href="javascript:void(0)">
+                    <div class="shopprdct__img">
+                      <img *ngIf="subCategory.categoryImageUrl" src="{{subCategory.categoryImageUrl}}"
+                        alt="{{subCategory.categoryName}}">
+                      <img *ngIf="!subCategory.categoryImageUrl" src="../../../../assets/img/no_product_image.png">
+                    </div>
+                    <div class="shopprdct__cntnt">
+                      <h6><b>{{subCategory.categoryName}}</b></h6>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="shopcontainer">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-6"
+                *ngFor="let productListSubCategory of subCategoryProductsList; let i=index">
+                <div class="shopprdct">
+                  <a href="javascript:void(0)">
+                    <div class="shopprdct__img">
+                      <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}"
+                        (click)="openProduct(productListSubCategory.product.productId);"
+                        alt="{{productListSubCategory.product.productName}}">
+                      <img *ngIf="!productListSubCategory.s3ImageUrl" src="../../../../assets/img/no_product_image.png"
+                        (click)="openProduct(productListSubCategory.product.productId);">
+                    </div>
+                    <div>
+                      <input type="number" [(ngModel)]="quantity[i]" placeholder="Qty"
+                        style="width: 26%;margin: auto;float: none; margin-top: 5px;"
+                        class="form-control w50 mr10 pull-left" min="1">
+                    </div>
+                    <div class="shopprdct__cntnt">
+                      <h6>{{productListSubCategory.product.productName}}</h6>
+                      <span class="price"
+                        *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price != null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
+                      <span class="price"
+                        *ngIf="productListSubCategory.productSummary.price && productListSubCategory.productSummary.price.price == null"><b>${{productListSubCategory.productSummary.price.price}}</b></span>
+
+                      <span class="price"
+                        *ngIf="productListSubCategory.productSummary.responseMessage == 'error'"><b>Price Not
+                          Available</b></span>
+                    </div>
+                  </a>
+                  <button class="blackBtn hoverblck"
+                    (click)='addProductToCart(quantity[i],productListSubCategory.product.productId)'>ADD TO BAG</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>

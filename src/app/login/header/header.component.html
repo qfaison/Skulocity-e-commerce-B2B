@@ -382,3 +382,323 @@
     </div>
 
 </div>
+
+
+
+
+<div class="checkout" *ngIf="toggleShow1">
+    <div id="myBag" *ngIf="myBag">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
+            <div class="shoppopup__producthldr">
+                <div class="shopprdct__img">
+                    <img *ngIf="cart.s3ImageUrl" src="{{cart.s3ImageUrl}}" alt="">
+                    <img *ngIf="!cart.s3ImageUrl" src="assets/img/no_product_image.png">
+                </div>
+                <div class="shopprdct__cntnt">
+                    <h6>{{cart.product.productName}}</h6>
+                    <span class="price"><b>$ {{cart.price}}</b></span>
+                </div>
+            </div>
+            <div class="quantityholder numbers-row">
+                <b>Quantity:</b> {{cart.quantity}}
+            </div>
+        </div>
+
+        <div class="promocode__holder">
+            <label for="promocode"> Promo code</label>
+            <input type="text" id="promocode">
+        </div>
+        <div class="totalbftax">
+            <h6> Total before tax: </h6>
+            <span> {{grandTotalAmount | number:'1.2-2'}} </span>
+        </div>
+        <div class="slidepopBtn formButton  text-right">
+            <a id="checkoutBag" href="javaScript:void(0);" class="blackBtn hoverblck"
+                (click)="checkoutOptions();">CHECKOUT</a>
+            <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
+        </div>
+    </div>
+
+    <div id="checkoutBagShow" *ngIf="checkoutBagShow" class="shoppopup--large">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__headingHldr">
+            <div class="headinghldr text-left">
+                <h1>CHECKOUT</h1>
+            </div>
+        </div>
+        <div class="comonformOuter">
+            <div class="col-md-12 subheading">
+                <h5>Who are we shipping this to?</h5>
+            </div>
+            <form action="">
+                <div class="col-md-12 subheading ">
+                    <h5>Where are we shipping your order?</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Shipping Address*</b></label>
+                            <select *ngIf="checkoutFormData" [(ngModel)]="contMechId" name="contMechId"
+                                (change)="checkoutOptionsCheckoutPageShippingAddress()">
+                                <option *ngFor="let address of checkoutFormData"
+                                    value="{{address.postalAddress.contactMechId}}">
+                                    {{address.postalAddress.address1}} {{address.postalAddress.address2}}
+                                    {{address.postalAddress.city}} {{address.postalAddress.stateProvinceGeoId}}
+                                    {{address.postalAddress.postalCode}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="shippingMethods">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Shipping Method*</b></label>
+                            <select *ngIf="checkoutFormData" [(ngModel)]="shippingMethod" name="shippingMethod">
+                                <option *ngFor="let method of shippingMethods"
+                                    value="{{method.shipmentMethodTypeId}}@{{method.partyId}}">
+                                    {{method.description}} ${{method.currencyValue}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="form-group form-check m-0">
+                            <input type="checkbox" class="form-check-input" id="Check3">
+                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
+                                    Conditions</u></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 formButton slidepopBtn text-right">
+                        <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPaymentClick" href="javascript:;"
+                            class="blackBtn hoverblck  blackBtn__large"
+                            (click)="checkoutOptionsCheckoutPageShippingOptions()">CONTINUE</a>
+                        <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="orderConfirmationPaymentShow" *ngIf="orderConfirmationPaymentShow" class="shoppopup--large">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__headingHldr px-0">
+            <div class="headinghldr text-left mb-5">
+                <h1>ENTER PAYMENT INFO</h1>
+            </div>
+        </div>
+        <div class="comonformOuter paymentInfoSctn">
+            <form action="">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="patmentinfo__Heading pl-15">
+                            <h3>Pay with</h3>
+                        </div>
+                        <div class="patmentinfo__Heading pl-15">
+                            <h5>Credit Card</h5>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Holder Name</label>
+                            <input type="text" class="form-control"
+                                value="{{paymentFormData[0]['firstNameOnCard']}} {{paymentFormData[0]['middleNameOnCard']}} {{paymentFormData[0]['lastNameOnCard']}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Number</label>
+                            <input type="text" class="form-control" value="{{paymentFormData[0]['cardNumber']}}">
+                        </div>
+                        <div class="DOB">
+                            <div class="form-group">
+                                <div class="row no-gutters justify-content-between">
+                                    <div class="col-md-6 col-8">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label>Expiration Date</label>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group px-0">
+                                                    <input type="text" class="form-control"
+                                                        value="{{paymentFormData[0]['expireDate']}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-4">
+                                        <div class="col-12 pr-0">
+                                            <label for="">CVV</label>
+                                        </div>
+                                        <div class="col-12 pr-0">
+                                            <div class="form-group px-0">
+                                                <input type="text" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="patmentinfo__Heading pl-15">
+                            <h5>- OR -</h5>
+                        </div>
+                        <div class="othrpymntoptn">
+                            <ul class="othrpymntoptn__list">
+                                <li> <button class="btntransparent"><img src="../../../assets/img/apple_pay.svg"
+                                            alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="../../../assets/img/samsungpay.png"
+                                            alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="../../../assets/img/PayPal.svg"
+                                            alt=""></button></li>
+                                <li> <button class="btntransparent"><img src="../../../assets/img/affirm.png"
+                                            alt=""></button></li>
+                            </ul>
+                        </div> -->
+                        <div class="separator"></div>
+                    </div>
+                </div>
+                <div class="formButton m-0">
+                    <!-- <input type="submit" value="PLACE OrDER" name=""> -->
+                    <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                        (click)="checkoutPayment()">PLACE OrDER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="orderDetailsScreen" class="shoppopup--large" *ngIf="orderDetailsScreen" style="padding: 25px;">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+            <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopup__headingHldr px-0">
+            <div class="headinghldr text-left mb-5">
+                <h1>ORDER CONFORMATION</h1>
+            </div>
+        </div>
+        <div class="comonformOuter paymentInfoSctn">
+            <form action="">
+                <div class="row" style="margin:0px;">
+                    <div class="col-md-12 pr-30 sepratorborder">
+                        <div class="patmentinfo__Heading ">
+                            <h3>Order Information</h3>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Status:</h3>
+                                    <span>Not yet ordered</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Payment Information:</h3>
+                                    <span>{{paymentMethodType}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoiceMain">
+                            <div class="invoiceCntnt">
+                                <div class="invoiceCntnt__prod">
+                                    <h3 class="invoiceCntnt__name">Shipping Information:</h3>
+                                    <span>{{postalAddress.address1}}</span>
+                                    <span>{{postalAddress.address2}}</span>
+                                    <span>{{postalAddress.city}}</span>
+                                    <span>{{postalAddress.stateProvinceGeoId}}</span>
+                                    <span>{{postalAddress.postalCode}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="myTable">
+                            <thead>
+                                <tr>
+                                    <th [style.background]="color" style="width: 20%;color:white">Product</th>
+                                    <th [style.background]="color" style="width: 20%;color:white">Quantity Ordered</th>
+                                    <th [style.background]="color" style="width: 20%;color:white">Unit Price</th>
+                                    <th [style.background]="color" style="width: 20%;color:white">Adjustments</th>
+                                    <th [style.background]="color" style="width: 20%;color:white">Sub Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of orderItems">
+                                    <td>{{order.productId}}-{{order.itemDescription}}</td>
+                                    <td>{{order.quantity}}</td>
+                                    <td>$ {{order.unitPrice | number:'1.2-2'}}</td>
+                                    <td>$ {{order.selectedAmount}}</td>
+                                    <td>{{order.quantity*order.unitPrice}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>SALES_TAX</b></td>
+                                    <td colspan="1"><b>$ {{prices.orderTaxTotal}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>Subtotal</b></td>
+                                    <td colspan="1"><b>$ {{prices.orderSubTotal}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>Promotion</b></td>
+                                    <td colspan="1"><b>($ {{prices.orderPromoTotal}})</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>Shipping and Handling</b></td>
+                                    <td colspan="1"><b>$ {{prices.orderShippingTotal}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>Sales Tax</b></td>
+                                    <td colspan="1"><b>$ {{prices.orderTaxTotal}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><b>Grand Total</b></td>
+                                    <td colspan="1"><b>$ {{prices.orderGrandTotal}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="formButton m-0">
+                    <!-- <input type="submit" value="PLACE OrDER" name=""> -->
+                    <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large" (click)="submitOrder()">SUBMIT OrDER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="bagFinishShow" *ngIf="bagFinishShow">
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="closeShoppopup" (click)="hideBag()">X</button>
+        </div>
+        <div class="bagfinalmain">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <h1>CONGRATS!</h1>
+                </div>
+            </div>
+            <div class="bagfinalmain__cntnt">
+                <div class="invoiceMain">
+                    <div class="invoiceCntnt invoiceMain--cntntlftrght">
+                        <div class="invoiceCntnt__prod">
+                            <h3 class="invoiceCntnt__name">Order Id:</h3>
+                            <span><b>{{orderId}}</b></span>
+                        </div>
+                    </div>
+                </div>
+                <p>We’ve sent you an email with all the details. </p>
+                <p>Your order is now being processed and will soon be on its way to your doorstep!</p>
+            </div>
+            <a routerLink="" class="blackBtn hoverblck">YASSS!</a>
+        </div>
+    </div>
+
+</div>
