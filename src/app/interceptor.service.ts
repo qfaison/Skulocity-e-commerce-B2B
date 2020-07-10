@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
 
-    url = 'https://development.skulocity.org';
+    url = 'https://development_bluechip.skulocity.org';
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         
