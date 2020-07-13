@@ -9,16 +9,16 @@ import { OrderHistoryServiceService } from './order-history-service.service';
 })
 export class OrderHistoryComponent implements OnInit {
 
-  tab1:boolean=true;
-  tab2: boolean=false;
-  tab3: boolean=false;
+  tab1=true;
+  tab2=false;
+  tab3=false;
   color: string;
   orderList;
   blob;
 
   constructor(
-    private router:Router,
-    private service: OrderHistoryServiceService
+    readonly router:Router,
+    readonly service: OrderHistoryServiceService
   ) { }
 
   ngOnInit(): void {
@@ -59,8 +59,8 @@ export class OrderHistoryComponent implements OnInit {
     this.service.downloadPdfInvoice(invoiceId).subscribe((res: any)=>{
       this.blob = new Blob([res], {type: 'application/pdf'});
 
-      var downloadURL = window.URL.createObjectURL(res);
-      var link = document.createElement('a');
+      const downloadURL = window.URL.createObjectURL(res);
+      const link = document.createElement('a');
       link.href = downloadURL;
       link.download = "order_"+invoiceId;
       link.click();

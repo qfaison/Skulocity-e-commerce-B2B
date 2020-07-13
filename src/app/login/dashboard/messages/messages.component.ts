@@ -12,15 +12,15 @@ export class MessagesComponent implements OnInit {
   messageList;
 
   constructor(
-    private service : MessageServiceService,
-    private router:Router
+    readonly service : MessageServiceService,
+    readonly router:Router
   ) { }
 
   ngOnInit(): void {
-    let condition = false;
-    let partyId = localStorage.getItem("partyId");
-    let start = 1;
-    let viewSize = 10;
+    const condition = false;
+    const partyId = localStorage.getItem("partyId");
+    const start = 1;
+    const viewSize = 10;
     this.getMessage(condition, partyId, start, viewSize);
   }
 

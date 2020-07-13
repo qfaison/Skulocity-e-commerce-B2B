@@ -19,8 +19,8 @@ export class ViewQuotesComponent implements OnInit {
   color;
 
   constructor(
-    private route: ActivatedRoute,
-    private service: ViewQuotesService
+    readonly route: ActivatedRoute,
+    readonly service: ViewQuotesService
   ) { }
 
   ngOnInit() {
@@ -41,8 +41,8 @@ export class ViewQuotesComponent implements OnInit {
   }
   saveRetailView(itemList) {
 
-    for (let c of itemList) {
-      let postData = {
+    for (const c of itemList) {
+      const postData = {
 
         "quoteId": c.quoteId,
         "quoteItemSeqId": c.quoteItemSeqId,
@@ -54,13 +54,13 @@ export class ViewQuotesComponent implements OnInit {
       }
       this.quoteItems.push(postData);
     }
-    let quoteData = {
+    const quoteData = {
       "quoteItemsApprovalList": this.quoteItems
     }
 
     this.service.postViewQoute(quoteData).subscribe((res) => {
       this.postViewRetailResponse = res['data']['responseMessage'];
-      if (this.postViewRetailResponse = "success") {
+      if (this.postViewRetailResponse === "success") {
         Swal.fire("Success");
       }
     }

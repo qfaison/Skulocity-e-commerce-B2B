@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ShopAllService } from '../dashboard/shop-all/shop-all.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,12 +22,31 @@ export class HeaderComponent implements OnInit {
   bagFinishShow: boolean = false;
   cartDetailsList;
   logo;
-  cartSize: number = 2;
+  cartSize: number = 0;
   postalAddresses;
+  cartSubscriber: any;
+
+  grandTotalAmount: number;
+  checkoutFormData;
+  paymentFormData;
+  shippingMethods;
+  itemDetails;
+  totalPaymentAmout: number;
+  toggleShow1: boolean = false;
+  contMechId;
+  shippingMethod;
+  orderDetailsScreen: boolean = false;
+  paymentMethodType;
+  postalAddress;
+  method;
+  orderItems;
+  prices;
+  orderId;
 
   constructor(
-    public router: Router,
-    private service: DashboardService
+    readonly router: Router,
+    readonly service: DashboardService,
+    readonly serviceCart: ShopAllService
   ) { }
 
   ngOnInit(): void {
@@ -35,105 +55,17 @@ export class HeaderComponent implements OnInit {
     }
     this.logo = localStorage.getItem('logo');
     this.showCart();
+    this.cartSubscriber = this.serviceCart.cartSubscriber.subscribe((value) => {
+      this.cartSize = value;
+    })
   }
 
   showCart(): void {
-    this.service.showCart().subscribe((res) => {
-      //this.cartDetailsList = res['data']['cart']['shoppingCartList'];
-      this.cartSize = 2;
-      this.cartDetailsList = [
-        {
-          "itemIndex": 0,
-          "optionalProductFeature": {
 
-          },
-          "shoppingListId": null,
-          "isPromo": false,
-          "product": {
-            "productId": "GZ-DIG",
-            "productTypeId": "DIGITAL_GOOD",
-            "primaryProductCategoryId": "101",
-            "manufacturerPartyId": null,
-            "facilityId": null,
-            "introductionDate": null,
-            "releaseDate": null,
-            "supportDiscontinuationDate": null,
-            "salesDiscontinuationDate": null,
-            "salesDiscWhenNotAvail": null,
-            "internalName": "Digital Gizmo",
-            "brandName": null,
-            "comments": null,
-            "productName": "Digital Gizmo",
-            "description": "A digital gizmo: can be downloaded immediately after purchase.",
-            "longDescription": "This gizmo is part of an exciting new breed that needs no corporeal form: it is all digital! Buy and download it now!",
-            "priceDetailText": null,
-            "smallImageUrl": null,
-            "mediumImageUrl": null,
-            "largeImageUrl": null,
-            "detailImageUrl": null,
-            "originalImageUrl": null,
-            "detailScreen": null,
-            "inventoryMessage": null,
-            "requireInventory": null,
-            "quantityUomId": null,
-            "quantityIncluded": null,
-            "piecesIncluded": null,
-            "requireAmount": null,
-            "fixedAmount": null,
-            "amountUomTypeId": null,
-            "weightUomId": null,
-            "weight": null,
-            "productWeight": null,
-            "heightUomId": null,
-            "productHeight": null,
-            "shippingHeight": null,
-            "widthUomId": null,
-            "productWidth": null,
-            "shippingWidth": null,
-            "depthUomId": null,
-            "productDepth": null,
-            "shippingDepth": null,
-            "diameterUomId": null,
-            "productDiameter": null,
-            "productRating": null,
-            "ratingTypeEnum": null,
-            "returnable": null,
-            "taxable": "Y",
-            "chargeShipping": "N",
-            "autoCreateKeywords": "Y",
-            "includeInPromotions": null,
-            "isVirtual": "N",
-            "isVariant": "N",
-            "virtualVariantMethodEnum": null,
-            "originGeoId": null,
-            "requirementMethodEnumId": null,
-            "billOfMaterialLevel": null,
-            "reservMaxPersons": null,
-            "reserv2ndPPPerc": null,
-            "reservNthPPPerc": null,
-            "configId": null,
-            "createdDate": 989755200000,
-            "createdByUserLogin": "admin",
-            "lastModifiedDate": 989755200000,
-            "lastModifiedByUserLogin": "admin",
-            "inShippingBox": null,
-            "defaultShipmentBoxTypeId": null,
-            "lastUpdatedStamp": 1575358123200,
-            "lastUpdatedTxStamp": 1575358121352,
-            "createdStamp": 1575358123200,
-            "createdTxStamp": 1575358121352,
-            "isActive": null,
-            "publishedScopeId": null,
-            "shopifyFulfillmentService": null
-          },
-          "s3ImageUrl": "",
-          "giftWrap": null,
-          "price": 81.00000000000,
-          "otherAdjustment": 0.00000,
-          "quantity": 1,
-          "subTotal": 81.00000000000
-        }
-      ]
+    this.service.showCart().subscribe((res) => {
+      this.cartSize = res['data']['cart']['shoppingCartSize'];
+      this.cartDetailsList = res['data']['cart']['shoppingCart'];
+      this.grandTotalAmount = res['data']['getItemList']['getDisplayGrandTotalAmount']
     })
   }
 
@@ -147,15 +79,25 @@ export class HeaderComponent implements OnInit {
   }
 
   showBag(): void {
-    this.toggleShow = true;
+    if (localStorage.getItem("token")) {
+      this.toggleShow = false;
+      this.toggleShow1 = true;
+    }
+    else {
+      this.toggleShow = true;
+      this.toggleShow1 = false;
+    }
+
     this.myBag = true;
   }
   hideBag(): void {
+    this.toggleShow1 = false;
     this.toggleShow = false;
     this.myBag = false;
     this.checkoutBagShow = false;
     this.orderConfirmationPaymentShow = false;
     this.bagFinishShow = false;
+    this.orderDetailsScreen = false;
   }
 
   checkoutOptions(): void {
@@ -163,65 +105,107 @@ export class HeaderComponent implements OnInit {
     this.checkoutBagShow = true;
     this.service.checkoutOptions().subscribe((res) => {
       console.log(res);
-    })
-    this.postalAddresses = [
-      {
-        "postalAddress": {
-          "contactMechId": "32260",
-          "toName": "Customer of Reseller",
-          "attnName": "Customer Contact1",
-          "address1": "1775 Lakeshore Circle",
-          "address2": null,
-          "directions": null,
-          "city": "Fort Lauderdale",
-          "postalCode": "33326",
-          "postalCodeExt": null,
-          "countryGeoId": "USA",
-          "stateProvinceGeoId": "FL",
-          "countyGeoId": null,
-          "postalCodeGeoId": null,
-          "geoPointId": null,
-          "lastUpdatedStamp": 1582310972768,
-          "lastUpdatedTxStamp": 1582310972714,
-          "createdStamp": 1582310972768,
-          "createdTxStamp": 1582310972714
-        }
-      },
-      {
-        "postalAddress": {
-          "contactMechId": "26480",
-          "toName": "DemoCus Company",
-          "attnName": null,
-          "address1": "1750 Lakeshore Circle",
-          "address2": null,
-          "directions": null,
-          "city": "Weston",
-          "postalCode": "33326",
-          "postalCodeExt": null,
-          "countryGeoId": "USA",
-          "stateProvinceGeoId": "FL",
-          "countyGeoId": null,
-          "postalCodeGeoId": null,
-          "geoPointId": null,
-          "lastUpdatedStamp": 1579864197404,
-          "lastUpdatedTxStamp": 1579864197363,
-          "createdStamp": 1579864197404,
-          "createdTxStamp": 1579864197363
-        }
+      if (!res['error']) {
+        this.checkoutFormData = res['data']['checkoutOptions']['postalAddresses'];
+        this.taxInfo();
       }
-    ]
+    })
   }
 
-  checkoutOptionsCheckoutPageShippingAddress():void {
+  taxInfo(): void {
+    this.service.taxInfo().subscribe((res) => {
+      console.log(res);
+    })
+  }
 
+  checkoutOptionsCheckoutPageShippingAddress(): void {
+
+    let data = {
+      "shipping_contact_mech_id": this.contMechId,
+      "checkoutpage": "shippingaddress"
+    }
+    this.service.checkoutOptionsCheckoutPage(data).subscribe((res) => {
+      if (!res['error']) {
+        this.shippingMethods = res['data']['checkoutOptions']['carrierShipmentMethodList'];
+      }
+    })
+  }
+
+  checkoutOptionsCheckoutPageShippingOptions(): void {
     this.checkoutBagShow = false;
     this.orderConfirmationPaymentShow = true;
     let data = {
-
+      'checkoutpage': "shippingoptions",
+      'is_gift': false,
+      'may_split': false,
+      'shipping_method': this.shippingMethod
     }
-    // this.service.checkoutOptionsCheckoutPage().subscribe((res) => {
-    //   console.log(res);
-    // })
+    this.service.checkoutOptionsCheckoutPageOptions(data).subscribe((res) => {
+      if (!res['error']) {
+        this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
+        this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
+        this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+      }
+    })
+  }
+
+  checkoutPayment(): void {
+    this.orderConfirmationPaymentShow = false;
+    this.orderDetailsScreen = true;
+    let data = {
+      'BACK_PAGE': "checkoutoptions",
+      'checkOutPaymentId': this.paymentFormData[0]['paymentMethodId'],
+      'checkoutpage': "payment"
+    }
+    this.service.checkoutOptionsCheckoutPagePayments(data).subscribe((res) => {
+      if (res['status'] === "ACCEPTED") {
+        this.review();
+      }
+      else {
+
+      }
+    })
+  }
+
+  review(): void {
+    this.service.review().subscribe((res) => {
+      if (!res['error']) {
+        this.paymentMethodType = res['data']['paymentMethodType']['description'];
+        this.postalAddress = res['data']['postalAddress'];
+        this.method = res['data']['carrierPartyId'] + ' ' + res['data']['shipmentMethodTypeId'];
+        this.orderItems = res['data']['orderItems'];
+        this.prices = res['data'];
+      }
+      else {
+
+      }
+    })
+  }
+
+  submitOrder() {
+    this.orderDetailsScreen = false;
+    this.bagFinishShow = true;
+    let data = { checkoutpage: "payment" }
+    this.service.submitOrder(data).subscribe((res) => {
+      if (!res['error']) {
+        this.orderId = res['data']['orderId'];
+        this.clearCart();
+      }
+      else {
+
+      }
+    })
+  }
+
+  clearCart(): void {
+    this.service.emptyCart().subscribe((res) => {
+      if (res['data'] === "success") {
+        this.showCart();
+      }
+      else {
+
+      }
+    })
   }
 
   @HostListener("window:scroll", [""])

@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class QuickAddService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getSpecialCategory(categoryId){

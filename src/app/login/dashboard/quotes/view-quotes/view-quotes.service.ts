@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewQuotesService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getViewQoute(quoteId){

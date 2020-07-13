@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class QuotesService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getQuotesList(){

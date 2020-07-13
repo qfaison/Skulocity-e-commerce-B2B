@@ -9,21 +9,16 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class ViewRequestComponent implements OnInit {
   id: number;
-  private sub: any;
+  readonly sub: any;
   viewRequest;
   viewTableRequest;
 
   constructor(
-    private route: ActivatedRoute,
-    private service : ViewRequestService
+    readonly route: ActivatedRoute,
+    readonly service : ViewRequestService
   ) { }
 
   ngOnInit() {
-    // this.sub = this.route.params.subscribe(params => {
-    //   this.id = params['custRequestId'];
-    //   this.getViewRequest(this.id);
-     
-    // });
     this.id = this.route['snapshot']['params']['requestId'];
     this.getViewRequest(this.id);
   }

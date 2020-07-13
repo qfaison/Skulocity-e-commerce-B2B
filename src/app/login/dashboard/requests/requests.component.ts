@@ -12,8 +12,8 @@ export class RequestsComponent implements OnInit {
   requestList;
 
   constructor(
-    private service : RequestService,
-    private router:Router
+    readonly service : RequestService,
+    readonly router:Router
   ) { }
 
   ngOnInit() {

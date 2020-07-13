@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class ProductPageServiceService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   openProduct(productData){

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Router,CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +14,8 @@ export class AuthGuardGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(localStorage.getItem('token'))
-      {
+    state: RouterStateSnapshot): boolean | UrlTree {
+      if(localStorage.getItem('token')){
         return true;
       }
       else{

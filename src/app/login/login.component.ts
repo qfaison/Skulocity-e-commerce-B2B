@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  logo = '../../assets/img/bluechip.jpg'
+  logo = 'assets/img/bluechip.jpg'
   color = `radial-gradient( #ffffff, #005eba)`;
   fontColor = '#005eba';
   customerPartyId;
@@ -72,17 +72,17 @@ export class LoginComponent implements OnInit {
       console.log(cookie1);
       if (response['body']['data']) {
         if (response['body']['data']['partyIdentifier'] == 'jma') {
-          this.logo = '../../assets/img/JMA Logo_PNG.png';
+          this.logo = 'assets/img/JMA Logo_PNG.png';
           this.color = `radial-gradient( #ffffff, #007d83)`;
           this.fontColor = '#007d83';
         }
         else if (response['body']['data']['partyIdentifier'] == 'dw') {
-          this.logo = '../../assets/img/dentwizard.png';
+          this.logo = 'assets/img/dentwizard.png';
           this.color = `radial-gradient( #ffffff, #0a4595)`;
           this.fontColor = '#0a4595';
         }
         else {
-          this.logo = '../../assets/img/bluechip.jpg'
+          this.logo = 'assets/img/bluechip.jpg'
           this.color = `radial-gradient( #ffffff, #005eba)`;
           this.fontColor = '#005eba';
         }

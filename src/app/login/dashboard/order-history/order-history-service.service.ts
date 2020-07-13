@@ -13,7 +13,7 @@ export class OrderHistoryServiceService {
   };
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   getOrderHistory(){
@@ -29,6 +29,10 @@ export class OrderHistoryServiceService {
   }
 
   addAllToCart(orderItemSeqId,data){
+    return this.http.post('skulocity/api/v1/ecommerce/addToCartFromOrder?'+orderItemSeqId,data);
+  }
+
+  addAllCart(orderItemSeqId,data){
     return this.http.post('skulocity/api/v1/ecommerce/addToCartFromOrder?'+orderItemSeqId,data);
   }
 

@@ -15,7 +15,7 @@ export class ShopAllComponent implements OnInit {
   categoryList;
   currentCatalogId = localStorage.getItem("catalogId");
   CatalogId;
-  toggleSwitchCatalog : boolean = true;
+  toggleSwitchCatalog: boolean = true;
   categoryListCatalog;
   productListCatalog;
   subCategoryList;
@@ -24,10 +24,11 @@ export class ShopAllComponent implements OnInit {
   quantity = [];
   quantityProduct = [];
   customerPartyId;
+  urlSubscriber: any;
 
   constructor(
-    private service : ShopAllService,
-    private router : Router
+    private service: ShopAllService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +53,7 @@ export class ShopAllComponent implements OnInit {
         this.catalogsList = res['data']['catalogCol'];
         this.categoryList = res['data']['categoryList'];
         this.CatalogId = res['data']['currentCatalogId'];
-        localStorage.setItem('catalogId',res['data']['currentCatalogId']);
+        localStorage.setItem('catalogId', res['data']['currentCatalogId']);
       })
     }
     else {
@@ -67,41 +68,53 @@ export class ShopAllComponent implements OnInit {
     }
   }
 
-  showCategories(catalog,index): void{
-    if(this.toggleSwitchCatalog)
-    {
-      this.toggleSwitchCatalog = !this.toggleSwitchCatalog;
-      let li = document.getElementById(catalog);
-      li.classList.add("open");
-      li.classList.add("active");
-      document.getElementById(catalog+""+index).style.display = "block";
-    }
-    else{
-      this.toggleSwitchCatalog = !this.toggleSwitchCatalog;
-      let li = document.getElementById(catalog);
-      li.classList.remove("open");
-      li.classList.remove("active");
-      document.getElementById(catalog+""+index).style.display = "none";
-    }
-    
+  showCatData(catalog, index): void {
+
+    this.categoryList = [];
+
+    localStorage.setItem('catalogId', catalog);
+
+    let catalogId = {
+      'CURRENT_CATALOG_ID': catalog
+    };
+    this.service.getMainCatalogId(catalogId).subscribe((res) => {
+      this.catalogsList = res['data']['catalogCol'];
+      this.categoryList = res['data']['categoryList'];
+      this.CatalogId = res['data']['currentCatalogId'];
+      this.showCategories(catalog, index);
+      if (this.categoryList.length == 0) {
+        Swal.fire('No categories present')
+      }
+    })
+
   }
 
-  openProduct(productId): void{
+  showCategories(catalog, index): void {
+    let li = document.getElementById(catalog);
+    li.classList.add("open");
+    li.classList.add("active");
+    let catalogListId = catalog + "-" + index;
+    setTimeout(() => {
+      if (document.getElementById(catalogListId)) document.getElementById(catalogListId).style.display = "block";
+    }, 0);
+  }
+
+  openProduct(productId): void {
     this.router.navigate(['/dashboard/product-page', productId]);
   }
 
-  getSpecialCategory():void {
+  getSpecialCategory(): void {
     let catalogId = localStorage.getItem('catalogId')
-    this.service.getSpecialCategory(catalogId).subscribe((res)=>{
+    this.service.getSpecialCategory(catalogId).subscribe((res) => {
       this.categoryListCatalog = res['data']['categoryList'];
       this.productListCatalog = res['data']['productList'];
     })
   }
 
-  getSubcategories(categoryId):void {
-    
-    this.service.getSubCategory(categoryId).subscribe((res)=>{
-      console.log("getSubCategory --->> ",res);
+  getSubcategories(categoryId): void {
+
+    this.service.getSubCategory(categoryId).subscribe((res) => {
+      console.log("getSubCategory --->> ", res);
       this.showSubCategory = true;
       this.subCategoryList = res['data']['subCategory'];
       this.subCategoryProductsList = res['data']['productDetails']['productCategoryMembers'];
@@ -109,19 +122,18 @@ export class ShopAllComponent implements OnInit {
 
   }
 
-  addProductToCart(quantity, productId):void {
-    if(quantity == undefined){
+  addProductToCart(quantity, productId): void {
+    if (quantity == undefined) {
       Swal.fire('Oops...', 'Please select quantity first!', 'error');
     }
-    else{
+    else {
       let data = {
         add_product_id: productId,
         quantity: quantity
       }
-      this.service.addProductToCart(data).subscribe((res)=>{
+      this.service.addProductToCart(data).subscribe((res) => {
         console.log(res);
-        if(res['message'])
-        {
+        if (res['message']) {
           Swal.fire('Product added to cart..!!')
           this.showCart();
         }
@@ -130,8 +142,8 @@ export class ShopAllComponent implements OnInit {
   }
 
   showCart(): void {
-    this.service.showCart().subscribe((res)=>{
-      console.log('showCart --->> ',res);
+    this.service.showCart().subscribe((res) => {
+      this.service.addValueToCart(res['data']['cart']['shoppingCartSize']);
     })
   }
 

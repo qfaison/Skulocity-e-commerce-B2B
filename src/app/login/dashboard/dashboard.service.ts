@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class DashboardService {
 
   constructor(
-    private http : HttpClient
+    readonly http : HttpClient
   ) { }
 
   main(){
@@ -31,8 +31,32 @@ export class DashboardService {
     return this.http.post('skulocity/api/v1/ecommerce/checkout/checkoutoptions',{});
   }
 
-  checkoutOptionsCheckoutPage(){
-    return this.http.post('skulocity/api/v1/ecommerce/checkout/checkoutoptions',{});
+  checkoutOptionsCheckoutPage(data){
+    return this.http.post('skulocity/api/v1/ecommerce/checkout/checkoutoptions?checkoutpage=shippingaddress',data);
+  }
+
+  checkoutOptionsCheckoutPageOptions(data){
+    return this.http.post('skulocity/api/v1/ecommerce/checkout/checkoutoptions?checkoutpage=shippingoptions',data);
+  }
+
+  checkoutOptionsCheckoutPagePayments(data){
+    return this.http.post('skulocity/api/v1/ecommerce/checkout/checkoutoptions?checkoutpage=payment',data);
+  }
+
+  review(){
+    return this.http.get('skulocity/api/v1/ecommerce/checkout/review');
+  }
+
+  taxInfo(){
+    return this.http.get('skulocity/api/v1/ecommerce/checkout/taxinfo');
+  }
+
+  submitOrder(data){
+    return this.http.post('skulocity/api/v1/ecommerce/checkout/processorder?checkoutpage=payment',data);
+  }
+  
+  emptyCart(){
+    return this.http.delete('skulocity/api/v1/public/ecommerce/cart/emptycart');
   }
 
 }

@@ -11,12 +11,15 @@ export class ShopAllService {
     private http : HttpClient
   ) { }
 
+  private cartNumber: Subject<any> = new Subject();
+  cartSubscriber = this.cartNumber.asObservable();
+
   main(){
     return this.http.post('skulocity/api/v1/public/ecommerce/main',{});
   }
 
   getMainCatalogId(catalogId){
-    return this.http.post('skulocity/api/v1/public/ecommerce/main',catalogId);
+    return this.http.post('skulocity/api/v1/public/ecommerce/main?CURRENT_CATALOG_ID='+ catalogId.CURRENT_CATALOG_ID,catalogId);
   }
 
   getCatalog(){
@@ -37,6 +40,10 @@ export class ShopAllService {
 
   showCart(){
     return this.http.get('skulocity/api/v1/public/ecommerce/cart/showcart');
+  }
+
+  addValueToCart(data): void {
+    this.cartNumber.next(data);
   }
   
 }
