@@ -64,25 +64,19 @@ export class LoginComponent implements OnInit {
 
     this.loginService.loginAppearance(customerData).subscribe((response: HttpResponse<any>) => {
 
-      let cookie = response.headers.get("Set-Cookie");
-      let cookie1 = response.body;
-      //this.cookie.set('cookie','');
-      //this.cookieValue = this.cookie.get('cookie');
-      console.log(cookie);
-      console.log(cookie1);
-      if (response['body']['data']) {
-        if (response['body']['data']['partyIdentifier'] == 'jma') {
-          this.logo = 'assets/img/JMA Logo_PNG.png';
+      if (response['data']) {
+        if (response['data']['partyIdentifier'] == 'jma') {
+          this.logo = response['data']['logoImageUrl'];
           this.color = `radial-gradient( #ffffff, #007d83)`;
           this.fontColor = '#007d83';
         }
-        else if (response['body']['data']['partyIdentifier'] == 'dw') {
-          this.logo = 'assets/img/dentwizard.png';
+        else if (response['data']['partyIdentifier'] == 'dw') {
+          this.logo = response['data']['logoImageUrl'];
           this.color = `radial-gradient( #ffffff, #0a4595)`;
           this.fontColor = '#0a4595';
         }
         else {
-          this.logo = 'assets/img/bluechip.jpg'
+          this.logo = 'assets/img/bluechip.jpg';
           this.color = `radial-gradient( #ffffff, #005eba)`;
           this.fontColor = '#005eba';
         }
