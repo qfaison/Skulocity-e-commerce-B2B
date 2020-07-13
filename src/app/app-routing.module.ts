@@ -25,7 +25,8 @@ import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-
 const routes: Routes = [
   { path:'', component: LoginComponent },
   { path:'dashboard', component: DashboardComponent, canActivate: [AuthGuardGuard], children: [
-    { path:'', component: IndexComponent },
+    { path:'', component: ShopAllComponent },
+    { path:'home', component: IndexComponent },
     { path:'shopAll', component: ShopAllComponent },
     { path:'keratin', component: KeratinComponent },
     { path:'faq', component: FaqComponent },
