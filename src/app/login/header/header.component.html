@@ -390,8 +390,10 @@
     <div id="myBag" *ngIf="myBag">
         <div class="shoppopupHeader mob__Dnone">
             <button class="closeShoppopup" (click)="hideBag()">X</button>
-            <button class="closeShoppopup">Clear Cart</button>
             <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
+        </div>
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="blackBtn hoverblck"><i class="fa fa-trash" aria-hidden="true"></i>Clear Cart</button>
         </div>
         <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
             <div class="shoppopup__producthldr">
