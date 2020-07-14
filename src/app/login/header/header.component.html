@@ -445,8 +445,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Shipping Address*</b></label>
-                            <select *ngIf="checkoutFormData" [(ngModel)]="contMechId" name="contMechId"
-                                (change)="checkoutOptionsCheckoutPageShippingAddress()">
+                            <select class="custom-select" *ngIf="checkoutFormData" [(ngModel)]="contMechId"
+                                name="contMechId" (change)="checkoutOptionsCheckoutPageShippingAddress()">
                                 <option *ngFor="let address of checkoutFormData"
                                     value="{{address.postalAddress.contactMechId}}">
                                     {{address.postalAddress.address1}} {{address.postalAddress.address2}}
@@ -456,12 +456,11 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row" *ngIf="shippingMethods">
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="shippingMethods">
                             <label for=""><b>Shipping Method*</b></label>
-                            <select *ngIf="checkoutFormData" [(ngModel)]="shippingMethod" name="shippingMethod">
+                            <select class="custom-select" *ngIf="checkoutFormData" [(ngModel)]="shippingMethod"
+                                name="shippingMethod">
                                 <option *ngFor="let method of shippingMethods"
                                     value="{{method.shipmentMethodTypeId}}@{{method.partyId}}">
                                     {{method.description}} ${{method.currencyValue}}
@@ -470,20 +469,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="form-group form-check m-0">
-                            <input type="checkbox" class="form-check-input" id="Check3">
-                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
-                                    Conditions</u></label>
-                        </div>
+
+                <div class="row" *ngIf="!shippingMethod && !contMechId">
+                    <div class="col-md-12" style="text-align: center;">
+                        <p style="color: red;">{{errorMessage}}</p>
                     </div>
+                </div>
+
+                <div class="row align-items-center">
                     <div class="col-md-6 formButton slidepopBtn text-right">
                         <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
                         <a id="orderConfirmationPaymentClick" href="javascript:;"
                             class="blackBtn hoverblck  blackBtn__large"
                             (click)="checkoutOptionsCheckoutPageShippingOptions()">CONTINUE</a>
-                        <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
                     </div>
                 </div>
             </form>
@@ -503,7 +501,6 @@
         <div class="comonformOuter paymentInfoSctn">
             <form action="">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="patmentinfo__Heading pl-15">
                             <h3>Pay with</h3>
@@ -512,59 +509,25 @@
                             <h5>Credit Card</h5>
                         </div>
                         <div class="form-group">
-                            <label for="">Card Holder Name</label>
-                            <input type="text" class="form-control"
-                                value="{{paymentFormData[0]['firstNameOnCard']}} {{paymentFormData[0]['middleNameOnCard']}} {{paymentFormData[0]['lastNameOnCard']}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Card Number</label>
-                            <input type="text" class="form-control" value="{{paymentFormData[0]['cardNumber']}}">
-                        </div>
-                        <div class="DOB">
-                            <div class="form-group">
-                                <div class="row no-gutters justify-content-between">
-                                    <div class="col-md-6 col-8">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label>Expiration Date</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group px-0">
-                                                    <input type="text" class="form-control"
-                                                        value="{{paymentFormData[0]['expireDate']}}">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <label class="no-padding mb5">Select Credit Card</label>
+                            <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let payment of paymentFormData">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <input type="radio" name="checkOutPaymentId" (click)="setPaymentMethodId(payment.paymentMethodId)" style="opacity: 1;">
                                     </div>
-                                    <div class="col-md-3 col-4">
-                                        <div class="col-12 pr-0">
-                                            <label for="">CVV</label>
-                                        </div>
-                                        <div class="col-12 pr-0">
-                                            <div class="form-group px-0">
-                                                <input type="text" class="form-control" value="">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-11">
+                                        <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                            {{payment.firstNameOnCard}} {{payment.middleNameOnCard}}
+                                            {{payment.lastNameOnCard}}&nbsp;&nbsp;
+                                            {{payment.cardType}}&nbsp;&nbsp;
+                                            {{payment.cardNumber}}&nbsp;&nbsp;
+                                            {{payment.expireDate}}
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
+                            </label>
+                            <div class="separator"></div>
                         </div>
-                        <!-- <div class="patmentinfo__Heading pl-15">
-                            <h5>- OR -</h5>
-                        </div>
-                        <div class="othrpymntoptn">
-                            <ul class="othrpymntoptn__list">
-                                <li> <button class="btntransparent"><img src="../../../assets/img/apple_pay.svg"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/samsungpay.png"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/PayPal.svg"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/affirm.png"
-                                            alt=""></button></li>
-                            </ul>
-                        </div> -->
-                        <div class="separator"></div>
                     </div>
                 </div>
                 <div class="formButton m-0">
@@ -624,11 +587,12 @@
                         <table id="myTable">
                             <thead>
                                 <tr>
-                                    <th [style.background]="color" style="width: 20%;color:white">Product</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Quantity Ordered</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Unit Price</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Adjustments</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Sub Total</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Product</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Quantity Ordered
+                                    </th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Unit Price</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Adjustments</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Sub Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -667,9 +631,28 @@
                         </table>
                     </div>
                 </div>
-                <div class="formButton m-0">
-                    <!-- <input type="submit" value="PLACE OrDER" name=""> -->
-                    <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large" (click)="submitOrder()">SUBMIT OrDER</a>
+                <div class="row" style="margin:0px; padding-top: 20px;">
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="form-check m-0">
+                            <p style="color: red;"><i>{{errorMessageTermsAndConditions}}</i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0px; padding-top: 20px;">
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="form-check m-0">
+                            <input type="checkbox" class="form-check-input" id="Check3" (click)="termsChecked();">
+                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
+                                    Conditions</u></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="formButton m-0">
+                            <!-- <input type="submit" value="PLACE OrDER" name=""> -->
+                            <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                                (click)="submitOrder()">SUBMIT OrDER</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

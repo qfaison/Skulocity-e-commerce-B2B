@@ -43,6 +43,13 @@ export class HeaderComponent implements OnInit {
   prices;
   orderId;
 
+  errorMessage;
+  paymentMethodId;
+  thColor;
+  errorMessageTermsAndConditions;
+  termsCondChecked:boolean = false;
+  selectPaymentErrorMessage;
+
   constructor(
     readonly router: Router,
     readonly service: DashboardService,
@@ -54,10 +61,15 @@ export class HeaderComponent implements OnInit {
       this.isLogin = true;
     }
     this.logo = localStorage.getItem('logo');
+    this.thColor = localStorage.getItem("fontColor")
     this.showCart();
     this.cartSubscriber = this.serviceCart.cartSubscriber.subscribe((value) => {
       this.cartSize = value;
     })
+  }
+
+  termsChecked(): void {
+    this.termsCondChecked = !this.termsCondChecked;
   }
 
   showCart(): void {
@@ -132,39 +144,60 @@ export class HeaderComponent implements OnInit {
   }
 
   checkoutOptionsCheckoutPageShippingOptions(): void {
-    this.checkoutBagShow = false;
-    this.orderConfirmationPaymentShow = true;
-    let data = {
-      'checkoutpage': "shippingoptions",
-      'is_gift': false,
-      'may_split': false,
-      'shipping_method': this.shippingMethod
+
+    if (this.shippingMethod == undefined) {
+      this.errorMessage = "Please select valid shipping method";
     }
-    this.service.checkoutOptionsCheckoutPageOptions(data).subscribe((res) => {
-      if (!res['error']) {
-        this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
-        this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
-        this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+    else if (this.contMechId == undefined) {
+      this.errorMessage = "Please select valid shipping address";
+    }
+    else {
+      this.errorMessage = "";
+      this.checkoutBagShow = false;
+      this.orderConfirmationPaymentShow = true;
+      let data = {
+        'checkoutpage': "shippingoptions",
+        'is_gift': false,
+        'may_split': false,
+        'shipping_method': this.shippingMethod
       }
-    })
+      this.service.checkoutOptionsCheckoutPageOptions(data).subscribe((res) => {
+        if (!res['error']) {
+          this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
+          this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
+          this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+        }
+      })
+    }
+
+  }
+
+  setPaymentMethodId(paymentMethodId): void {
+    this.paymentMethodId = paymentMethodId;
   }
 
   checkoutPayment(): void {
-    this.orderConfirmationPaymentShow = false;
-    this.orderDetailsScreen = true;
-    let data = {
-      'BACK_PAGE': "checkoutoptions",
-      'checkOutPaymentId': this.paymentFormData[0]['paymentMethodId'],
-      'checkoutpage': "payment"
-    }
-    this.service.checkoutOptionsCheckoutPagePayments(data).subscribe((res) => {
-      if (res['status'] === "ACCEPTED") {
-        this.review();
-      }
-      else {
 
+    if(this.paymentMethodId != null || this.paymentMethodId != undefined){
+      this.orderConfirmationPaymentShow = false;
+      this.orderDetailsScreen = true;
+      let data = {
+        'BACK_PAGE': "checkoutoptions",
+        'checkOutPaymentId': this.paymentMethodId,
+        'checkoutpage': "payment"
       }
-    })
+      this.service.checkoutOptionsCheckoutPagePayments(data).subscribe((res) => {
+        if (res['status'] === "ACCEPTED") {
+          this.review();
+        }
+        else {
+  
+        }
+      })
+    }
+    else{
+      this.selectPaymentErrorMessage = "Please select a card";
+    }
   }
 
   review(): void {
@@ -183,18 +216,21 @@ export class HeaderComponent implements OnInit {
   }
 
   submitOrder() {
-    this.orderDetailsScreen = false;
-    this.bagFinishShow = true;
-    let data = { checkoutpage: "payment" }
-    this.service.submitOrder(data).subscribe((res) => {
-      if (!res['error']) {
-        this.orderId = res['data']['orderId'];
-        this.clearCart();
-      }
-      else {
 
-      }
-    })
+    if (this.termsCondChecked) {
+      this.orderDetailsScreen = false;
+      this.bagFinishShow = true;
+      let data = { checkoutpage: "payment" }
+      this.service.submitOrder(data).subscribe((res) => {
+        if (!res['error']) {
+          this.orderId = res['data']['orderId'];
+          this.clearCart();
+        }
+      })
+    }
+    else {
+      this.errorMessageTermsAndConditions = "Please agree to the terms and conditions first..!!"
+    }
   }
 
   clearCart(): void {
