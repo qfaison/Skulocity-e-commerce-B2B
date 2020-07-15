@@ -393,7 +393,7 @@
             <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
         </div>
         <div class="shoppopupHeader mob__Dnone">
-            <button class="blackBtn hoverblck">Clear Cart</button>
+            <button class="blackBtn hoverblck" (click)="clearCart()">Clear Cart</button>
         </div>
         <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
             <div class="shoppopup__producthldr">
