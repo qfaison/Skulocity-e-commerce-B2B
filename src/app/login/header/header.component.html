@@ -672,14 +672,14 @@
                             <label for="">Expiration Date *</label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <select name="expYear" formControlName="expYear">
+                                    <select name="expMonth" formControlName="expMonth">
                                         <option *ngFor="let month of months" [ngValue]="month">
                                             {{month}}
                                         </option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <select name="expMonth" formControlName="expMonth">
+                                    <select name="expYear" formControlName="expYear">
                                         <option *ngFor="let year of years" [ngValue]="year">
                                             {{year}}
                                         </option>

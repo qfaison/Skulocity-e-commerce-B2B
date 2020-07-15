@@ -338,6 +338,8 @@ export class HeaderComponent implements OnInit {
   addNewCardDetails():void{
     let data = this.cardForm.value;
     data['contactMechId'] = this.contactMechId;
+    let year = String(data['expYear'])
+    data['expYear'] = year;
     this.service.createCreditCard(data).subscribe((res) => {
       if (!res['error']) {
         this.addNewCard = false;
