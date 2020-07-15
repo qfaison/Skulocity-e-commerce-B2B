@@ -731,9 +731,7 @@
                         <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let address of billingAddresses">
                             <div class="row">
                                 <div class="col-md-1">
-                                    <input type="radio" name="contactMechId" formControlName="contactMechId"
-                                    value="address.partyContactMech.contactMechId"
-                                        (click)="setContactMechId(address.partyContactMech.contactMechId)"
+                                    <input type="radio" name="contactMechId" formControlName="contactMechId" value="{{address.partyContactMech.contactMechId}}" (click)="setContactMechId(address.partyContactMech.contactMechId)"
                                         style="opacity: 1;">
                                 </div>
                                 <div class="col-md-11">
