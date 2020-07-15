@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
       this.years.push(currentYear + i);
     }
     //set values for month dropdown
-    this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    this.months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
   }
 
   constructor(
