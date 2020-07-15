@@ -37,17 +37,17 @@
                         <div class="dropdown-menu">
                             <ul>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/quickAdd']">Quick Add</a></li>
+                                        [routerLink]="['/dashboard/quickAdd']">Quick Add</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/orderHistory']">Order History</a></li>
+                                        [routerLink]="['/dashboard/orderHistory']">Order History</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/shoppingList']">ShoppingLists</a></li>
+                                        [routerLink]="['/dashboard/shoppingList']">ShoppingLists</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/requests']">Requests</a></li>
+                                        [routerLink]="['/dashboard/requests']">Requests</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/quotes']">Quotes</a></li>
+                                        [routerLink]="['/dashboard/quotes']">Quotes</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/messages']">Messages</a></li>
+                                        [routerLink]="['/dashboard/messages']">Messages</a></li>
                             </ul>
                         </div>
                     </li>
@@ -58,7 +58,8 @@
                             ACCOUNT</a>
                         <div class="dropdown-menu">
                             <ul>
-                                <li style="list-style-type: none;"><a class="dropdown-item" *ngIf="isLogin" [routerLink]="['/dashboard/profile']">My Profile</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item" *ngIf="isLogin"
+                                        [routerLink]="['/dashboard/profile']">My Profile</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item" href="javascript:void(0)"
                                         (click)="signOut()">Sign Out</a></li>
                             </ul>
@@ -130,13 +131,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">First Name*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['toName']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['toName']}}">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Last Name*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['attnName']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['attnName']}}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -159,17 +162,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Shipping Street Address*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address1']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['address1']}}">
                         </div>
                         <div class="form-group">
                             <label for="">Apt/Suite</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address2']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['address2']}}">
                         </div>
                         <div class="row no-gutters">
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     <label for="">City*</label>
-                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['city']}}">
+                                    <input type="text" class="form-control"
+                                        value="{{postalAddresses[0]['postalAddress']['city']}}">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +183,8 @@
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     <label for="">Zip/Postal Code*</label>
-                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['postalCode']}}">
+                                    <input type="text" class="form-control"
+                                        value="{{postalAddresses[0]['postalAddress']['postalCode']}}">
                                 </div>
                             </div>
                         </div>
@@ -189,11 +196,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Country*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['countryGeoId']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['countryGeoId']}}">
                         </div>
                         <div class="form-group">
                             <label for="">State/Province*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['stateProvinceGeoId']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['stateProvinceGeoId']}}">
                         </div>
                     </div>
                 </div>
@@ -208,7 +217,8 @@
                     <div class="col-md-6 formButton slidepopBtn text-right">
                         <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
                         <a id="orderConfirmationPaymentClick" href="javascript:;"
-                            class="blackBtn hoverblck  blackBtn__large" (click)="checkoutOptionsCheckoutPageShippingAddress()">CONTINUE</a>
+                            class="blackBtn hoverblck  blackBtn__large"
+                            (click)="checkoutOptionsCheckoutPageShippingAddress()">CONTINUE</a>
                         <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
                     </div>
                 </div>
@@ -441,7 +451,8 @@
                 <h5>Who are we shipping this to?</h5>
             </div>
             <div class="col-md-12 subheading">
-                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addAddressPopup()">Add Address</button>
+                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addAddressPopup()">Add
+                    Address</button>
             </div>
             <form action="">
                 <div class="col-md-12 subheading ">
@@ -496,7 +507,8 @@
         <div class="comonformOuter" *ngIf="addAdressForm">
             <div class="shoppopup__headingHldr">
                 <div class="headinghldr text-left">
-                    <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addAdressHide()">Cancel</button>
+                    <button class="blackBtn hoverblck" style="margin-left: 20px;"
+                        (click)="addAdressHide()">Cancel</button>
                 </div>
             </div>
             <form [formGroup]="addressForm">
@@ -516,9 +528,9 @@
                         </div>
                         <div class="form-group">
                             <label for="">State/Province *</label>
-                            <select class="custom-select" formControlName="stateProvinceGeoId" name="stateProvinceGeoId">
-                                <option *ngFor="let state of states"
-                                    value="{{state.geoId}}">
+                            <select class="custom-select" formControlName="stateProvinceGeoId"
+                                name="stateProvinceGeoId">
+                                <option *ngFor="let state of states" value="{{state.geoId}}">
                                     {{state.geoName}}
                                 </option>
                             </select>
@@ -547,8 +559,7 @@
                         <div class="form-group">
                             <label for="">Country *</label>
                             <select class="custom-select" formControlName="countryGeoId" name="countryGeoId">
-                                <option *ngFor="let country of countries"
-                                    value="{{country.geoId}}">
+                                <option *ngFor="let country of countries" value="{{country.geoId}}">
                                     {{country.geoName}}
                                 </option>
                             </select>
@@ -560,8 +571,8 @@
                     </div>
                     <div class="col-md-6 formButton m-0">
                         <!-- <input type="submit" value="CONTINUE" name=""> -->
-                        <a id="orderConfirmationPayment" href="javascript:;"
-                            class="blackBtn hoverblck  blackBtn__large" (click)="addAddress()">CONTINUE</a>
+                        <a id="orderConfirmationPayment" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                            (click)="addAddress()">CONTINUE</a>
                     </div>
                 </div>
             </form>
@@ -578,7 +589,10 @@
                 <h1>ENTER PAYMENT INFO</h1>
             </div>
         </div>
-        <div class="comonformOuter paymentInfoSctn">
+        <div class="col-md-12 subheading">
+            <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addCard()">Add Credit Card</button>
+        </div>
+        <div class="comonformOuter paymentInfoSctn" *ngIf="!addNewCard">
             <form action="">
                 <div class="row">
                     <div class="col-md-12">
@@ -593,7 +607,8 @@
                             <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let payment of paymentFormData">
                                 <div class="row">
                                     <div class="col-md-1">
-                                        <input type="radio" name="checkOutPaymentId" (click)="setPaymentMethodId(payment.paymentMethodId)" style="opacity: 1;">
+                                        <input type="radio" name="checkOutPaymentId"
+                                            (click)="setPaymentMethodId(payment.paymentMethodId)" style="opacity: 1;">
                                     </div>
                                     <div class="col-md-11">
                                         <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
@@ -614,6 +629,111 @@
                     <!-- <input type="submit" value="PLACE OrDER" name=""> -->
                     <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
                         (click)="checkoutPayment()">PLACE OrDER</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="comonformOuter" *ngIf="addNewCard">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <button class="blackBtn hoverblck" style="margin-left: 20px;"
+                        (click)="addAdressHide()">Cancel</button>
+                </div>
+            </div>
+            <form [formGroup]="cardForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Company Name On Card</label>
+                            <input type="text" class="form-control" formControlName="companyNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">First Name Card *</label>
+                            <input type="text" class="form-control" formControlName="firstNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Last Name Card *</label>
+                            <input type="text" class="form-control" formControlName="lastNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Type *</label>
+                            <select class="custom-select" formControlName="cardType" name="cardType">
+                                <option *ngFor="let state of states" value="{{state.geoId}}">
+                                    {{state.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Expiration Date *</label>
+                            <select class="custom-select" formControlName="expYear" name="expYear">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                            <select class="custom-select" formControlName="expMonth" name="expMonth">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Prefix Card</label>
+                            <input type="text" class="form-control" formControlName="titleOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Middle Name Card</label>
+                            <input type="text" class="form-control" formControlName="middleNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Suffix On Card</label>
+                            <input type="text" class="form-control" formControlName="suffixOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Number *</label>
+                            <select class="custom-select" formControlName="cardNumber" name="cardNumber">
+                                <option *ngFor="let country of countries" value="{{country.geoId}}">
+                                    {{country.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <input type="text" class="form-control" formControlName="description">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group">
+                        <label class="no-padding mb5">Select Billing Address</label>
+                        <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let address of billingAddresses">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <input type="radio" name="contactMechId" formControlName="contactMechId"
+                                        (click)="setPaymentMethodId(address.partyContactMech.contactMechId)" style="opacity: 1;">
+                                </div>
+                                <div class="col-md-11">
+                                    <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                        To: Attn: {{address.address1}} {{address.address2}}
+                                        {{address.city}}&nbsp;&nbsp;
+                                        {{address.stateProvinceGeoId}}&nbsp;&nbsp;
+                                        {{address.postalCode}}&nbsp;&nbsp;
+                                        ({{address.lastUpdatedStamp | date}})
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="separator"></div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 formButton m-0">
+                        <!-- <input type="submit" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPayment" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                            (click)="addNewCardDetails()">CONTINUE</a>
+                    </div>
                 </div>
             </form>
         </div>

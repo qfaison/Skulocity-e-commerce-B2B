@@ -55,6 +55,9 @@ export class HeaderComponent implements OnInit {
   countries;
   states;
 
+  addNewCard:boolean = false;
+  billingAddresses;
+
   constructor(
     readonly router: Router,
     readonly service: DashboardService,
@@ -71,6 +74,21 @@ export class HeaderComponent implements OnInit {
     address2: new FormControl(''),
     postalCode: new FormControl(''),
     countryGeoId: new FormControl('')
+  });
+
+  cardForm = new FormGroup({
+    companyNameOnCard: new FormControl(''),
+    firstNameOnCard: new FormControl(''),
+    lastNameOnCard: new FormControl(''),
+    cardType: new FormControl(''),
+    expYear: new FormControl(''),
+    expMonth: new FormControl(''),
+    titleOnCard: new FormControl(''),
+    middleNameOnCard: new FormControl(''),
+    suffixOnCard: new FormControl(''),
+    cardNumber: new FormControl(''),
+    description: new FormControl(''),
+    contactMechId: new FormControl('')
   });
 
 
@@ -286,6 +304,19 @@ export class HeaderComponent implements OnInit {
 
   addAdressHide(): void {
     this.addAdressForm = false;
+  }
+
+  addCard():void {
+    this.addNewCard = true;
+    this.service.getPostalAddresses().subscribe((res) => {
+      if (!res['error']) {
+        this.billingAddresses = res['data']['postalAddressInfos'];
+      }
+    })
+  }
+
+  addNewCardDetails():void{
+    console.log(this.cardForm.value);
   }
 
   @HostListener("window:scroll", [""])

@@ -67,4 +67,8 @@ export class DashboardService {
     return this.http.post('skulocity/api/v1/ecommerce/checkout/create/postaladdress/andPurpose',data)
   }
 
+  getPostalAddresses(){
+    return this.http.get('skulocity/api/v1/ecommerce/profile/editCreditCard')
+  }
+
 }
