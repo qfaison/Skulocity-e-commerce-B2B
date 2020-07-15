@@ -320,6 +320,10 @@ export class HeaderComponent implements OnInit {
     this.addAdressForm = false;
   }
 
+  addCardHide(): void {
+    this.addNewCard = false;
+  }
+
   addCard():void {
     this.addNewCard = true;
     this.service.getPostalAddresses().subscribe((res) => {
