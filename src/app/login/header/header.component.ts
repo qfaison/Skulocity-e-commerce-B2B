@@ -57,6 +57,20 @@ export class HeaderComponent implements OnInit {
 
   addNewCard:boolean = false;
   billingAddresses;
+  months;
+  years = [];
+
+  getDates() {
+    var date = new Date();
+    var currentYear = date.getFullYear();
+
+    //set values for year dropdown
+    for (var i = 0; i <= 100; i++) {
+      this.years.push(currentYear + i);
+    }
+    //set values for month dropdown
+    this.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  }
 
   constructor(
     readonly router: Router,

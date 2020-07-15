@@ -591,7 +591,8 @@
         </div>
         <div class="comonformOuter paymentInfoSctn" *ngIf="!addNewCard">
             <div class="col-md-12 subheading">
-                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addCard()">Add Credit Card</button>
+                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addCard()">Add Credit
+                    Card</button>
             </div>
             <form action="">
                 <div class="row">
@@ -658,24 +659,30 @@
                         <div class="form-group">
                             <label for="">Card Type *</label>
                             <select class="custom-select" formControlName="cardType" name="cardType">
-                                <option *ngFor="let state of states" value="{{state.geoId}}">
-                                    {{state.geoName}}
-                                </option>
+                                <option value="Visa" class="ng-binding">Visa </option>
+                                <option value="MasterCard" class="ng-binding">Master Card </option>
+                                <option value="AmericanExpress" class="ng-binding">American Express </option>
+                                <option value="DinersClub" class="ng-binding">Diners Club </option>
+                                <option value="Discover" class="ng-binding">Discover </option>
+                                <option value="EnRoute" class="ng-binding">EnRoute </option>
+                                <option value="JCB" class="ng-binding">JCB </option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Expiration Date *</label>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <select class="custom-select" formControlName="expYear" name="expYear">
-                                        <option value="Y">Y</option>
-                                        <option value="N">N</option>
+                                    <select name="expYear" formControlName="expYear">
+                                        <option *ngFor="let month of months" [ngValue]="month">
+                                            {{month}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="custom-select" formControlName="expMonth" name="expMonth">
-                                        <option value="Y">Y</option>
-                                        <option value="N">N</option>
+                                    <select name="expMonth" formControlName="expMonth">
+                                        <option *ngFor="let year of years" [ngValue]="year">
+                                            {{year}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -684,7 +691,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Prefix Card</label>
-                            <input type="text" class="form-control" formControlName="titleOnCard">
+                            <select class="custom-select" formControlName="titleOnCard" name="titleOnCard">
+                                <option value="Mr." class="ng-binding">Mr. </option>
+                                <option value="Mrs." class="ng-binding">Mrs. </option>
+                                <option value="Ms." class="ng-binding">Ms.. </option>
+                                <option value="Dr." class="ng-binding">Dr. </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="">Middle Name Card</label>
@@ -692,7 +704,15 @@
                         </div>
                         <div class="form-group">
                             <label for="">Suffix On Card</label>
-                            <input type="text" class="form-control" formControlName="suffixOnCard">
+                            <select class="custom-select" formControlName="suffixOnCard" name="suffixOnCard">
+                                <option value="Jr." class="ng-binding">Jr. </option>
+                                <option value="Sr." class="ng-binding">Sr. </option>
+                                <option value="I" class="ng-binding">I </option>
+                                <option value="II" class="ng-binding">II </option>
+                                <option value="III" class="ng-binding">III </option>
+                                <option value="IV" class="ng-binding">IV </option>
+                                <option value="V" class="ng-binding">V </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="">Card Number *</label>
@@ -708,7 +728,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="form-group">
                         <label class="no-padding mb5"><b>Select Billing Address</b></label>
@@ -716,7 +736,8 @@
                             <div class="row">
                                 <div class="col-md-1">
                                     <input type="radio" name="contactMechId" formControlName="contactMechId"
-                                        (click)="setPaymentMethodId(address.partyContactMech.contactMechId)" style="opacity: 1;">
+                                        (click)="setPaymentMethodId(address.partyContactMech.contactMechId)"
+                                        style="opacity: 1;">
                                 </div>
                                 <div class="col-md-11">
                                     <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
