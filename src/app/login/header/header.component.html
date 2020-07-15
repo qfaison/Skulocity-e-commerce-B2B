@@ -716,11 +716,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Card Number *</label>
-                            <select class="custom-select" formControlName="cardNumber" name="cardNumber">
-                                <option *ngFor="let country of countries" value="{{country.geoId}}">
-                                    {{country.geoName}}
-                                </option>
-                            </select>
+                            <input type="text" class="form-control" formControlName="cardNumber">
                         </div>
                         <div class="form-group">
                             <label for="">Description</label>

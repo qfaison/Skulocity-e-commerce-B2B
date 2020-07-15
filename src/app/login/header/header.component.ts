@@ -110,6 +110,7 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('isLogin') == 'true') {
       this.isLogin = true;
     }
+    this.getDates();
     this.logo = localStorage.getItem('logo');
     this.thColor = localStorage.getItem("fontColor")
     this.showCart();
