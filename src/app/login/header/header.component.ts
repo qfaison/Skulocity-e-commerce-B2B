@@ -59,6 +59,7 @@ export class HeaderComponent implements OnInit {
   billingAddresses;
   months;
   years = [];
+  contactMechId;
 
   getDates() {
     var date = new Date();
@@ -335,7 +336,18 @@ export class HeaderComponent implements OnInit {
   }
 
   addNewCardDetails():void{
-    console.log(this.cardForm.value);
+    let data = this.cardForm.value;
+    data['contactMechId'] = this.contactMechId;
+    this.service.createCreditCard(data).subscribe((res) => {
+      if (!res['error']) {
+        this.addNewCard = false;
+        this.checkoutOptionsCheckoutPageShippingOptions();
+      }
+    })
+  }
+
+  setContactMechId(contactMechIdVal){
+    this.contactMechId = contactMechIdVal;
   }
 
   @HostListener("window:scroll", [""])

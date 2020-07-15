@@ -71,4 +71,8 @@ export class DashboardService {
     return this.http.get('skulocity/api/v1/ecommerce/profile/editCreditCard')
   }
 
+  createCreditCard(data){
+    return this.http.post('skulocity/api/v1/ecommerce/profile/createCreditCard',data)
+  }
+
 }
