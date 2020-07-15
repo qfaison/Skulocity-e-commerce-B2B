@@ -489,6 +489,80 @@
                 </div>
             </form>
         </div>
+
+        <div class="comonformOuter" *ngIf="addAdressForm">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addAdressHide()">Cancel</button>
+                </div>
+            </div>
+            <form [formGroup]="addressForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">To Name</label>
+                            <input type="text" class="form-control" formControlName="toName">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Attention Name</label>
+                            <input type="text" class="form-control" formControlName="attnName">
+                        </div>
+                        <div class="form-group">
+                            <label for="">City</label>
+                            <input type="text" class="form-control" formControlName="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="">State/Province *</label>
+                            <select class="custom-select" formControlName="stateProvinceGeoId" name="stateProvinceGeoId">
+                                <option *ngFor="let state of states"
+                                    value="{{state.geoId}}">
+                                    {{state.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Allow Solicitation?</label>
+                            <select class="custom-select" formControlName="allowSolicitation" name="allowSolicitation">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Address Line 1 *</label>
+                            <input type="text" class="form-control" formControlName="address1">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Address Line 2</label>
+                            <input type="text" class="form-control" formControlName="address2">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Zip/Postal Code *</label>
+                            <input type="text" class="form-control" formControlName="postalCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Country *</label>
+                            <select class="custom-select" formControlName="countryGeoId" name="countryGeoId">
+                                <option *ngFor="let country of countries"
+                                    value="{{country.geoId}}">
+                                    {{country.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 formButton m-0">
+                        <!-- <input type="submit" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPayment" href="javascript:;"
+                            class="blackBtn hoverblck  blackBtn__large" (click)="addAddress()">CONTINUE</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div id="orderConfirmationPaymentShow" *ngIf="orderConfirmationPaymentShow" class="shoppopup--large">

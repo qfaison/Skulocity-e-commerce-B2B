@@ -3,6 +3,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShopAllService } from '../dashboard/shop-all/shop-all.service';
 import Swal from 'sweetalert2';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -47,14 +48,31 @@ export class HeaderComponent implements OnInit {
   paymentMethodId;
   thColor;
   errorMessageTermsAndConditions;
-  termsCondChecked:boolean = false;
+  termsCondChecked: boolean = false;
   selectPaymentErrorMessage;
+
+  addAdressForm: boolean = false;
+  countries;
+  states;
 
   constructor(
     readonly router: Router,
     readonly service: DashboardService,
     readonly serviceCart: ShopAllService
   ) { }
+
+  addressForm = new FormGroup({
+    toName: new FormControl(''),
+    attnName: new FormControl(''),
+    city: new FormControl(''),
+    stateProvinceGeoId: new FormControl(''),
+    allowSolicitation: new FormControl(''),
+    address1: new FormControl(''),
+    address2: new FormControl(''),
+    postalCode: new FormControl(''),
+    countryGeoId: new FormControl('')
+  });
+
 
   ngOnInit(): void {
     if (localStorage.getItem('isLogin') == 'true') {
@@ -178,7 +196,7 @@ export class HeaderComponent implements OnInit {
 
   checkoutPayment(): void {
 
-    if(this.paymentMethodId != null || this.paymentMethodId != undefined){
+    if (this.paymentMethodId != null || this.paymentMethodId != undefined) {
       this.orderConfirmationPaymentShow = false;
       this.orderDetailsScreen = true;
       let data = {
@@ -191,11 +209,11 @@ export class HeaderComponent implements OnInit {
           this.review();
         }
         else {
-  
+
         }
       })
     }
-    else{
+    else {
       this.selectPaymentErrorMessage = "Please select a card";
     }
   }
@@ -242,6 +260,32 @@ export class HeaderComponent implements OnInit {
 
       }
     })
+  }
+
+  addAddress(): void {
+    console.log(this.addressForm.value);
+    let data = this.addressForm.value;
+    data['contactMechPurposeTypeId'] = "SHIPPING_LOCATION";
+    this.service.addAdress(data).subscribe((res) => {
+      if (res['data']['responseMessage'] === "success") {
+        this.addAdressForm = false;
+        this.checkoutOptions();
+      }
+    })
+  }
+
+  addAddressPopup(): void {
+    this.addAdressForm = true;
+    this.service.getCountriesAndStates().subscribe((res) => {
+      if (!res['error']) {
+        this.countries = res['data']['countries'];
+        this.states = res['data']['states'];
+      }
+    })
+  }
+
+  addAdressHide(): void {
+    this.addAdressForm = false;
   }
 
   @HostListener("window:scroll", [""])
