@@ -706,7 +706,6 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="no-padding mb5">Select Billing Address</label>
-                        {{billingAddresses|json}}
                         <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let address of billingAddresses">
                             <div class="row">
                                 <div class="col-md-1">
@@ -715,11 +714,11 @@
                                 </div>
                                 <div class="col-md-11">
                                     <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
-                                        To: Attn: {{address.address1}} {{address.address2}}
-                                        {{address.city}}&nbsp;&nbsp;
-                                        {{address.stateProvinceGeoId}}&nbsp;&nbsp;
-                                        {{address.postalCode}}&nbsp;&nbsp;
-                                        ({{address.lastUpdatedStamp | date}})
+                                        To: Attn: {{address.postalAddress.address1}} {{address.postalAddress.address2}}
+                                        {{address.postalAddress.city}}&nbsp;&nbsp;
+                                        {{address.postalAddress.stateProvinceGeoId}}&nbsp;&nbsp;
+                                        {{address.postalAddress.postalCode}}&nbsp;&nbsp;
+                                        ({{address.postalAddress.lastUpdatedStamp | date}})
                                     </span>
                                 </div>
                             </div>
