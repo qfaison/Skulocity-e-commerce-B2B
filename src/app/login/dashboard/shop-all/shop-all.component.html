@@ -42,9 +42,8 @@
           <h3></h3>
           <!-- <a href="#" class="blackBtn whitebtn"></a> -->
         </div>
-{{showSubCategorySpecial}} ----- category
-        <div *ngIf="showSubCategorySpecial">
-          <div class="shopcontainer">
+        <div>
+          <div *ngIf="showSubCategorySpecial" class="shopcontainer">
             <div class="row">
               <div class="col-lg-4 col-md-6 col-6" *ngFor="let categoryList of categoryListCatalog">
                 <h6>Categories</h6>
@@ -65,7 +64,7 @@
           </div>
 
           <hr>
-{{showProductsSpecial}} ----- products
+
           <div *ngIf="showProductsSpecial" class="shopcontainer">
             <div class="row">
               <div class="col-lg-4 col-md-6 col-6" *ngFor="let productList of productListCatalog; let i=index">
