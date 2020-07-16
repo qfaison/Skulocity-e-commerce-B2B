@@ -134,6 +134,8 @@ export class ShopAllComponent implements OnInit {
       if (this.subCategoryProductsList.length != 0) {
         this.showSubCatInnerProducts = true;
       }
+      this.showSubCategorySpecial = false;
+      this.showProductsSpecial = false;
     })
 
   }
