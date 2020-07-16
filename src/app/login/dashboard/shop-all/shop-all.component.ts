@@ -34,7 +34,6 @@ export class ShopAllComponent implements OnInit {
   ngOnInit(): void {
     this.customerPartyId = localStorage.getItem("customerPartyId");
     this.main();
-    this.getSpecialCategory();
   }
 
   mouseon() {
@@ -54,6 +53,7 @@ export class ShopAllComponent implements OnInit {
         this.categoryList = res['data']['categoryList'];
         this.CatalogId = res['data']['currentCatalogId'];
         localStorage.setItem('catalogId', res['data']['currentCatalogId']);
+        this.getSpecialCategory();
       })
     }
     else {
@@ -64,6 +64,7 @@ export class ShopAllComponent implements OnInit {
         this.catalogsList = res['data']['catalogCol'];
         this.categoryList = res['data']['categoryList'];
         this.CatalogId = res['data']['currentCatalogId'];
+        this.getSpecialCategory();
       })
     }
   }
