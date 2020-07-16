@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ShopAllService } from './shop-all.service';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-shop-all',
@@ -20,11 +21,15 @@ export class ShopAllComponent implements OnInit {
   productListCatalog;
   subCategoryList;
   subCategoryProductsList;
-  showSubCategory: boolean = false;
   quantity = [];
   quantityProduct = [];
   customerPartyId;
   urlSubscriber: any;
+
+  showSubCategorySpecial: boolean = false;
+  showProductsSpecial: boolean = false;
+  showSubCatInner: boolean = false;
+  showSubCatInnerProducts: boolean = false;
 
   constructor(
     private service: ShopAllService,
@@ -109,16 +114,26 @@ export class ShopAllComponent implements OnInit {
     this.service.getSpecialCategory(catalogId).subscribe((res) => {
       this.categoryListCatalog = res['data']['categoryList'];
       this.productListCatalog = res['data']['productList'];
+      if (this.categoryListCatalog.length != 0) {
+        this.showSubCategorySpecial = true;
+      }
+      if (this.productListCatalog.length != 0) {
+        this.showProductsSpecial = true;
+      }
     })
   }
 
   getSubcategories(categoryId): void {
 
     this.service.getSubCategory(categoryId).subscribe((res) => {
-      console.log("getSubCategory --->> ", res);
-      this.showSubCategory = true;
       this.subCategoryList = res['data']['subCategory'];
       this.subCategoryProductsList = res['data']['productDetails']['productCategoryMembers'];
+      if (this.subCategoryList.length != 0) {
+        this.showSubCatInner = true;
+      }
+      if (this.subCategoryProductsList.length != 0) {
+        this.showSubCatInnerProducts = true;
+      }
     })
 
   }
