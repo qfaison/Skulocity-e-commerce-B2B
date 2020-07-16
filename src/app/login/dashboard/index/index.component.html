@@ -1,5 +1,6 @@
 <section class="homepagebaner homepagebaner--pro  unillax-container" id="home">
-    <img src="assets/img/whiteBackround.png" alt="" class="unillax-background" style="transform: translateY(0px);">
+    <img *ngIf="customerPartyId==='jma'" src="assets/img/jmaBanner.png" alt="" class="unillax-background" style="transform: translateY(0px);">
+    <img *ngIf="customerPartyId==='dw'" src="assets/img/dwBanner.jpg" alt="" class="unillax-background" style="transform: translateY(0px);">
     <div class="unillax-overlay unillax-element" style="color: rgb(255, 255, 255); transform: translateY(162.5px);">
         <div class="container-fluid">
             <div class="bannerContent">
