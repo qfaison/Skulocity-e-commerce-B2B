@@ -488,7 +488,7 @@
                 </div>
 
                 <div class="row" *ngIf="customerPartyId === 'dw'">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>* Region</b></label>
                             <select class="custom-select">
@@ -498,7 +498,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>* District (for F&I only)</b></label>
                             <select class="custom-select">
@@ -508,7 +508,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>* Zone (F&I agents="Agents")</b></label>
                             <select class="custom-select">
