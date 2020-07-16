@@ -487,6 +487,42 @@
                     </div>
                 </div>
 
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* Region</b></label>
+                            <select class="custom-select">
+                                <option value="Region1">Region 1</option>
+                                <option value="Region2">Region 2</option>
+                                <option value="Region3">Region 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* District (for F&I only)</b></label>
+                            <select class="custom-select">
+                                <option value="District1">District 1</option>
+                                <option value="District1">District 2</option>
+                                <option value="District1">District 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* Zone (F&I agents="Agents")</b></label>
+                            <select class="custom-select">
+                                <option value="Zone1">Zone 1</option>
+                                <option value="Zone2">Zone 2</option>
+                                <option value="Zone3">Zone 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" *ngIf="!shippingMethod && !contMechId">
                     <div class="col-md-12" style="text-align: center;">
                         <p style="color: red;">{{errorMessage}}</p>
