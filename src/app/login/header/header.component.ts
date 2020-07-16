@@ -61,6 +61,8 @@ export class HeaderComponent implements OnInit {
   years = [];
   contactMechId;
 
+  customerPartyId;
+
   getDates() {
     var date = new Date();
     var currentYear = date.getFullYear();
@@ -113,6 +115,7 @@ export class HeaderComponent implements OnInit {
     }
     this.getDates();
     this.logo = localStorage.getItem('logo');
+    this.customerPartyId = localStorage.getItem("customerPartyId");
     this.thColor = localStorage.getItem("fontColor")
     this.showCart();
     this.cartSubscriber = this.serviceCart.cartSubscriber.subscribe((value) => {
