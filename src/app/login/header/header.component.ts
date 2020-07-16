@@ -62,6 +62,7 @@ export class HeaderComponent implements OnInit {
   contactMechId;
 
   customerPartyId;
+  EXT_OFFLINE:boolean = false;
 
   getDates() {
     var date = new Date();
@@ -221,6 +222,13 @@ export class HeaderComponent implements OnInit {
           this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
           this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
           this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+          if(res['data']['storePayment']['productStorePaymentMethodTypeIdMap']['EXT_OFFLINE']){
+            this.EXT_OFFLINE = true;
+          }
+          else{
+            this.EXT_OFFLINE = false;
+          }
+          
         }
       })
     }
