@@ -3,6 +3,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShopAllService } from '../dashboard/shop-all/shop-all.service';
 import Swal from 'sweetalert2';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -43,21 +44,84 @@ export class HeaderComponent implements OnInit {
   prices;
   orderId;
 
+  errorMessage;
+  paymentMethodId;
+  thColor;
+  errorMessageTermsAndConditions;
+  termsCondChecked: boolean = false;
+  selectPaymentErrorMessage;
+
+  addAdressForm: boolean = false;
+  countries;
+  states;
+
+  addNewCard:boolean = false;
+  billingAddresses;
+  months;
+  years = [];
+  contactMechId;
+
+  getDates() {
+    var date = new Date();
+    var currentYear = date.getFullYear();
+
+    //set values for year dropdown
+    for (var i = 0; i <= 100; i++) {
+      this.years.push(currentYear + i);
+    }
+    //set values for month dropdown
+    this.months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+  }
+
   constructor(
     readonly router: Router,
     readonly service: DashboardService,
     readonly serviceCart: ShopAllService
   ) { }
 
+  addressForm = new FormGroup({
+    toName: new FormControl(''),
+    attnName: new FormControl(''),
+    city: new FormControl(''),
+    stateProvinceGeoId: new FormControl(''),
+    allowSolicitation: new FormControl(''),
+    address1: new FormControl(''),
+    address2: new FormControl(''),
+    postalCode: new FormControl(''),
+    countryGeoId: new FormControl('')
+  });
+
+  cardForm = new FormGroup({
+    companyNameOnCard: new FormControl(''),
+    firstNameOnCard: new FormControl(''),
+    lastNameOnCard: new FormControl(''),
+    cardType: new FormControl(''),
+    expYear: new FormControl(''),
+    expMonth: new FormControl(''),
+    titleOnCard: new FormControl(''),
+    middleNameOnCard: new FormControl(''),
+    suffixOnCard: new FormControl(''),
+    cardNumber: new FormControl(''),
+    description: new FormControl(''),
+    contactMechId: new FormControl('')
+  });
+
+
   ngOnInit(): void {
     if (localStorage.getItem('isLogin') == 'true') {
       this.isLogin = true;
     }
+    this.getDates();
     this.logo = localStorage.getItem('logo');
+    this.thColor = localStorage.getItem("fontColor")
     this.showCart();
     this.cartSubscriber = this.serviceCart.cartSubscriber.subscribe((value) => {
       this.cartSize = value;
     })
+  }
+
+  termsChecked(): void {
+    this.termsCondChecked = !this.termsCondChecked;
   }
 
   showCart(): void {
@@ -132,39 +196,60 @@ export class HeaderComponent implements OnInit {
   }
 
   checkoutOptionsCheckoutPageShippingOptions(): void {
-    this.checkoutBagShow = false;
-    this.orderConfirmationPaymentShow = true;
-    let data = {
-      'checkoutpage': "shippingoptions",
-      'is_gift': false,
-      'may_split': false,
-      'shipping_method': this.shippingMethod
+
+    if (this.shippingMethod == undefined) {
+      this.errorMessage = "Please select valid shipping method";
     }
-    this.service.checkoutOptionsCheckoutPageOptions(data).subscribe((res) => {
-      if (!res['error']) {
-        this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
-        this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
-        this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+    else if (this.contMechId == undefined) {
+      this.errorMessage = "Please select valid shipping address";
+    }
+    else {
+      this.errorMessage = "";
+      this.checkoutBagShow = false;
+      this.orderConfirmationPaymentShow = true;
+      let data = {
+        'checkoutpage': "shippingoptions",
+        'is_gift': false,
+        'may_split': false,
+        'shipping_method': this.shippingMethod
       }
-    })
+      this.service.checkoutOptionsCheckoutPageOptions(data).subscribe((res) => {
+        if (!res['error']) {
+          this.totalPaymentAmout = res['data']['getDisplayGrandTotalAmount'];
+          this.paymentFormData = res['data']['checkoutPayment']['creditCard'];
+          this.itemDetails = res['data']['checkoutPayment']['shoppingCart'];
+        }
+      })
+    }
+
+  }
+
+  setPaymentMethodId(paymentMethodId): void {
+    this.paymentMethodId = paymentMethodId;
   }
 
   checkoutPayment(): void {
-    this.orderConfirmationPaymentShow = false;
-    this.orderDetailsScreen = true;
-    let data = {
-      'BACK_PAGE': "checkoutoptions",
-      'checkOutPaymentId': this.paymentFormData[0]['paymentMethodId'],
-      'checkoutpage': "payment"
-    }
-    this.service.checkoutOptionsCheckoutPagePayments(data).subscribe((res) => {
-      if (res['status'] === "ACCEPTED") {
-        this.review();
-      }
-      else {
 
+    if (this.paymentMethodId != null || this.paymentMethodId != undefined) {
+      this.orderConfirmationPaymentShow = false;
+      this.orderDetailsScreen = true;
+      let data = {
+        'BACK_PAGE': "checkoutoptions",
+        'checkOutPaymentId': this.paymentMethodId,
+        'checkoutpage': "payment"
       }
-    })
+      this.service.checkoutOptionsCheckoutPagePayments(data).subscribe((res) => {
+        if (res['status'] === "ACCEPTED") {
+          this.review();
+        }
+        else {
+
+        }
+      })
+    }
+    else {
+      this.selectPaymentErrorMessage = "Please select a card";
+    }
   }
 
   review(): void {
@@ -183,18 +268,21 @@ export class HeaderComponent implements OnInit {
   }
 
   submitOrder() {
-    this.orderDetailsScreen = false;
-    this.bagFinishShow = true;
-    let data = { checkoutpage: "payment" }
-    this.service.submitOrder(data).subscribe((res) => {
-      if (!res['error']) {
-        this.orderId = res['data']['orderId'];
-        this.clearCart();
-      }
-      else {
 
-      }
-    })
+    if (this.termsCondChecked) {
+      this.orderDetailsScreen = false;
+      this.bagFinishShow = true;
+      let data = { checkoutpage: "payment" }
+      this.service.submitOrder(data).subscribe((res) => {
+        if (!res['error']) {
+          this.orderId = res['data']['orderId'];
+          this.clearCart();
+        }
+      })
+    }
+    else {
+      this.errorMessageTermsAndConditions = "Please agree to the terms and conditions first..!!"
+    }
   }
 
   clearCart(): void {
@@ -206,6 +294,62 @@ export class HeaderComponent implements OnInit {
 
       }
     })
+  }
+
+  addAddress(): void {
+    console.log(this.addressForm.value);
+    let data = this.addressForm.value;
+    data['contactMechPurposeTypeId'] = "SHIPPING_LOCATION";
+    this.service.addAdress(data).subscribe((res) => {
+      if (res['data']['responseMessage'] === "success") {
+        this.addAdressForm = false;
+        this.checkoutOptions();
+      }
+    })
+  }
+
+  addAddressPopup(): void {
+    this.addAdressForm = true;
+    this.service.getCountriesAndStates().subscribe((res) => {
+      if (!res['error']) {
+        this.countries = res['data']['countries'];
+        this.states = res['data']['states'];
+      }
+    })
+  }
+
+  addAdressHide(): void {
+    this.addAdressForm = false;
+  }
+
+  addCardHide(): void {
+    this.addNewCard = false;
+  }
+
+  addCard():void {
+    this.addNewCard = true;
+    this.service.getPostalAddresses().subscribe((res) => {
+      if (!res['error']) {
+        this.billingAddresses = res['data']['postalAddressInfos'];
+      }
+    })
+  }
+
+  addNewCardDetails():void{
+    let data = this.cardForm.value;
+    data['contactMechId'] = this.contactMechId;
+    let year = String(data['expYear'])
+    data['expYear'] = year;
+    this.service.createCreditCard(data).subscribe((res) => {
+      if (!res['error']) {
+        this.addNewCard = false;
+        this.checkoutOptionsCheckoutPageShippingOptions();
+      }
+    })
+  }
+
+  setContactMechId(contactMechIdVal){
+    this.contactMechId = contactMechIdVal;
   }
 
   @HostListener("window:scroll", [""])

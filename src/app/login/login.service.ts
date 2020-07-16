@@ -11,7 +11,7 @@ export class LoginService {
   ) { }
 
   loginAppearance(customerData) {
-    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration', customerData, { observe: 'response' });
+    return this.http.post('skulocity/api/v1/public/ecommerce/getCustomerConfiguration', customerData);
   }
 
   login(userData) {
