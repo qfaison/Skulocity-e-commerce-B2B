@@ -658,6 +658,20 @@
                                     </div>
                                 </div>
                             </label>
+
+                            <label class="mb10 col-md-12 pl0 ng-scope" *ngIf="EXT_OFFLINE">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <input type="radio" name="checkOutPaymentId"
+                                            (click)="setPaymentMethodId('EXT_OFFLINE')" style="opacity: 1;">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                            Offline Payment
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
                             <div class="separator"></div>
                         </div>
                     </div>
