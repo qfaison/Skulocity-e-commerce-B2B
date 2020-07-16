@@ -107,8 +107,9 @@
                   <a href="javascript:void(0)">
                     <div class="shopprdct__img">
                       <img *ngIf="subCategory.categoryImageUrl" src="{{subCategory.categoryImageUrl}}"
-                        alt="{{subCategory.categoryName}}">
-                      <img *ngIf="!subCategory.categoryImageUrl" src="assets/img/no_product_image.png">
+                      (click)="getSubcategories(subCategory.entity.productCategoryId);" alt="{{subCategory.categoryName}}">
+                      <img *ngIf="!subCategory.categoryImageUrl" src="assets/img/no_product_image.png"
+                      (click)="getSubcategories(subCategory.entity.productCategoryId);">
                     </div>
                     <div class="shopprdct__cntnt">
                       <h6><b>{{subCategory.categoryName}}</b></h6>
