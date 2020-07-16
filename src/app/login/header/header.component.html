@@ -487,6 +487,46 @@
                     </div>
                 </div>
 
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* Region</b></label>
+                            <select class="custom-select">
+                                <option value="Andalucía">Andalucía</option>
+                                <option value="Oviedo">Oviedo</option>
+                                <option value="Cataluña">Cataluña</option>
+                                <option value="Madrid">Madrid</option>
+                                <option value="ComunidadValenciana">Comunidad Valenciana</option>
+                                <option value="PaísVasco">País Vasco</option>
+                                <option value="NordPasdeCalais">Nord-Pas-de-Calais</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* District (for F&I only)</b></label>
+                            <select class="custom-select">
+                                <option value="District1">District 1</option>
+                                <option value="District1">District 2</option>
+                                <option value="District1">District 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* Zone (F&I agents="Agents")</b></label>
+                            <select class="custom-select">
+                                <option value="Zone1">Zone 1</option>
+                                <option value="Zone2">Zone 2</option>
+                                <option value="Zone3">Zone 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" *ngIf="!shippingMethod && !contMechId">
                     <div class="col-md-12" style="text-align: center;">
                         <p style="color: red;">{{errorMessage}}</p>
@@ -542,14 +582,6 @@
                                 <option value="N">N</option>
                             </select>
                         </div>
-                        <div class="form-group" *ngIf="customerPartyId === 'dw'">
-                            <label for="">District (for F&I only)*</label>
-                            <select class="custom-select">
-                                <option value="District1">District 1</option>
-                                <option value="District1">District 2</option>
-                                <option value="District1">District 3</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -570,26 +602,6 @@
                                 <option *ngFor="let country of countries" value="{{country.geoId}}">
                                     {{country.geoName}}
                                 </option>
-                            </select>
-                        </div>
-                        <div class="form-group" *ngIf="customerPartyId === 'dw'"> 
-                            <label for="">Region *</label>
-                            <select class="custom-select">
-                                <option value="Andalucía">Andalucía</option>
-                                <option value="Oviedo">Oviedo</option>
-                                <option value="Cataluña">Cataluña</option>
-                                <option value="Madrid">Madrid</option>
-                                <option value="ComunidadValenciana">Comunidad Valenciana</option>
-                                <option value="PaísVasco">País Vasco</option>
-                                <option value="NordPasdeCalais">Nord-Pas-de-Calais</option>
-                            </select>
-                        </div>
-                        <div class="form-group" *ngIf="customerPartyId === 'dw'">
-                            <label for="">Zone (F&I agents="Agents")*</label>
-                            <select class="custom-select">
-                                <option value="Zone1">Zone 1</option>
-                                <option value="Zone2">Zone 2</option>
-                                <option value="Zone3">Zone 3</option>
                             </select>
                         </div>
                     </div>
