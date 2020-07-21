@@ -18,6 +18,7 @@ export class ProductPageComponent implements OnInit {
   isVirtual;
   featureList;
   featureTypes;
+  variantTreeSampleKeys;
   variantTree;
   productIdVarient;
 
@@ -47,7 +48,8 @@ export class ProductPageComponent implements OnInit {
       this.featureList = res['data']['featureOrder'];
       if (this.featureList.length > 0) {
         this.featureTypes = res['data']['featureOrder'];
-        this.variantTree = res['data']['variantSampleKeys'];
+        this.variantTreeSampleKeys = res['data']['variantSampleKeys'];
+        this.variantTree = res['data']['variantTree'];
       }
     })
   }
