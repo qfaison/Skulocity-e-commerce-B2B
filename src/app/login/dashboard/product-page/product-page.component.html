@@ -1,48 +1,15 @@
 <section class="productSliderSection" id="home">
   <div class="productSlider slick-initialized slick-slider slick-dotted" role="toolbar"
     style="background: url('assets/img/whiteBackround.png');">
-    <!-- <div aria-live="polite" class="slick-list draggable" style="height: 993px;">
-      <div class="slick-track" style="opacity: 1; width: 6745px; transform: translate3d(-1349px, 0px, 0px);"
-        role="listbox">
-        <div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 1349px;"
-          tabindex="-1">
-          <div class="commonbackground productSlider__background"
-            style="background: url(assets/img/productpagebckgrnd.jpg);">
-          </div>
-        </div>
-        <div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false"
-          style="width: 1349px;" tabindex="-1" role="option" aria-describedby="slick-slide00">
-          <div class="commonbackground productSlider__background"
-            style="background: url(assets/img/productpagebckgrnd.jpg);">
-          </div>
-        </div>
-        <div class="slick-slide" data-slick-index="1" aria-hidden="true" style="width: 1349px;" tabindex="-1"
-          role="option" aria-describedby="slick-slide01">
-          <div class="commonbackground productSlider__background" style="background: url(assets/img/productpagebckgrnd.jpg);">
-          </div>
-        </div>
-        <div class="slick-slide" data-slick-index="2" aria-hidden="true" style="width: 1349px;" tabindex="-1"
-          role="option" aria-describedby="slick-slide02">
-          <div class="commonbackground productSlider__background"
-            style="background: url(assets/img/productpagebckgrnd.jpg);">
-          </div>
-        </div>
-        <div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" style="width: 1349px;"
-          tabindex="-1">
-          <div class="commonbackground productSlider__background"
-            style="background: url(assets/img/productpagebckgrnd.jpg);">
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-
     <ul class="slick-dots" style="display: flex; color:black" role="tablist">
-      <li class="slick-active" style="color:black" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation00"
-        id="slick-slide00"><button type="button" data-role="none" role="button" tabindex="0">1</button></li>
-      <li aria-hidden="true" style="color:black" role="presentation" aria-selected="false" aria-controls="navigation01" id="slick-slide01">
+      <li class="slick-active" style="color:black" aria-hidden="false" role="presentation" aria-selected="true"
+        aria-controls="navigation00" id="slick-slide00"><button type="button" data-role="none" role="button"
+          tabindex="0">1</button></li>
+      <li aria-hidden="true" style="color:black" role="presentation" aria-selected="false" aria-controls="navigation01"
+        id="slick-slide01">
         <button type="button" data-role="none" role="button" tabindex="0">2</button></li>
-      <li aria-hidden="true" style="color:black" role="presentation" aria-selected="false" aria-controls="navigation02" id="slick-slide02">
+      <li aria-hidden="true" style="color:black" role="presentation" aria-selected="false" aria-controls="navigation02"
+        id="slick-slide02">
         <button type="button" data-role="none" role="button" tabindex="0">3</button></li>
     </ul>
   </div>
@@ -61,25 +28,40 @@
           <div class="productSliderCntnt">
             <div class="productSliderCntnt__titleHldr">
               <h1 class="productSliderCntnt__title" style="color:black">{{productData?.title}}</h1>
-              <span class="productSliderCntnt__price desktop-dnone" style="color:black">${{productData?.price.price}}</span>
+              <span class="productSliderCntnt__price desktop-dnone"
+                style="color:black">${{productData?.price.price}}</span>
             </div>
             <h3 class="productSliderCntnt__subtitle" style="color:black">{{productData?.metaDescription}}</h3>
             <ul class="productSliderCntnt__btnhldr mob__Dnone">
               <li *ngFor="let item of productData?.productContentWrapperMap | keyvalue">
                 <a *ngIf="item.key != 'productName' && item.key != 'description' && item.key != 'ADDITIONAL_IMAGE_1' && item.key != 'DIGITAL_DOWNLOAD'"
-                  href="javascript:void(0);" (click)="scroll(item.key)"
-                  class="productSliderCntnt__btn" style="color:black">{{item.key | uppercase}}</a>
+                  href="javascript:void(0);" (click)="scroll(item.key)" class="productSliderCntnt__btn"
+                  style="color:black">{{item.key | uppercase}}</a>
               </li>
-              <li><a href="javascript:void(0);" style="color:black" (click)="scroll('PairWith')" class="productSliderCntnt__btn">PAIR WITH</a></li>
-              <li><a href="javascript:void(0);" style="color:black" (click)="scroll('Reviews')" class="productSliderCntnt__btn">REVIEWS</a></li>
+              <li><a href="javascript:void(0);" style="color:black" (click)="scroll('PairWith')"
+                  class="productSliderCntnt__btn">PAIR WITH</a></li>
+              <li><a href="javascript:void(0);" style="color:black" (click)="scroll('Reviews')"
+                  class="productSliderCntnt__btn">REVIEWS</a></li>
             </ul>
             <div class="productSliderCntnt__priceHolder">
-              <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">${{productData?.price.price}}</p>
+              <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes" style="display: block !important;">
+                <label for="">{{feature}}</label>
+                <select class="custom-select" name="countryGeoId">
+                  <option *ngFor="let variant of variantTree | keyvalue" value="{{variant.value}}">
+                    {{variant.value}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="productSliderCntnt__priceHolder">
+              <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">${{productData?.price.price}}
+              </p>
               <div class="productSliderCntnt__qnttyBtn">
                 <div class="quantityholder numbers-row">
                   <input type="number" name="partridge" [(ngModel)]="quantity" class="num-box" id="partridge" value="1">
                 </div>
-                <button class="blackBtn whitebtn" style="background-color:black; color: white;" (click)="addToCart(quantity)">ADD TO BAG</button>
+                <button class="blackBtn whitebtn" style="background-color:black; color: white;"
+                  (click)="addToCart(quantity)">ADD TO BAG</button>
               </div>
             </div>
             <div class="FtrSocialMedia productSliderCntnt__socialmedia d-flex justify-content-between">

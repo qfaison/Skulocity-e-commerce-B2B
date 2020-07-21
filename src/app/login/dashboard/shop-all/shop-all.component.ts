@@ -105,8 +105,9 @@ export class ShopAllComponent implements OnInit {
     }, 0);
   }
 
-  openProduct(productId): void {
-    this.router.navigate(['/dashboard/product-page', productId]);
+  openProduct(productId,isVirtual): void {
+    this.router.navigate(['/dashboard/product-page', productId, isVirtual]);
+
   }
 
   getSpecialCategory(): void {
@@ -157,9 +158,12 @@ export class ShopAllComponent implements OnInit {
       }
       this.service.addProductToCart(data).subscribe((res) => {
         console.log(res);
-        if (res['message']) {
-          Swal.fire('Product added to cart..!!')
+        if (res['responseMessage'] != null) {
+          Swal.fire(res['responseMessage']);
           this.showCart();
+        }
+        else{
+          Swal.fire('Product added to cart..!!');
         }
       })
     }

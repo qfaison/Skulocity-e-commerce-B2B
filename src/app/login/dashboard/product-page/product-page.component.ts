@@ -15,6 +15,10 @@ export class ProductPageComponent implements OnInit {
   productId;
   quantity;
   alsoBoughtProducts;
+  isVirtual;
+  featureList;
+  featureTypes;
+  variantTree;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -27,6 +31,8 @@ export class ProductPageComponent implements OnInit {
 
   getProductDetails(): void {
     this.productId = this.route.snapshot.params['productId'];
+    this.isVirtual = this.route.snapshot.params['isVirtual'];
+    console.log("Is a varient product -->> ", this.isVirtual)
     const catalogId = localStorage.getItem("catalogId");
 
     const data = {
@@ -37,6 +43,11 @@ export class ProductPageComponent implements OnInit {
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
+      this.featureList = res['data']['featureOrder'];
+      if(this.featureList.length >0){
+        this.featureTypes = res['data']['featureOrder'];
+        this.variantTree = res['data']['variantSampleKeys'];
+      }
     })
   }
 
