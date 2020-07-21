@@ -47,8 +47,8 @@
               <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes">
                 <label for="">{{feature}}</label>
                 <select class="custom-select" name="countryGeoId">
-                  <option *ngFor="let variant of variantTree | keyvalue" value="{{variant.key}}">
-                    {{variant.key}}
+                  <option *ngFor="let variant of variantTree | keyvalue" value="{{variant.value}}">
+                    {{variant.value}}
                   </option>
                 </select>
               </div>
