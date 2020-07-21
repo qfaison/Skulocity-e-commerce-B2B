@@ -108,7 +108,7 @@ export class ShopAllComponent implements OnInit {
   openProduct(productId,isVariant): void {
     //this.router.navigate(['/dashboard/product-page', productId, isVariant]);
 
-    this.router.navigate(['/dashboard/product-page', productId, { state: { isVariant: 'isVariant' } }]);
+    this.router.navigate(['/dashboard/product-page', productId, { state: { 'isVariant': isVariant } }]);
 
   }
 
