@@ -19,6 +19,7 @@ export class ProductPageComponent implements OnInit {
   featureList;
   featureTypes;
   variantTree;
+  productIdVarient;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -53,15 +54,15 @@ export class ProductPageComponent implements OnInit {
 
   getList(feature): void {
 
-    console.log("Feature -->> ",feature);
+    console.log("Feature -->> ", feature);
+    let Varient = this.variantTree[feature];
 
-    // if (this.featureList.length === 1) {
-
-    // }
-    // else {
-
-    // }
-
+    if(Array.isArray(Varient)){
+      console.log("if statement", Varient);
+    }
+    else{
+      console.log("else statement", Varient);
+    }
   }
 
   addToCart(quantity): void {
