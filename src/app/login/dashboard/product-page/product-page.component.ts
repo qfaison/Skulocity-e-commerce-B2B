@@ -18,7 +18,9 @@ export class ProductPageComponent implements OnInit {
   isVirtual;
   featureList;
   featureTypes;
+  variantTreeSampleKeys;
   variantTree;
+  productIdVarient;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -44,11 +46,26 @@ export class ProductPageComponent implements OnInit {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
-      if(this.featureList.length >0){
+      if (this.featureList && this.featureList.length > 0) {
         this.featureTypes = res['data']['featureOrder'];
-        this.variantTree = res['data']['variantSampleKeys'];
+        this.variantTreeSampleKeys = res['data']['variantSampleKeys'];
+        this.variantTree = res['data']['variantTree'];
       }
     })
+  }
+
+  getList(feature): void {
+
+    console.log("Feature -->> ", feature);
+    let Varient = this.variantTree[feature];
+
+    if(Array.isArray(Varient)){
+      console.log("if statement", Varient);
+      this.productIdVarient = Varient[0];
+    }
+    else{
+      console.log("else statement", Varient);
+    }
   }
 
   addToCart(quantity): void {
