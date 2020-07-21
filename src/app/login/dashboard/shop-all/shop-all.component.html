@@ -128,6 +128,7 @@
               <div class="col-lg-4 col-md-6 col-6"
                 *ngFor="let productListSubCategory of subCategoryProductsList; let i=index">
                 <div class="shopprdct">
+                  {{productListSubCategory.product.isVariant}}
                   <a href="javascript:void(0)">
                     <div class="shopprdct__img">
                       <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}"
