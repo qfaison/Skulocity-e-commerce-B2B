@@ -46,7 +46,7 @@
             <div class="productSliderCntnt__priceHolder">
               <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes" style="display: block !important;">
                 <label for="">{{feature}}</label>
-                <select class="custom-select" name="countryGeoId">
+                <select class="custom-select" name="countryGeoId" [(ngModel)]="featureTypes[feature]" (change)="getList(featureTypes[feature])">
                   <option *ngFor="let variant of variantTree | keyvalue" value="{{variant.value}}">
                     {{variant.value}}
                   </option>

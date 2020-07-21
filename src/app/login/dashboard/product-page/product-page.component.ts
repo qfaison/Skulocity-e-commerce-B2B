@@ -44,11 +44,24 @@ export class ProductPageComponent implements OnInit {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
-      if(this.featureList.length >0){
+      if (this.featureList.length > 0) {
         this.featureTypes = res['data']['featureOrder'];
         this.variantTree = res['data']['variantSampleKeys'];
       }
     })
+  }
+
+  getList(feature): void {
+
+    console.log("Feature -->> ",feature);
+
+    // if (this.featureList.length === 1) {
+
+    // }
+    // else {
+
+    // }
+
   }
 
   addToCart(quantity): void {
