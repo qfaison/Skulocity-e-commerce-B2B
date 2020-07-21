@@ -131,10 +131,10 @@
                   <a href="javascript:void(0)">
                     <div class="shopprdct__img">
                       <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}"
-                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVariant);"
+                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVirtual);"
                         alt="{{productListSubCategory.product.productName}}">
                       <img *ngIf="!productListSubCategory.s3ImageUrl" src="assets/img/no_product_image.png"
-                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVariant);">
+                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVirtual);">
                     </div>
                     <div>
                       <input type="number" [(ngModel)]="quantity[i]" placeholder="Qty"
