@@ -40,7 +40,7 @@ const routes: Routes = [
     { path:'quotes', component: QuotesComponent },
     { path:'view-quotes/:quoteId', component: ViewQuotesComponent },
     { path:'messages', component: MessagesComponent },
-    { path:'product-page/:productId', component: ProductPageComponent},
+    { path:'product-page/:productId/:isVirtual', component: ProductPageComponent},
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
   ]}
