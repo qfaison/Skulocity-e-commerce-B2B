@@ -128,14 +128,13 @@
               <div class="col-lg-4 col-md-6 col-6"
                 *ngFor="let productListSubCategory of subCategoryProductsList; let i=index">
                 <div class="shopprdct">
-                  {{productListSubCategory.product.isVariant}}
                   <a href="javascript:void(0)">
                     <div class="shopprdct__img">
                       <img *ngIf="productListSubCategory.s3ImageUrl" src="{{productListSubCategory.s3ImageUrl}}"
-                        (click)="openProduct(productListSubCategory.product.productId);"
+                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVariant);"
                         alt="{{productListSubCategory.product.productName}}">
                       <img *ngIf="!productListSubCategory.s3ImageUrl" src="assets/img/no_product_image.png"
-                        (click)="openProduct(productListSubCategory.product.productId);">
+                        (click)="openProduct(productListSubCategory.product.productId,productListSubCategory.product.isVariant);">
                     </div>
                     <div>
                       <input type="number" [(ngModel)]="quantity[i]" placeholder="Qty"

@@ -105,8 +105,8 @@ export class ShopAllComponent implements OnInit {
     }, 0);
   }
 
-  openProduct(productId): void {
-    this.router.navigate(['/dashboard/product-page', productId]);
+  openProduct(productId,isVariant): void {
+    this.router.navigate(['/dashboard/product-page', productId, isVariant]);
   }
 
   getSpecialCategory(): void {
