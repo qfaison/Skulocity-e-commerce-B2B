@@ -16,6 +16,9 @@ export class ProductPageComponent implements OnInit {
   quantity;
   alsoBoughtProducts;
   isVirtual;
+  featureList;
+  featureTypes;
+  variantTree;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -40,6 +43,11 @@ export class ProductPageComponent implements OnInit {
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
+      this.featureList = res['data']['featureOrder'];
+      if(this.featureList.length >0){
+        this.featureTypes = res['data']['featureOrder'];
+        this.variantTree = res['data']['variantSampleKeys'];
+      }
     })
   }
 
