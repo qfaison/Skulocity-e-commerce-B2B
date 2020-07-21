@@ -154,9 +154,9 @@
                     </div>
                   </a>
                   
-                  <button class="blackBtn hoverblck" *ngIf="productListSubCategory.product.isVariant === 'Y'"
+                  <button class="blackBtn hoverblck" *ngIf="productListSubCategory.product.isVirtual === 'Y'"
                     (click)='addProductToCart(quantity[i],productListSubCategory.product.productId)'>Choose Varient</button>
-                  <button class="blackBtn hoverblck" *ngIf="productListSubCategory.product.isVariant === 'N'"
+                  <button class="blackBtn hoverblck" *ngIf="productListSubCategory.product.isVirtual === 'N'"
                     (click)='addProductToCart(quantity[i],productListSubCategory.product.productId)'>ADD TO BAG</button>
                 </div>
               </div>
