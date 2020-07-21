@@ -15,7 +15,7 @@ export class ProductPageComponent implements OnInit {
   productId;
   quantity;
   alsoBoughtProducts;
-  isVarient;
+  isVirtual;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -28,8 +28,8 @@ export class ProductPageComponent implements OnInit {
 
   getProductDetails(): void {
     this.productId = this.route.snapshot.params['productId'];
-    this.isVarient = this.route.snapshot.params['isVarient'];
-    console.log("Is a varient product -->> ", this.isVarient)
+    this.isVirtual = this.route.snapshot.params['isVirtual'];
+    console.log("Is a varient product -->> ", this.isVirtual)
     const catalogId = localStorage.getItem("catalogId");
 
     const data = {
