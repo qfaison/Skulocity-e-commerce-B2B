@@ -43,7 +43,15 @@
               <li><a href="javascript:void(0);" style="color:black" (click)="scroll('Reviews')"
                   class="productSliderCntnt__btn">REVIEWS</a></li>
             </ul>
-            <div class="productSliderCntnt__priceHolder">
+            <div class="productSliderCntnt__priceHolder" style="display: block !important;">
+              <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes">
+                <label for="">{{feature}}</label>
+                <select class="custom-select" name="countryGeoId">
+                  <option *ngFor="let variant of variantTree | keyvalue" value="{{variant.value}}">
+                    {{variant.value}}
+                  </option>
+                </select>
+              </div>
               <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes">
                 <label for="">{{feature}}</label>
                 <select class="custom-select" name="countryGeoId">
