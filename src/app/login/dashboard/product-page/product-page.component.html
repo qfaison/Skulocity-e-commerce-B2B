@@ -43,18 +43,31 @@
               <li><a href="javascript:void(0);" style="color:black" (click)="scroll('Reviews')"
                   class="productSliderCntnt__btn">REVIEWS</a></li>
             </ul>
-            <div class="productSliderCntnt__priceHolder" *ngIf="featureList">
-              <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes" style="display: block !important;">
-                <label for="">{{feature}}</label>
-                <select class="custom-select" name="countryGeoId" [(ngModel)]="featureTypes[feature]" (change)="getList(featureTypes[feature])">
+            <div class="productSliderCntnt__priceHolder" *ngIf="featureList" style="justify-content: space-evenly;">
+              <div class="quantityholder numbers-row" style="display: block !important;">
+                <label for="">{{featureTypes[0]}}</label>
+                <select class="custom-select" name="featureTypes[0]" [(ngModel)]="featuresModelVal[0]"
+                  (change)="getList(featuresModelVal[0],0)">
                   <option *ngFor="let variant of variantTreeSampleKeys | keyvalue" value="{{variant.value}}">
                     {{variant.value}}
                   </option>
                 </select>
               </div>
+              <div class="quantityholder numbers-row" *ngFor="let feature of featureTypes; let i = index"
+                style="display: block !important;">
+                <div *ngIf="i>0">
+                  <label for="">{{feature}}</label>
+                  <select class="custom-select" name="featureTypes[feature]" [(ngModel)]="featureTypes.feature"
+                    (change)="getList(featureTypes.feature,i)">
+                    <option *ngFor="let variant of dropDownData[i] | keyvalue" value="{{variant.key}}">
+                      {{variant.key}}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="productSliderCntnt__priceHolder">
-              <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">${{productData?.price.price}}
+              <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">${{productData?.price?.price}}
               </p>
               <div class="productSliderCntnt__qnttyBtn">
                 <div class="quantityholder numbers-row">
