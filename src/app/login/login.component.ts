@@ -39,11 +39,8 @@ export class LoginComponent implements OnInit {
     this.currentUrl = window.location.href;
 
     let urlSplitted = (this.currentUrl).split('.');
-    this.tenantId = urlSplitted[1];
-
     let pos = urlSplitted[0].lastIndexOf('/');
-    //this.customerPartyId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
-    this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
+    this.tenantId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
     if(this.tenantId != 'development'){
       localStorage.setItem('tenantId',this.tenantId);
       localStorage.setItem('urlTenant',this.tenantId);
@@ -51,9 +48,9 @@ export class LoginComponent implements OnInit {
     else{
       localStorage.setItem('urlTenant',this.tenantId);
     }
-    console.log("customerPartyId -->> ", this.customerPartyId);
-    console.log("tenantId -->> ", this.tenantId);
+    console.log("tenantId -->> ",a);
 
+    this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if (localStorage.getItem('isLogin')) {
       this.router.navigate(['/dashboard']);
     }
