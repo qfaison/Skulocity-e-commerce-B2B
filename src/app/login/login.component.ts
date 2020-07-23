@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
     this.tenantId = urlSplitted[1];
 
     let pos = urlSplitted[0].lastIndexOf('/');
-    this.customerPartyId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
+    //this.customerPartyId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
+    this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if(this.tenantId != 'development'){
       localStorage.setItem('tenantId',this.tenantId);
       localStorage.setItem('urlTenant',this.tenantId);
