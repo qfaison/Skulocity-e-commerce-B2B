@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
 
-    url = 'https://development.skulocity.org';
+    url;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -29,6 +29,10 @@ export class APIInterceptor implements HttpInterceptor {
         }
         if (localStorage.getItem('tenantId')) {
             headers = headers.append('tenantId', localStorage.getItem('tenantId'));
+            this.url =  'https://'+localStorage.getItem('tenantId')+'.skulocity.org';
+        }
+        else{
+            this.url =  'https://'+localStorage.getItem('urlTenant')+'.skulocity.org';
         }
         
         let request = localStorage.getItem("token");

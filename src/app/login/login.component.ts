@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
     this.tenantId = a[0].substring(pos+1,a[0].length);
     if(this.tenantId != 'development'){
       localStorage.setItem('tenantId',this.tenantId);
+      localStorage.setItem('urlTenant',this.tenantId);
+    }
+    else{
+      localStorage.setItem('urlTenant',this.tenantId);
     }
     console.log("tenantId -->> ",this.tenantId);
 
