@@ -9,19 +9,6 @@ export class APIInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        // if (localStorage.getItem("token")) {
-        //     req = req.clone(
-        //         { 
-        //             headers: new HttpHeaders({'Authorization': localStorage.getItem('token')}),
-        //             url: `${this.url}/${req.url}`
-        //         }
-        //     );
-        // } else {
-        //     req = req.clone({ url: `${this.url}/${req.url}`});
-        // }   
-        // return next.handle(req);
-
-
 
         let headers = new HttpHeaders();
         if (localStorage.getItem('token')) {
