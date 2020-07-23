@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     else{
       localStorage.setItem('urlTenant',this.tenantId);
     }
-    console.log("tenantId -->> ",a);
 
     this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if (localStorage.getItem('isLogin')) {
