@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   fontColor = '#005eba';
   customerPartyId;
   private cookieValue: string;
+  currentUrl;
+  tenantId;
 
   loginForm: FormGroup = this.formBuilder.group({
     'username': ['', Validators.required],
@@ -34,7 +36,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(window.location.href);
+    this.currentUrl = window.location.href;
+
+    let a = (this.currentUrl).split('.');
+    let pos = a[0].lastIndexOf('/');
+    this.tenantId = a.substring(0,pos);
+    console.log("tenantId -->> ",this.tenantId);
+
     this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if (localStorage.getItem('isLogin')) {
       this.router.navigate(['/dashboard']);
