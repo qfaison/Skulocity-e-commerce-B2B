@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    console.log(window.location.href);
     this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if (localStorage.getItem('isLogin')) {
       this.router.navigate(['/dashboard']);
