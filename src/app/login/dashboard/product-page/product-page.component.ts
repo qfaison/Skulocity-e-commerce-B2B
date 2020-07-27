@@ -107,12 +107,12 @@ export class ProductPageComponent implements OnInit {
           }
 
           this.service.addProductToCart(data).subscribe((res) => {
-            if (res['responseMessage'] != null) {
-              Swal.fire(res['responseMessage']);
+            if (res['data']['responseMessage'] != null) {
+              Swal.fire(res['data']['responseMessage']);
               //this.getCartCount();
             }
-            else if (res['errorMessage'] != null) {
-              Swal.fire(res['errorMessage']);
+            else if (res['data']['errorMessage'] != null) {
+              Swal.fire(res['data']['errorMessage']);
               //this.getCartCount();
             }
             else {
