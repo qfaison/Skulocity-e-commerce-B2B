@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
       console.log(response);
       localStorage.setItem("token", response['data']['authenticationToken']['token']);
       localStorage.setItem("isLogin", "true");
-      this.service.hideLoader();
+      //this.service.hideLoader();
       this.router.navigate(['/dashboard']);
     })
 
