@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { finalize } from "rxjs/operators";
+import { AppService } from './app-service';
+
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
 
+    constructor(public loaderService: AppService) { }
+
     url;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+        this.loaderService.showLoader();
 
         let headers = new HttpHeaders();
         if (localStorage.getItem('token')) {
@@ -38,6 +43,8 @@ export class APIInterceptor implements HttpInterceptor {
                 }
             );
         }
-        return next.handle(req);
+        return next.handle(req).pipe(
+            finalize(() => this.loaderService.hideLoader()));
     }
+    
 }

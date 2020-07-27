@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngAfterViewInit(): void{
-    this.service.hideLoader();
+    //this.service.hideLoader();
   } 
 
 }

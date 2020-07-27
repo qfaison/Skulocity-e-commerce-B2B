@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin(): void {
-    this.service.showLoader();
+    //this.service.showLoader();
     this.loginService.login(this.loginForm.value).subscribe((response) => {
       console.log(response);
       localStorage.setItem("token", response['data']['authenticationToken']['token']);
