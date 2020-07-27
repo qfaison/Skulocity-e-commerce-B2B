@@ -1,0 +1,15 @@
+.globalLoader{
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    display: flex;
+    background-color: #777777;
+    opacity: 0.5;
+    z-index: 2;
+}
+.spinner-border{
+    margin: auto;
+    z-index: 9;
+}

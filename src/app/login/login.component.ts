@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { AppService } from '../app-service';
 
 @Component({
   selector: 'app-login',
@@ -26,16 +27,16 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(
-    public router: Router,
-    public http: HttpClient,
-    private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private routeActivated: ActivatedRoute,
-    private cookie: CookieService
+    readonly router: Router,
+    readonly http: HttpClient,
+    readonly formBuilder: FormBuilder,
+    readonly loginService: LoginService,
+    readonly service: AppService,
+    readonly routeActivated: ActivatedRoute,
+    readonly cookie: CookieService
   ) { }
 
   ngOnInit(): void {
-
     this.currentUrl = window.location.href;
 
     let urlSplitted = (this.currentUrl).split('.');
@@ -64,11 +65,12 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin(): void {
-    console.log(this.loginForm.value);
+    this.service.showLoader();
     this.loginService.login(this.loginForm.value).subscribe((response) => {
       console.log(response);
       localStorage.setItem("token", response['data']['authenticationToken']['token']);
       localStorage.setItem("isLogin", "true");
+      this.service.hideLoader();
       this.router.navigate(['/dashboard']);
     })
 
