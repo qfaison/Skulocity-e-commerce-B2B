@@ -107,9 +107,20 @@ export class ProductPageComponent implements OnInit {
           }
 
           this.service.addProductToCart(data).subscribe((res) => {
-            this.productData = res['data'];
-            Swal.fire("Product added successfully..!!");
-            this.getCartCount();
+            if (res['responseMessage'] != null) {
+              Swal.fire(res['responseMessage']);
+              //this.getCartCount();
+            }
+            else if (res['errorMessage'] != null) {
+              Swal.fire(res['errorMessage']);
+              //this.getCartCount();
+            }
+            else {
+              this.productData = res['data'];
+              Swal.fire("Product added successfully..!!");
+              this.getCartCount();
+            }
+
           })
         }
       }
@@ -121,9 +132,20 @@ export class ProductPageComponent implements OnInit {
         }
 
         this.service.addProductToCart(data).subscribe((res) => {
-          this.productData = res['data'];
-          Swal.fire("Product added successfully..!!");
-          this.getCartCount();
+          if (res['responseMessage'] != null) {
+            Swal.fire(res['responseMessage']);
+            //this.getCartCount();
+          }
+          else if (res['errorMessage'] != null) {
+            Swal.fire(res['errorMessage']);
+            //this.getCartCount();
+          }
+          else {
+            this.productData = res['data'];
+            Swal.fire("Product added successfully..!!");
+            this.getCartCount();
+          }
+
         })
       }
     }
@@ -137,8 +159,17 @@ export class ProductPageComponent implements OnInit {
     }
 
     this.service.addProductToCart(data).subscribe((res) => {
-      this.productData = res['data'];
-      Swal.fire("Product added successfully..!!")
+      if (res['responseMessage'] != null) {
+        Swal.fire(res['responseMessage']);
+      }
+      else if (res['errorMessage'] != null) {
+        Swal.fire(res['errorMessage']);
+      }
+      else {
+        this.productData = res['data'];
+        Swal.fire("Product added successfully..!!")
+      }
+
     })
 
 

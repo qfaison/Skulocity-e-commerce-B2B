@@ -162,6 +162,10 @@ export class ShopAllComponent implements OnInit {
           Swal.fire(res['responseMessage']);
           this.showCart();
         }
+        else if (res['errorMessage'] != null) {
+          Swal.fire(res['errorMessage']);
+          this.showCart();
+        }
         else{
           Swal.fire('Product added to cart..!!');
         }
