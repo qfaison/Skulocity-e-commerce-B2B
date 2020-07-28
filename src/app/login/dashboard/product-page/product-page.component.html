@@ -100,13 +100,17 @@
                 </div>
 
                 <div *ngIf="!conf.isSingleChoice" style="display: block;">
+                  <div class="quantityholder numbers-row">
+                    <label for="">{{conf.question}}</label>
+                  </div>
                   <div *ngFor="let option of conf.options;let i=index;">
                     <div class="quantityholder numbers-row">
                       <label for="">{{conf.question}}</label>
                     </div>
                     <div class="quantityholder numbers-row">
+                      <input type="checkbox" class="form-control" id="vehicle1" name="vehicle1" value="test"
+                        style="height: 20px;">
                       <span>{{conf.options[i]['description']}}</span>
-                      <input type="checkbox" class="form-control" id="vehicle1" name="vehicle1" value="test" style="height: 20px;">
                     </div>
                     <div class="quantityholder numbers-row" style="margin-top: 10px;">
                       <input type="text" class="form-control" name="Comment" value="Comment">
