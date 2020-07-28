@@ -70,9 +70,9 @@
             <!--- Configurable Product --->
 
             <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
-              {{quesList | json}}
               <div class="productSliderCntnt__qnttyBtn" *ngFor="let conf in quesList">
-                <div>
+                LENGTH --- >> {{conf.options?.length}}
+                <div *ngIf="conf.options?.length === 1">
 
                   hgfhsgfghjgfhjgfhj
                   <div class="quantityholder numbers-row">
