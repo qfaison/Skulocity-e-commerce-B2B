@@ -57,10 +57,10 @@ export class ProductPageComponent implements OnInit {
       this.featureList = res['data']['featureOrder'];
       this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
       let List = res['data']['productSummary']['quesList'];
-      if(List.length > 0 && this.configurableProduct === 'AGGREGATED'){
+      if (List.length > 0 && this.configurableProduct === 'AGGREGATED') {
         this.quesList = res['data']['productSummary']['quesList'];
       }
-      else if(List.length === 0 && this.configurableProduct === 'AGGREGATED'){
+      else if (List.length === 0 && this.configurableProduct === 'AGGREGATED') {
         Swal.fire("Product is not configured properly");
       }
       if (this.featureList && this.featureList.length > 0) {
@@ -99,19 +99,46 @@ export class ProductPageComponent implements OnInit {
 
   addToCart(quantity): void {
 
-    if (quantity == undefined || quantity == null) {
-      Swal.fire('Oops...', 'Please enter the quantity!', 'error')
+    if (this.configurableProduct === 'AGGREGATED') {
+      console.log(this.comment);
     }
     else {
+      if (quantity == undefined || quantity == null) {
+        Swal.fire('Oops...', 'Please enter the quantity!', 'error')
+      }
+      else {
 
-      let product;
+        let product;
 
-      if (this.isVirtual === 'Y') {
-        if (this.productIdVarient === undefined) {
-          Swal.fire("Oops..!!", "Please select varient", 'error');
+        if (this.isVirtual === 'Y') {
+          if (this.productIdVarient === undefined) {
+            Swal.fire("Oops..!!", "Please select varient", 'error');
+          }
+          else {
+            product = this.productIdVarient;
+            let data = {
+              'add_product_id': product,
+              'quantity': quantity
+            }
+
+            this.service.addProductToCart(data).subscribe((res) => {
+              if (res['data']['responseMessage'] != null) {
+                Swal.fire(res['data']['responseMessage']);
+              }
+              else if (res['data']['errorMessage'] != null) {
+                Swal.fire(res['data']['errorMessage']);
+              }
+              else {
+                this.productData = res['data'];
+                Swal.fire("Product added successfully..!!");
+                this.getCartCount();
+              }
+
+            })
+          }
         }
         else {
-          product = this.productIdVarient;
+          product = this.productId;
           let data = {
             'add_product_id': product,
             'quantity': quantity
@@ -133,29 +160,9 @@ export class ProductPageComponent implements OnInit {
           })
         }
       }
-      else {
-        product = this.productId;
-        let data = {
-          'add_product_id': product,
-          'quantity': quantity
-        }
-
-        this.service.addProductToCart(data).subscribe((res) => {
-          if (res['data']['responseMessage'] != null) {
-            Swal.fire(res['data']['responseMessage']);
-          }
-          else if (res['data']['errorMessage'] != null) {
-            Swal.fire(res['data']['errorMessage']);
-          }
-          else {
-            this.productData = res['data'];
-            Swal.fire("Product added successfully..!!");
-            this.getCartCount();
-          }
-
-        })
-      }
     }
+
+
 
   }
 
