@@ -69,25 +69,33 @@
 
             <!--- Configurable Product --->
 
-            <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
+            <div class="productSliderCntnt__priceHolder" *ngIf="quesList" style="display: block;">
               <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf of quesList;let i=index;">
-                <div *ngIf="conf.options?.length === 1 && conf.isSingleChoice">
+                <div *ngIf="conf.options?.length === 1 && conf.isSingleChoice" style="display: block;">
                   <div class="quantityholder numbers-row">
                     <label for="">{{conf.question}}</label>
+                  </div>
+                  <div class="quantityholder numbers-row">
                     <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
                       value="{{conf.options[i]['description']}}" readonly>
+                  </div>
+                  <div class="quantityholder numbers-row">
                     <input type="text" name="Comment" value="Comment 0">
                   </div>
                 </div>
 
-                <div *ngIf="conf.options?.length > 1 && conf.isSingleChoice">
+                <div *ngIf="conf.options?.length > 1 && conf.isSingleChoice" style="display: block;">
                   <div class="quantityholder numbers-row">
                     <label for="">{{conf.question}}</label>
+                  </div>
+                  <div class="quantityholder numbers-row">
                     <select class="custom-select">
                       <option *ngFor="let option of conf.options" value="{{option.description}}">
                         {{option.description}}
                       </option>
                     </select>
+                  </div>
+                  <div class="quantityholder numbers-row">
                     <input type="text" name="Comment" value="Comment 0">
                   </div>
                 </div>
