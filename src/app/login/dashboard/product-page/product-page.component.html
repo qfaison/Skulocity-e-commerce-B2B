@@ -76,10 +76,10 @@
                     <label for="">{{conf.question}}</label>
                   </div>
                   <div class="quantityholder numbers-row">
-                    {{conf.options[0]["description"]}}
+                    {{conf.options[i]["description"]}}
                   </div>
                   <div class="quantityholder numbers-row" style="margin-top: 10px;">
-                    <input type="text" class="form-control" name="Comment" value="Comment 0">
+                    <input type="text" class="form-control" name="Comment" value="Comment">
                   </div>
                 </div>
 
@@ -95,7 +95,20 @@
                     </select>
                   </div>
                   <div class="quantityholder numbers-row" style="margin-top: 10px;">
-                    <input type="text" class="form-control" name="Comment" value="Comment 0">
+                    <input type="text" class="form-control" name="Comment" value="Comment">
+                  </div>
+                </div>
+
+                <div *ngIf="!conf.isSingleChoice" style="display: block;">
+                  <div class="quantityholder numbers-row">
+                    <label for="">{{conf.question}}</label>
+                  </div>
+                  <div class="quantityholder numbers-row">
+                    {{conf.options[i]['description']}}
+                    <input type="checkbox" id="vehicle1" name="vehicle1" value="test">
+                  </div>
+                  <div class="quantityholder numbers-row" style="margin-top: 10px;">
+                    <input type="text" class="form-control" name="Comment" value="Comment">
                   </div>
                 </div>
               </div>
