@@ -70,6 +70,7 @@
             <!--- Configurable Product --->
 
             <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
+              {{quesList | json}
               <div class="productSliderCntnt__qnttyBtn" *ngFor="let conf in quesList">
                 <div>
 
