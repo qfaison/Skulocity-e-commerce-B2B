@@ -76,11 +76,12 @@
                     <label for="">{{conf.question}}</label>
                   </div>
                   <div class="quantityholder numbers-row">
+                    {{conf.options |json}}
                     <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
                       value="{{conf.options[0]['description']}}" readonly>
                   </div>
-                  <div class="quantityholder numbers-row">
-                    <input type="text" name="Comment" value="Comment 0">
+                  <div class="quantityholder numbers-row" style="margin-top: 10px;">
+                    <input type="text" class="form-control" name="Comment" value="Comment 0">
                   </div>
                 </div>
 
@@ -95,8 +96,8 @@
                       </option>
                     </select>
                   </div>
-                  <div class="quantityholder numbers-row">
-                    <input type="text" name="Comment" value="Comment 0">
+                  <div class="quantityholder numbers-row" style="margin-top: 10px;">
+                    <input type="text" class="form-control" name="Comment" value="Comment 0">
                   </div>
                 </div>
               </div>
