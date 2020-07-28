@@ -71,10 +71,7 @@
 
             <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
               quesList outer ==>> {{quesList | json}}
-              <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf in quesList">
-                conf ==>> {{conf | json}}
-                quesList inner ==>> {{quesList | json}}
-                LENGTH --- >> {{conf.options?.length}}
+              <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf of quesList">
                 <div *ngIf="conf.options?.length === 1">
 
                   hgfhsgfghjgfhjgfhj
