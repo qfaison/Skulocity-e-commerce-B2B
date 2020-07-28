@@ -73,7 +73,7 @@
               <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf of quesList;let i=index;">
                 <div *ngIf="conf.options?.length === 1 && conf.isSingleChoice">
                   <div class="quantityholder numbers-row">
-                    <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">{{conf.question}}</p>
+                    <label for="">{{conf.question}}</label>
                     <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
                       value="{{conf.options[i]['description']}}" readonly>
                     <input type="text" name="Comment" value="Comment 0">
@@ -82,7 +82,7 @@
 
                 <div *ngIf="conf.options?.length > 1 && conf.isSingleChoice">
                   <div class="quantityholder numbers-row">
-                    <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">{{conf.question}}</p>
+                    <label for="">{{conf.question}}</label>
                     <select class="custom-select">
                       <option *ngFor="let option of conf.options" value="{{option.description}}">
                         {{option.description}}
