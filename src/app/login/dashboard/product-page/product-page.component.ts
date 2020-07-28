@@ -28,6 +28,7 @@ export class ProductPageComponent implements OnInit {
   selectedVariantsData = [];
   configurableProduct;
   quesList;
+  Comment = [];
 
   constructor(
     readonly route: ActivatedRoute,
