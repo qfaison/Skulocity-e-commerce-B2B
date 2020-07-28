@@ -189,6 +189,11 @@ export class ProductPageComponent implements OnInit {
 
   }
 
+  selectProductDetails(conf,index): void{
+    console.log("conf",conf);
+    console.log("index",index);
+  }
+
   getCartCount(): void {
     this.shopAllService.showCart().subscribe((res) => {
       this.shopAllService.addValueToCart(res['data']['cart']['shoppingCartSize']);
