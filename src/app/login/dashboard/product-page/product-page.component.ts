@@ -55,11 +55,13 @@ export class ProductPageComponent implements OnInit {
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
       this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
-
-      if(this.quesList.length > 0){
+      let List = res['data']['productSummary']['quesList'];
+      if(List.length > 0 && this.configurableProduct === 'AGGREGATED'){
         this.quesList = res['data']['productSummary']['quesList'];
       }
-
+      else if(List.length === 0 && this.configurableProduct === 'AGGREGATED'){
+        Swal.fire("Product is not configured properly");
+      }
       if (this.featureList && this.featureList.length > 0) {
         this.featureTypes = res['data']['featureOrder'];
         this.variantTreeSampleKeys = res['data']['variantSampleKeys'];

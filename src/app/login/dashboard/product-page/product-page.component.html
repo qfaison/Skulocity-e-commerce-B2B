@@ -25,7 +25,6 @@
           </div>
         </div>
         <div class="col-md-5">
-          {{quesList | json}}
           <div class="productSliderCntnt">
             <div class="productSliderCntnt__titleHldr">
               <h1 class="productSliderCntnt__title" style="color:black">{{productData?.title}}</h1>
@@ -67,6 +66,27 @@
                 </div>
               </div>
             </div>
+
+            <!--- Configurable Product --->
+
+            <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
+              <div class="productSliderCntnt__qnttyBtn" *ngFor="let conf in quesList">
+                <div *ngIf="conf.options?.length === 1">
+
+                  hgfhsgfghjgfhjgfhj
+                  <div class="quantityholder numbers-row">
+                    <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">{{conf.question}}</p>
+                    <input type="number" name="partridge" [(ngModel)]="quantity" class="num-box" id="partridge"
+                      value="1">
+                  </div>
+                  <button class="blackBtn whitebtn" style="background-color:black; color: white;"
+                    (click)="addToCart(quantity)">ADD TO BAG</button>
+                </div>
+              </div>
+            </div>
+
+            <!--- End Configurable Product --->
+
             <div class="productSliderCntnt__priceHolder">
               <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">${{productData?.price?.price}}
               </p>
