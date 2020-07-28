@@ -88,8 +88,8 @@
                     <label for="">{{conf.question}}</label>
                   </div>
                   <div class="quantityholder numbers-row">
-                    <select class="custom-select" name="confDropdowns[conf]" [(ngModel)]="confDropdowns[i]"
-                    (change)="selectProductDetails(confDropdowns.conf,i)">
+                    <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="confDropdowns[i]"
+                    (change)="selectProductDetails(confDropdowns[i],i)">
                       <option *ngFor="let option of conf.options" value="{{option.description}}">
                         {{option.description}}
                       </option>
