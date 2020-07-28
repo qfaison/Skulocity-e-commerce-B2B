@@ -29,6 +29,7 @@ export class ProductPageComponent implements OnInit {
   configurableProduct;
   quesList;
   comment = [];
+  confDropdowns = [];
 
   constructor(
     readonly route: ActivatedRoute,
@@ -100,7 +101,8 @@ export class ProductPageComponent implements OnInit {
   addToCart(quantity): void {
 
     if (this.configurableProduct === 'AGGREGATED') {
-      console.log(this.comment);
+      console.log("comment",this.comment);
+      console.log("confDropdowns", this.confDropdowns);
     }
     else {
       if (quantity == undefined || quantity == null) {
