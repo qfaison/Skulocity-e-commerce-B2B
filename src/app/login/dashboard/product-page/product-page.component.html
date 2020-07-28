@@ -70,18 +70,26 @@
             <!--- Configurable Product --->
 
             <div class="productSliderCntnt__priceHolder" *ngIf="quesList">
-              quesList outer ==>> {{quesList | json}}
-              <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf of quesList">
-                <div *ngIf="conf.options?.length === 1">
-
-                  hgfhsgfghjgfhjgfhj
+              <div class="productSliderCntnt__qnttyBtn" id="Conf" *ngFor="let conf of quesList;let i=index;">
+                <div *ngIf="conf.options?.length === 1 && conf.isSingleChoice">
                   <div class="quantityholder numbers-row">
                     <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">{{conf.question}}</p>
-                    <input type="number" name="partridge" [(ngModel)]="quantity" class="num-box" id="partridge"
-                      value="1">
+                    <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
+                      value="{{conf.options[i]['description']}}" readonly>
+                    <input type="text" name="Comment" value="Comment 0">
                   </div>
-                  <button class="blackBtn whitebtn" style="background-color:black; color: white;"
-                    (click)="addToCart(quantity)">ADD TO BAG</button>
+                </div>
+
+                <div *ngIf="conf.options?.length > 1 && conf.isSingleChoice">
+                  <div class="quantityholder numbers-row">
+                    <p class="productSliderCntnt__priceholder mob__Dnone" style="color:black">{{conf.question}}</p>
+                    <select class="custom-select">
+                      <option *ngFor="let option of conf.options" value="{{option.description}}">
+                        {{option.description}}
+                      </option>
+                    </select>
+                    <input type="text" name="Comment" value="Comment 0">
+                  </div>
                 </div>
               </div>
             </div>
