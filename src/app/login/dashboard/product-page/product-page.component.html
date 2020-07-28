@@ -76,7 +76,7 @@
                     <label for="">{{conf.question}}</label>
                   </div>
                   <div class="quantityholder numbers-row">
-                    {{conf.options |json}}
+                    {{conf.options[0] |json}}
                     <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
                       value="{{conf.options[0]['description']}}" readonly>
                   </div>
