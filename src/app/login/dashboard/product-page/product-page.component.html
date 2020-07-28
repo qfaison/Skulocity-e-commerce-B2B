@@ -77,8 +77,7 @@
                   </div>
                   <div class="quantityholder numbers-row">
                     {{conf.options[0]["description"] |json}}
-                    <input type="text" name="question" [(ngModel)]="quantity" class="num-box"
-                      value="{{conf.options[0]['description']}}" readonly>
+                    <input type="text" name="question" value="{{conf.options[0]['description']}}" readonly>
                   </div>
                   <div class="quantityholder numbers-row" style="margin-top: 10px;">
                     <input type="text" class="form-control" name="Comment" value="Comment 0">
