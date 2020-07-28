@@ -26,6 +26,8 @@ export class ProductPageComponent implements OnInit {
   dropDownData = ["NA"];
 
   selectedVariantsData = [];
+  configurableProduct;
+  quesList;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -52,6 +54,12 @@ export class ProductPageComponent implements OnInit {
       this.productData = res['data'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
+      this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
+
+      if(this.quesList.length > 0){
+        this.quesList = res['data']['productSummary']['quesList'];
+      }
+
       if (this.featureList && this.featureList.length > 0) {
         this.featureTypes = res['data']['featureOrder'];
         this.variantTreeSampleKeys = res['data']['variantSampleKeys'];
@@ -109,11 +117,9 @@ export class ProductPageComponent implements OnInit {
           this.service.addProductToCart(data).subscribe((res) => {
             if (res['data']['responseMessage'] != null) {
               Swal.fire(res['data']['responseMessage']);
-              //this.getCartCount();
             }
             else if (res['data']['errorMessage'] != null) {
               Swal.fire(res['data']['errorMessage']);
-              //this.getCartCount();
             }
             else {
               this.productData = res['data'];
@@ -134,11 +140,9 @@ export class ProductPageComponent implements OnInit {
         this.service.addProductToCart(data).subscribe((res) => {
           if (res['data']['responseMessage'] != null) {
             Swal.fire(res['data']['responseMessage']);
-            //this.getCartCount();
           }
           else if (res['data']['errorMessage'] != null) {
             Swal.fire(res['data']['errorMessage']);
-            //this.getCartCount();
           }
           else {
             this.productData = res['data'];
