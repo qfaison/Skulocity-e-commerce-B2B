@@ -103,14 +103,14 @@
                   <div class="quantityholder numbers-row">
                     <label for="">{{conf.question}}</label>
                   </div>
-                  <div *ngFor="let option of conf.options;let i=index;" style="margin-top: 10px;">
+                  <div *ngFor="let option of conf.options;let y=index;" style="margin-top: 10px;">
                     <div class="quantityholder numbers-row">
                       <input type="checkbox" class="form-control" id="vehicle1" name="vehicle1" value="test"
                         style="height: 20px; width: 10%;">
-                      <span>{{conf.options[i]['description']}}</span>
+                      <span>{{conf.options[y]['description']}}</span>
                     </div>
                     <div class="quantityholder numbers-row" style="margin-top: 10px;">
-                      <input type="text" class="form-control" name="CommentCheck" [(ngModel)]="comment[i]" value="Comment">
+                      <input type="text" class="form-control" name="CommentCheck" [(ngModel)]="comment[y]" value="Comment">
                     </div>
                   </div>
                 </div>
