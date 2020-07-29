@@ -87,12 +87,17 @@
                   <div class="quantityholder numbers-row">
                     <label for="">{{conf.question}}</label>
                   </div>
+
+                  ---->>{{confDropdowns[i]}}
                   <div class="quantityholder numbers-row">
                     <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="confDropdowns[i]"
-                    (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
-                      <option *ngFor="let option of conf.options" [attr.value]="option.description" [attr.selected]="option.isSelected === true ? true:null">
+                      (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
+                      <option *ngFor="let option of conf.options" [attr.value]="option.description"
+                        [attr.selected]="option.isSelected === true ? true:null">
                         {{option.description}}
                       </option>
+                    </select>
+
                     </select>
                   </div>
                   <div class="quantityholder numbers-row" style="margin-top: 10px;">
@@ -106,12 +111,14 @@
                   </div>
                   <div *ngFor="let option of conf.options;let y=index;" style="margin-top: 10px;">
                     <div class="quantityholder numbers-row">
-                      <input type="checkbox" class="form-control" [(ngModel)]="checkbox[y]"  name="checkbox-name" checked="conf.options[y]['isSelected'] == 'true'"
-                        style="height: 20px; width: 10%;" (click)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,y)">
+                      <input type="checkbox" class="form-control" [(ngModel)]="checkbox[y]" name="checkbox-name"
+                        checked="conf.options[y]['isSelected'] == 'true'" style="height: 20px; width: 10%;"
+                        (click)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,y)">
                       <span>{{conf.options[y]['description']}}</span>
                     </div>
                     <div class="quantityholder numbers-row" style="margin-top: 10px;">
-                      <input type="text" class="form-control" name="CommentCheck" [(ngModel)]="commentCheckBox[y]" value="Comment">
+                      <input type="text" class="form-control" name="CommentCheck" [(ngModel)]="commentCheckBox[y]"
+                        value="Comment">
                     </div>
                   </div>
                 </div>
