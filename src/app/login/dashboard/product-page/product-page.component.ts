@@ -205,7 +205,7 @@ export class ProductPageComponent implements OnInit {
     for(let comm in this.comment){
       if(comm <= index)
       {
-        data['comments_0'+comm+'_0'] = this.comment[comm];
+        data['comments_'+comm+'_0'] = this.comment[comm];
       }
       
     }
