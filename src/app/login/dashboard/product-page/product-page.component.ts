@@ -14,7 +14,7 @@ export class ProductPageComponent implements OnInit {
 
   productData;
   productId;
-  quantity =1;
+  quantity = 1;
   alsoBoughtProducts;
   isVirtual;
   featureList;
@@ -31,6 +31,7 @@ export class ProductPageComponent implements OnInit {
   comment = [];
   commentCheckBox = [];
   confDropdowns = [];
+  checkbox = [];
   data = {};
 
   constructor(
@@ -200,6 +201,19 @@ export class ProductPageComponent implements OnInit {
     }
     else {
 
+      console.log(this.quesList);
+
+      let arr = this.quesList[index]['options'];
+
+      for (let key in arr) {
+        if (key != 'getIndexBy') {
+          if (arr[key]['description'] === conf) {
+            this.data[index] = key;
+          }
+        }
+      }
+
+
       if (isSingleChoice) {
         for (let comm in this.comment) {
           if (comm <= index) {
@@ -211,7 +225,7 @@ export class ProductPageComponent implements OnInit {
       else {
         for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            this.data['comments_' + index + '_'+checkboxIndex] = this.commentCheckBox[comm];
+            this.data['comments_' + index + '_' + checkboxIndex] = this.commentCheckBox[comm];
           }
         }
       }
@@ -220,7 +234,7 @@ export class ProductPageComponent implements OnInit {
       this.data['quantity'] = this.quantity;
       console.log(this.data);
       this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
-        console.log("Config Data Price Update",res);
+        console.log("Config Data Price Update", res);
       })
 
     }
