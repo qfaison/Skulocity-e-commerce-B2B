@@ -194,6 +194,8 @@ export class ProductPageComponent implements OnInit {
   selectProductDetails(conf,index): void{
     console.log("conf",conf);
     console.log("index",index);
+    console.log("productId;",this.productId);
+    console.log("quantity", this.quantity);
   }
 
   getCartCount(): void {
