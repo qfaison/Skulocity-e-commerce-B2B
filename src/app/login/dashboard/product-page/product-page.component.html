@@ -89,7 +89,7 @@
                   </div>
 
                   <div class="quantityholder numbers-row">
-                    <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="confDropdowns[i]"
+                    <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="description"
                       (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
                       <option *ngFor="let option of conf.options" [attr.value]="option.description"
                         [attr.selected]="option.isSelected == 'true' ? true:null">
