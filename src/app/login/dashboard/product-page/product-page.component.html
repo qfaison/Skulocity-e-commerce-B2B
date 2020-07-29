@@ -88,7 +88,6 @@
                     <label for="">{{conf.question}}</label>
                   </div>
 
-                  ---->>{{confDropdowns[i]}}
                   <div class="quantityholder numbers-row">
                     <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="confDropdowns[i]"
                       (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
@@ -96,8 +95,6 @@
                         [attr.selected]="option.isSelected === true ? true:null">
                         {{option.description}}
                       </option>
-                    </select>
-
                     </select>
                   </div>
                   <div class="quantityholder numbers-row" style="margin-top: 10px;">

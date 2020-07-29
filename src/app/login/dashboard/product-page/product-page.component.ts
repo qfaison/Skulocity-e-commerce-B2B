@@ -105,7 +105,6 @@ export class ProductPageComponent implements OnInit {
 
     if (this.configurableProduct === 'AGGREGATED') {
       console.log("comment", this.comment);
-      console.log("confDropdowns", this.confDropdowns);
     }
     else {
       if (quantity == undefined || quantity == null) {
