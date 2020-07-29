@@ -31,11 +31,7 @@ export class ProductPageComponent implements OnInit {
   comment = [];
   commentCheckBox = [];
   confDropdowns = [];
-
-  data = {
-    "add_product_id": this.productId,
-    "quantity": this.quantity
-  };
+  data = {};
 
   constructor(
     readonly route: ActivatedRoute,
@@ -198,6 +194,11 @@ export class ProductPageComponent implements OnInit {
   }
 
   selectProductDetails(conf, index, isSingleChoice, checkboxIndex): void {
+
+    this.data = {
+      "add_product_id": this.productId,
+      "quantity": this.quantity
+    };
 
     if (this.quantity === undefined) {
       Swal.fire('Oops..!!', 'Please select Quantity', 'error');
