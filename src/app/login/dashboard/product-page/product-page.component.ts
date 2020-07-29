@@ -191,31 +191,44 @@ export class ProductPageComponent implements OnInit {
 
   }
 
-  selectProductDetails(conf, index): void {
+  selectProductDetails(conf, index, isSingleChoice, checkboxIndex): void {
+
+    let data = {};
 
     if (this.quantity === undefined) {
-      Swal.fire('Oops..!!','Please select Quantity','error');
+      Swal.fire('Oops..!!', 'Please select Quantity', 'error');
     }
     else {
-      console.log("conf", conf);
-      console.log("index", index);
-      console.log("productId;", this.productId);
-      console.log("quantity", this.quantity);
 
-      const data = {
-        "add_product_id": this.productId,
-        "quantity": this.quantity
-      }
+      if (isSingleChoice) {
+        data = {
+          "add_product_id": this.productId,
+          "quantity": this.quantity
+        }
 
-      for (let comm in this.comment) {
-        if (comm <= index) {
-          data['comments_' + comm + '_0'] = this.comment[comm];
+        for (let comm in this.comment) {
+          if (comm <= index) {
+            data['comments_' + comm + '_0'] = this.comment[comm];
+          }
+
         }
 
       }
+      else {
+        data = {
+          "add_product_id": this.productId,
+          "quantity": this.quantity
+        }
+
+        for (let comm in this.comment) {
+          if (comm <= checkboxIndex) {
+            data['comments_' + comm + '_0'] = this.comment[comm];
+          }
+
+        }
+      }
 
       console.log(data);
-
 
       // this.service.openProduct(data).subscribe((res) => {
 
