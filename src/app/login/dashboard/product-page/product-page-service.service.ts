@@ -18,4 +18,8 @@ export class ProductPageServiceService {
   addProductToCart(productDetails){
     return this.http.post('skulocity/api/v1/public/ecommerce/product/addToCart',productDetails);
   }
+
+  getConfigDetailsEvent(data){
+    return this.http.post('skulocity/api/v1/crmsfa/orders/getConfigDetailsEvent',data);
+  }
 }
