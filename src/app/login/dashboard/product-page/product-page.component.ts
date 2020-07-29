@@ -211,7 +211,7 @@ export class ProductPageComponent implements OnInit {
       else {
         for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            this.data['comments_' + comm + '_0'] = this.commentCheckBox[comm];
+            this.data['comments_' + index + '_'+checkboxIndex] = this.commentCheckBox[comm];
           }
         }
       }
