@@ -236,7 +236,9 @@ export class ProductPageComponent implements OnInit {
       let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
 
       this.data['add_product_id'] = Array(this.productId);
-      this.data['quantity'] = Array(this.quantity);
+      let Quantity = [];
+      Quantity.push(this.quantity)
+      this.data['quantity'] = Quantity;
       this.data['currencyUsed'] = Array(currencyUsed);
       this.data['product_id'] = Array(this.productId);
       console.log(this.data);
