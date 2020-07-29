@@ -101,7 +101,7 @@ export class ProductPageComponent implements OnInit {
   addToCart(quantity): void {
 
     if (this.configurableProduct === 'AGGREGATED') {
-      console.log("comment",this.comment);
+      console.log("comment", this.comment);
       console.log("confDropdowns", this.confDropdowns);
     }
     else {
@@ -191,31 +191,36 @@ export class ProductPageComponent implements OnInit {
 
   }
 
-  selectProductDetails(conf,index): void{
-    console.log("conf",conf);
-    console.log("index",index);
-    console.log("productId;",this.productId);
-    console.log("quantity", this.quantity);
+  selectProductDetails(conf, index): void {
 
-    const data = {
-      "add_product_id": this.productId,
-      "quantity": this.quantity
+    if (this.quantity === undefined) {
+      Swal.fire('Oops..!!','Please select Quantity','error');
     }
+    else {
+      console.log("conf", conf);
+      console.log("index", index);
+      console.log("productId;", this.productId);
+      console.log("quantity", this.quantity);
 
-    for(let comm in this.comment){
-      if(comm <= index)
-      {
-        data['comments_'+comm+'_0'] = this.comment[comm];
+      const data = {
+        "add_product_id": this.productId,
+        "quantity": this.quantity
       }
-      
+
+      for (let comm in this.comment) {
+        if (comm <= index) {
+          data['comments_' + comm + '_0'] = this.comment[comm];
+        }
+
+      }
+
+      console.log(data);
+
+
+      // this.service.openProduct(data).subscribe((res) => {
+
+      // })
     }
-
-    console.log(data);
-
-
-    // this.service.openProduct(data).subscribe((res) => {
-      
-    // })
   }
 
   getCartCount(): void {

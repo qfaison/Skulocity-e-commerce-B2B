@@ -106,8 +106,8 @@
                   </div>
                   <div *ngFor="let option of conf.options;let y=index;" style="margin-top: 10px;">
                     <div class="quantityholder numbers-row">
-                      <input type="checkbox" class="form-control" id="vehicle1" name="vehicle1" value="test"
-                        style="height: 20px; width: 10%;">
+                      <input type="checkbox" class="form-control"  name="checkbox-name"
+                        style="height: 20px; width: 10%;" (click)="selectProductDetails(confDropdowns[i],i)">
                       <span>{{conf.options[y]['description']}}</span>
                     </div>
                     <div class="quantityholder numbers-row" style="margin-top: 10px;">
