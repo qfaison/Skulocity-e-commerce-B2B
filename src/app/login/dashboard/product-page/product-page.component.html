@@ -70,7 +70,7 @@
             <!--- Configurable Product --->
 
             <div class="productSliderCntnt__priceHolder" *ngIf="quesList" style="display: block;">
-              <div id="Conf" *ngFor="let conf of quesList;let i=index;" style="margin: 10px;">
+              <div *ngFor="let conf of quesList;let i=index;" style="margin: 10px;">
                 <div *ngIf="conf.options?.length === 1 && conf.isSingleChoice" style="display: block;">
                   <div class="quantityholder numbers-row">
                     <label for="">{{conf.question}}</label>
