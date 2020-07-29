@@ -216,7 +216,12 @@ export class ProductPageComponent implements OnInit {
         }
       }
 
+      this.data['add_product_id'] = this.productId;
+      this.data['quantity'] = this.quantity;
       console.log(this.data);
+      this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
+        console.log("Config Data Price Update",res);
+      })
 
     }
   }
