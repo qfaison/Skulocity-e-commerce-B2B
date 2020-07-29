@@ -29,6 +29,7 @@ export class ProductPageComponent implements OnInit {
   configurableProduct;
   quesList;
   comment = [];
+  commentCheckBox = [];
   confDropdowns = [];
 
   constructor(
@@ -200,31 +201,24 @@ export class ProductPageComponent implements OnInit {
     }
     else {
 
-      if (isSingleChoice) {
-        data = {
-          "add_product_id": this.productId,
-          "quantity": this.quantity
-        }
+      data = {
+        "add_product_id": this.productId,
+        "quantity": this.quantity
+      }
 
+      if (isSingleChoice) {
         for (let comm in this.comment) {
           if (comm <= index) {
             data['comments_' + comm + '_0'] = this.comment[comm];
           }
 
         }
-
       }
       else {
-        data = {
-          "add_product_id": this.productId,
-          "quantity": this.quantity
-        }
-
-        for (let comm in this.comment) {
+        for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            data['comments_' + comm + '_0'] = this.comment[comm];
+            data['comments_' + comm + '_0'] = this.commentCheckBox[comm];
           }
-
         }
       }
 
