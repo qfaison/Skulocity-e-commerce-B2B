@@ -32,6 +32,11 @@ export class ProductPageComponent implements OnInit {
   commentCheckBox = [];
   confDropdowns = [];
 
+  data = {
+    "add_product_id": this.productId,
+    "quantity": this.quantity
+  };
+
   constructor(
     readonly route: ActivatedRoute,
     readonly service: ProductPageServiceService,
@@ -194,22 +199,15 @@ export class ProductPageComponent implements OnInit {
 
   selectProductDetails(conf, index, isSingleChoice, checkboxIndex): void {
 
-    let data = {};
-
     if (this.quantity === undefined) {
       Swal.fire('Oops..!!', 'Please select Quantity', 'error');
     }
     else {
 
-      data = {
-        "add_product_id": this.productId,
-        "quantity": this.quantity
-      }
-
       if (isSingleChoice) {
         for (let comm in this.comment) {
           if (comm <= index) {
-            data['comments_' + comm + '_0'] = this.comment[comm];
+            this.data['comments_' + comm + '_0'] = this.comment[comm];
           }
 
         }
@@ -217,12 +215,12 @@ export class ProductPageComponent implements OnInit {
       else {
         for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            data['comments_' + comm + '_0'] = this.commentCheckBox[comm];
+            this.data['comments_' + comm + '_0'] = this.commentCheckBox[comm];
           }
         }
       }
 
-      console.log(data);
+      console.log(this.data);
 
       // this.service.openProduct(data).subscribe((res) => {
 
