@@ -196,6 +196,26 @@ export class ProductPageComponent implements OnInit {
     console.log("index",index);
     console.log("productId;",this.productId);
     console.log("quantity", this.quantity);
+
+    const data = {
+      "add_product_id": this.productId,
+      "quantity": this.quantity
+    }
+
+    for(let comm in this.comment){
+      if(comm <= index)
+      {
+        data['comments_0'+comm+'_0'] = this.comment[comm];
+      }
+      
+    }
+
+    console.log(data);
+
+
+    // this.service.openProduct(data).subscribe((res) => {
+      
+    // })
   }
 
   getCartCount(): void {
