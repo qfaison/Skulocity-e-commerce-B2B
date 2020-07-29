@@ -89,7 +89,7 @@
                   </div>
                   <div class="quantityholder numbers-row">
                     <select class="custom-select" name="confDropdowns[i]" [(ngModel)]="confDropdowns[i]"
-                    (change)="selectProductDetails(i)">
+                    (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
                       <option *ngFor="let option of conf.options" value="{{option.description}}">
                         {{option.description}}
                       </option>
@@ -107,7 +107,7 @@
                   <div *ngFor="let option of conf.options;let y=index;" style="margin-top: 10px;">
                     <div class="quantityholder numbers-row">
                       <input type="checkbox" class="form-control"  name="checkbox-name"
-                        style="height: 20px; width: 10%;" (click)="selectProductDetailsCheckBox(y)">
+                        style="height: 20px; width: 10%;" (click)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,y)">
                       <span>{{conf.options[y]['description']}}</span>
                     </div>
                     <div class="quantityholder numbers-row" style="margin-top: 10px;">

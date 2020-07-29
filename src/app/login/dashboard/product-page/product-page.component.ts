@@ -14,7 +14,7 @@ export class ProductPageComponent implements OnInit {
 
   productData;
   productId;
-  quantity = 1;
+  quantity =1;
   alsoBoughtProducts;
   isVirtual;
   featureList;
@@ -31,7 +31,7 @@ export class ProductPageComponent implements OnInit {
   comment = [];
   commentCheckBox = [];
   confDropdowns = [];
-  dataComment = {};
+  data = {};
 
   constructor(
     readonly route: ActivatedRoute,
@@ -48,11 +48,6 @@ export class ProductPageComponent implements OnInit {
     this.isVirtual = this.route.snapshot.params['isVirtual'];
     console.log("Is a varient product -->> ", this.isVirtual)
     const catalogId = localStorage.getItem("catalogId");
-
-    this.dataComment = {
-      "add_product_id": this.productId,
-      "quantity": this.quantity
-    };
 
     const data = {
       "CURRENT_CATALOG_ID": catalogId,
@@ -106,8 +101,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart(quantity): void {
-
-    console.log('Comments with Data' , this.dataComment);
 
     if (this.configurableProduct === 'AGGREGATED') {
       console.log("comment", this.comment);
@@ -200,21 +193,31 @@ export class ProductPageComponent implements OnInit {
 
   }
 
-  selectProductDetails(index): void {
+  selectProductDetails(conf, index, isSingleChoice, checkboxIndex): void {
 
-    for (let comm in this.comment) {
-      if (comm <= index) {
-        this.dataComment['comments_' + comm + '_0'] = this.comment[comm];
-      }
+    if (this.quantity === undefined) {
+      Swal.fire('Oops..!!', 'Please select Quantity', 'error');
     }
-  }
+    else {
 
-  selectProductDetailsCheckBox(checkboxIndex): void {
+      if (isSingleChoice) {
+        for (let comm in this.comment) {
+          if (comm <= index) {
+            this.data['comments_' + comm + '_0'] = this.comment[comm];
+          }
 
-    for (let comm in this.commentCheckBox) {
-      if (comm <= checkboxIndex) {
-        this.dataComment['comments_' + comm + '_0'] = this.commentCheckBox[comm];
+        }
       }
+      else {
+        for (let comm in this.commentCheckBox) {
+          if (comm <= checkboxIndex) {
+            this.data['comments_' + comm + '_0'] = this.commentCheckBox[comm];
+          }
+        }
+      }
+
+      console.log(this.data);
+
     }
   }
 
