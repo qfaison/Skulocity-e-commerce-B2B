@@ -220,7 +220,7 @@ export class ProductPageComponent implements OnInit {
       if (isSingleChoice) {
         for (let comm in this.comment) {
           if (comm <= index) {
-            this.data['comments_' + comm + '_0'] = this.comment[comm];
+            this.data['comments_' + comm + '_0'] = Array.from(this.comment[comm]);
           }
 
         }
@@ -228,13 +228,17 @@ export class ProductPageComponent implements OnInit {
       else {
         for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            this.data['comments_' + index + '_' + checkboxIndex] = this.commentCheckBox[comm];
+            this.data['comments_' + index + '_' + checkboxIndex] = Array.from(this.commentCheckBox[comm]);
           }
         }
       }
 
-      this.data['add_product_id'] = this.productId;
-      this.data['quantity'] = this.quantity;
+      let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
+
+      this.data['add_product_id'] = Array.from(this.productId);
+      this.data['quantity'] = Array.from(this.quantity.toString());
+      this.data['currencyUsed'] = Array.from(currencyUsed);
+      this.data['product_id'] = Array.from(this.productId);
       console.log(this.data);
       this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
         console.log("Config Data Price Update", res);
