@@ -208,7 +208,9 @@ export class ProductPageComponent implements OnInit {
       for (let key in arr) {
         if (key != 'getIndexBy') {
           if (arr[key]['description'] === conf) {
-            this.data[index] = key;
+            let arr = [];
+            arr.push(key);
+            this.data[index] = arr;
           }
         }
       }
