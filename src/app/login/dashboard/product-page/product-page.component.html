@@ -109,7 +109,7 @@
                   <div *ngFor="let option of conf.options;let y=index;" style="margin-top: 10px;">
                     <div class="quantityholder numbers-row">
                       <input type="checkbox" class="form-control" id="{{ 'checkbox' + i +'_' + y }}" name="checkbox-name"
-                        checked="conf.options[y]['isSelected'] == 'true'" style="height: 20px; width: 10%;"
+                        [checked]="conf.options[y]['isSelected'] === true ? true:null" style="height: 20px; width: 10%;"
                         (click)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,y)">
                       <span>{{conf.options[y]['description']}}</span>
                     </div>
