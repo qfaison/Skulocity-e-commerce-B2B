@@ -117,7 +117,19 @@ export class ProductPageComponent implements OnInit {
         this.data['product_id'] = Array(this.productId);
         
       }
-      if (this.comment.length === 0 && this.commentCheckBox.length === 0) {
+      if (this.commentCheckBox.length === 0) {
+        for (let key in this.quesList) {
+          if (!this.quesList[key]['isSingleChoice']) {
+            for (let option in this.quesList[key]['options']) {
+              if (this.quesList[key]['options'][option]['isSelected'] === true) {
+                this.data[key] = Array(option);
+              }
+            }
+          }
+        }
+      }
+
+      if (this.comment.length === 0) {
         for (let key in this.quesList) {
           if (this.quesList[key]['isSingleChoice']) {
             if (this.quesList[key]['options'].length != 1) {
@@ -125,14 +137,6 @@ export class ProductPageComponent implements OnInit {
                 if (this.quesList[key]['options'][option]['isSelected'] === true) {
                   this.data[key] = Array(option);
                 }
-              }
-            }
-          }
-          else {
-            console.log("NotSingleChoiceCheckbox", this.quesList[key])
-            for (let option in this.quesList[key]['options']) {
-              if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                this.data[key] = Array(option);
               }
             }
           }
