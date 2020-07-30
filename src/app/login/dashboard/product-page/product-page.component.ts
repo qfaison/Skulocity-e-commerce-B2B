@@ -47,7 +47,6 @@ export class ProductPageComponent implements OnInit {
   getProductDetails(): void {
     this.productId = this.route.snapshot.params['productId'];
     this.isVirtual = this.route.snapshot.params['isVirtual'];
-    console.log("Is a varient product -->> ", this.isVirtual)
     const catalogId = localStorage.getItem("catalogId");
 
     const data = {
