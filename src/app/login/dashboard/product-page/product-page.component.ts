@@ -115,18 +115,31 @@ export class ProductPageComponent implements OnInit {
         this.data['quantity'] = Quantity;
         this.data['currencyUsed'] = Array(currencyUsed);
         this.data['product_id'] = Array(this.productId);
-        console.log("Data added afterwards", this.data);
+        
       }
       if (this.comment.length === 0 && this.commentCheckBox.length === 0) {
         for (let key in this.quesList) {
           if (this.quesList[key]['isSingleChoice']) {
-            console.log("SingleChoiceDropdown", this.quesList[key])
+            if (this.quesList[key]['options'].length != 1) {
+              for (let option in this.quesList[key]['options']) {
+                if (this.quesList[key]['options'][option]['isSelected'] === true) {
+                  this.data[key] = Array(option);
+                }
+              }
+            }
           }
-          else{
+          else {
             console.log("NotSingleChoiceCheckbox", this.quesList[key])
+            for (let option in this.quesList[key]['options']) {
+              if (this.quesList[key]['options'][option]['isSelected'] === true) {
+                this.data[key] = Array(option);
+              }
+            }
           }
         }
       }
+
+      console.log("Data added afterwards", this.data);
     }
     else {
       if (quantity == undefined || quantity == null) {
