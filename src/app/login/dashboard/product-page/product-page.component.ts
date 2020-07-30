@@ -106,6 +106,27 @@ export class ProductPageComponent implements OnInit {
       console.log("comment", this.comment);
       console.log("commentCheckBox", this.commentCheckBox);
       console.log("data", this.data);
+
+      if (Object.keys(this.data).length === 0) {
+        let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
+        this.data['add_product_id'] = Array(this.productId);
+        let Quantity = [];
+        Quantity.push(this.quantity)
+        this.data['quantity'] = Quantity;
+        this.data['currencyUsed'] = Array(currencyUsed);
+        this.data['product_id'] = Array(this.productId);
+        console.log("Data added afterwards", this.data);
+      }
+      if (this.comment.length === 0 && this.commentCheckBox.length === 0) {
+        for (let key in this.quesList) {
+          if (this.quesList[key]['isSingleChoice']) {
+            console.log("SingleChoiceDropdown", this.quesList[key])
+          }
+          else{
+            console.log("NotSingleChoiceCheckbox", this.quesList[key])
+          }
+        }
+      }
     }
     else {
       if (quantity == undefined || quantity == null) {
@@ -209,7 +230,7 @@ export class ProductPageComponent implements OnInit {
         if (key != 'getIndexBy') {
           if (arr[key]['description'] === conf) {
             let arr = [];
-            let keyInt : number = +key;
+            let keyInt: number = +key;
             arr.push(keyInt);
             this.data[index] = arr;
           }
