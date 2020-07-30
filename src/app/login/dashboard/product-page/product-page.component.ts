@@ -104,7 +104,8 @@ export class ProductPageComponent implements OnInit {
 
     if (this.configurableProduct === 'AGGREGATED') {
       console.log("comment", this.comment);
-      console.log("data", this.data)
+      console.log("commentCheckBox", this.commentCheckBox);
+      console.log("data", this.data);
     }
     else {
       if (quantity == undefined || quantity == null) {
@@ -219,7 +220,7 @@ export class ProductPageComponent implements OnInit {
       if (isSingleChoice) {
         for (let comm in this.comment) {
           if (comm <= index) {
-            this.data['comments_' + comm + '_0'] = Array.from(this.comment[comm]);
+            this.data['comments_' + comm + '_0'] = Array(this.comment[comm]);
           }
 
         }
@@ -227,7 +228,7 @@ export class ProductPageComponent implements OnInit {
       else {
         for (let comm in this.commentCheckBox) {
           if (comm <= checkboxIndex) {
-            this.data['comments_' + index + '_' + checkboxIndex] = Array.from(this.commentCheckBox[comm]);
+            this.data['comments_' + index + '_' + checkboxIndex] = Array(this.commentCheckBox[comm]);
           }
         }
       }
