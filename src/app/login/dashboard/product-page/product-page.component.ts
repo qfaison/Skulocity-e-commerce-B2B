@@ -57,7 +57,7 @@ export class ProductPageComponent implements OnInit {
 
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
-      this.price = this.productData['price']['price'];
+      this.price = '$'+this.productData['price']['price'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
       this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
