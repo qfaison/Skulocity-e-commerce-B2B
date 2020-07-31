@@ -141,7 +141,7 @@ export class ProductPageComponent implements OnInit {
               for (let option in this.quesList[key]['options']) {
                 if (this.quesList[key]['options'][option]['isSelected'] === true) {
                   let selectedOption = Number(option);
-                  this.data[key] = Array(Number(selectedOption));
+                  this.data[key] = Array(selectedOption);
                 }
               }
             }
