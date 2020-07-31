@@ -93,6 +93,7 @@
                       (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
                       <option *ngFor="let option of conf.options" [attr.value]="option.description"
                         [attr.selected]="option.isSelected === true ? true:null">
+                        ------->>>>> {{option.isSelected }}
                         {{option.description}}
                       </option>
                     </select>
