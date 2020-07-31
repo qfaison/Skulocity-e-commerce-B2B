@@ -123,7 +123,8 @@ export class ProductPageComponent implements OnInit {
           if (!this.quesList[key]['isSingleChoice']) {
             for (let option in this.quesList[key]['options']) {
               if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                let selectedOption = Number(option);
+                let selectedOption = [];
+                selectedOption.push(Number(option));
                 this.data[key] = Array(selectedOption);
               }
 
@@ -140,7 +141,8 @@ export class ProductPageComponent implements OnInit {
             if (this.quesList[key]['options'].length != 1) {
               for (let option in this.quesList[key]['options']) {
                 if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                  let selectedOption = Number(option);
+                  let selectedOption = [];
+                  selectedOption.push(Number(option));
                   this.data[key] = Array(selectedOption);
                 }
               }
