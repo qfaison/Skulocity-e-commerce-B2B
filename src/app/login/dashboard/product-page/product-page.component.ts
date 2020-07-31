@@ -123,11 +123,11 @@ export class ProductPageComponent implements OnInit {
           if (!this.quesList[key]['isSingleChoice']) {
             for (let option in this.quesList[key]['options']) {
               if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                this.data[key] = Array(option);
+                this.data[key] = Array(Number(option));
               }
 
-              if(!this.data['comment_' + key + '_'+ option]){
-                this.data['comment_' + key + '_'+ option] = Array('');
+              if(!this.data['comments_' + key + '_'+ option]){
+                this.data['comments_' + key + '_'+ option] = Array('');
               }
             }
           }
@@ -139,13 +139,13 @@ export class ProductPageComponent implements OnInit {
             if (this.quesList[key]['options'].length != 1) {
               for (let option in this.quesList[key]['options']) {
                 if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                  this.data[key] = Array(option);
+                  this.data[key] = Array(Number(option));
                 }
               }
             }
 
-            if (!this.data['comment_' + key + '_0']) {
-              this.data['comment_' + key + '_0'] = Array('');
+            if (!this.data['comments_' + key + '_0']) {
+              this.data['comments_' + key + '_0'] = Array('');
             }
           }
         }
