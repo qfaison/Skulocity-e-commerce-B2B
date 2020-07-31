@@ -92,7 +92,7 @@
                     <select class="custom-select" id="{{ 'dropdown' + i }}" name="confDropdowns[i]"
                       (change)="selectProductDetails(confDropdowns[i],i,conf.isSingleChoice,null)">
                       <option *ngFor="let option of conf.options" [attr.value]="option.description"
-                        selected="{{option.isSelected}}">
+                        [attr.selected]="option.isSelected === true ? true:null">
                         {{option.description}}
                       </option>
                     </select>
