@@ -33,6 +33,7 @@ export class ProductPageComponent implements OnInit {
   confDropdowns = [];
   checkbox = [];
   data = {};
+  price;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -56,6 +57,7 @@ export class ProductPageComponent implements OnInit {
 
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
+      this.price = this.productData['price']['price'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
       this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
@@ -281,7 +283,8 @@ export class ProductPageComponent implements OnInit {
       this.data['product_id'] = Array(this.productId);
       console.log(this.data);
       this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
-        console.log("Config Data Price Update", res);
+        if(res['data']['responseMessage'] === 'success')
+        this.price = res['data']['totalPrice'];
       })
 
     }
