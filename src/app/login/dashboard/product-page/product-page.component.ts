@@ -125,7 +125,7 @@ export class ProductPageComponent implements OnInit {
               if (this.quesList[key]['options'][option]['isSelected'] === true) {
                 let selectedOption = [];
                 selectedOption.push(Number(option));
-                this.data[key] = Array(selectedOption);
+                this.data[key] = selectedOption;
               }
 
               if(!this.data['comments_' + key + '_'+ option]){
@@ -143,7 +143,7 @@ export class ProductPageComponent implements OnInit {
                 if (this.quesList[key]['options'][option]['isSelected'] === true) {
                   let selectedOption = [];
                   selectedOption.push(Number(option));
-                  this.data[key] = Array(selectedOption);
+                  this.data[key] = selectedOption;
                 }
               }
             }
