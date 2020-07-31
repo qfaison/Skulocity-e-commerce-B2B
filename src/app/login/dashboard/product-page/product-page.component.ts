@@ -119,42 +119,47 @@ export class ProductPageComponent implements OnInit {
         this.data['product_id'] = Array(this.productId);
 
       }
-        for (let key in this.quesList) {
-          if (!this.quesList[key]['isSingleChoice']) {
+      for (let key in this.quesList) {
+        if (!this.quesList[key]['isSingleChoice']) {
+          for (let option in this.quesList[key]['options']) {
+            if (this.quesList[key]['options'][option]['isSelected'] === true) {
+              let selectedOption = [];
+              selectedOption.push(Number(option));
+              this.data[key] = selectedOption;
+            }
+
+            if (!this.data['comments_' + key + '_' + option]) {
+              this.data['comments_' + key + '_' + option] = Array('');
+            }
+          }
+        }
+      }
+
+
+      for (let key in this.quesList) {
+        if (this.quesList[key]['isSingleChoice']) {
+          if (this.quesList[key]['options'].length != 1) {
             for (let option in this.quesList[key]['options']) {
               if (this.quesList[key]['options'][option]['isSelected'] === true) {
                 let selectedOption = [];
                 selectedOption.push(Number(option));
                 this.data[key] = selectedOption;
               }
-
-              if(!this.data['comments_' + key + '_'+ option]){
-                this.data['comments_' + key + '_'+ option] = Array('');
-              }
             }
           }
-        }
-      
 
-        for (let key in this.quesList) {
-          if (this.quesList[key]['isSingleChoice']) {
-            if (this.quesList[key]['options'].length != 1) {
-              for (let option in this.quesList[key]['options']) {
-                if (this.quesList[key]['options'][option]['isSelected'] === true) {
-                  let selectedOption = [];
-                  selectedOption.push(Number(option));
-                  this.data[key] = selectedOption;
-                }
-              }
-            }
-
-            if (!this.data['comments_' + key + '_0']) {
-              this.data['comments_' + key + '_0'] = Array('');
-            }
+          if (!this.data['comments_' + key + '_0']) {
+            this.data['comments_' + key + '_0'] = Array('');
           }
         }
+      }
 
-      console.log("Data added afterwards", this.data);
+      this.service.addConfProduct(this.data).subscribe((res) => {
+        if (res['data'] === "success") {
+          Swal.fire("Product added successfully..!!");
+        }
+      })
+
     }
     else {
       if (quantity == undefined || quantity == null) {

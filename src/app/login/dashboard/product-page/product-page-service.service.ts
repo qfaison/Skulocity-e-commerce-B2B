@@ -22,4 +22,9 @@ export class ProductPageServiceService {
   getConfigDetailsEvent(data){
     return this.http.post('skulocity/api/v1/crmsfa/orders/getConfigDetailsEvent',data);
   }
+
+  addConfProduct(data) {
+    return this.http.post('skulocity/api/v1/crmsfa/orders/addConfigItemsToCart',data);
+  }
+
 }
