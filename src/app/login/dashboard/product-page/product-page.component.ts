@@ -57,7 +57,7 @@ export class ProductPageComponent implements OnInit {
 
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
-      this.price = '$'+this.productData['price']['price'];
+      this.price = '$' + this.productData['price']['price'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
       this.featureList = res['data']['featureOrder'];
       this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
@@ -117,21 +117,23 @@ export class ProductPageComponent implements OnInit {
         this.data['quantity'] = Quantity;
         this.data['currencyUsed'] = Array(currencyUsed);
         this.data['product_id'] = Array(this.productId);
-        
+
       }
-      if (this.commentCheckBox.length === 0) {
         for (let key in this.quesList) {
           if (!this.quesList[key]['isSingleChoice']) {
             for (let option in this.quesList[key]['options']) {
               if (this.quesList[key]['options'][option]['isSelected'] === true) {
                 this.data[key] = Array(option);
               }
+
+              if(!this.data['comment_' + key + '_'+ option]){
+                this.data['comment_' + key + '_'+ option] = Array('');
+              }
             }
           }
         }
-      }
+      
 
-      if (this.comment.length === 0) {
         for (let key in this.quesList) {
           if (this.quesList[key]['isSingleChoice']) {
             if (this.quesList[key]['options'].length != 1) {
@@ -141,9 +143,12 @@ export class ProductPageComponent implements OnInit {
                 }
               }
             }
+
+            if (!this.data['comment_' + key + '_0']) {
+              this.data['comment_' + key + '_0'] = Array('');
+            }
           }
         }
-      }
 
       console.log("Data added afterwards", this.data);
     }
@@ -274,7 +279,6 @@ export class ProductPageComponent implements OnInit {
       }
 
       let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
-
       this.data['add_product_id'] = Array(this.productId);
       let Quantity = [];
       Quantity.push(this.quantity)
@@ -283,8 +287,8 @@ export class ProductPageComponent implements OnInit {
       this.data['product_id'] = Array(this.productId);
       console.log(this.data);
       this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
-        if(res['data']['responseMessage'] === 'success')
-        this.price = res['data']['totalPrice'];
+        if (res['data']['responseMessage'] === 'success')
+          this.price = res['data']['totalPrice'];
       })
 
     }
