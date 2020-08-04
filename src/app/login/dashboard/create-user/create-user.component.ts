@@ -12,6 +12,7 @@ export class CreateUserComponent implements OnInit {
 
   countries;
   states;
+  country;
 
   profileForm = new FormGroup({
     USER_FIRST_NAME: new FormControl(''),
