@@ -157,6 +157,7 @@ export class ProductPageComponent implements OnInit {
       this.service.addConfProduct(this.data).subscribe((res) => {
         if (res['data'] === "success") {
           Swal.fire("Product added successfully..!!");
+		  this.getCartCount();
         }
       })
 
