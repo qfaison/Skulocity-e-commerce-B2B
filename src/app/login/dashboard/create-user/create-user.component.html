@@ -1,1 +1,140 @@
-<p>create-user works!</p>
+<section class="faqpagesection whiteBoxSection ErrorPage">
+  <div class="container">
+    <div class="headinghldr text-left">
+      <h1>Create An Account</h1>
+    </div>
+    <div class="comonformOuter">
+      <form [formGroup]="profileForm">
+        <div class="row justify-content-end">
+          <div class="col-md-12">
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">First Name*</label>
+                  <input type="text" formControlName="USER_FIRST_NAME" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Last Name*</label>
+                  <input type="text" formControlName="USER_LAST_NAME" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Email*</label>
+                  <input type="text" formControlName="CUSTOMER_EMAIL" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Address Line 1*</label>
+                  <input type="text" formControlName="CUSTOMER_ADDRESS1" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Address Line 2</label>
+                  <input type="text" formControlName="CUSTOMER_ADDRESS2" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">City*</label>
+                  <input type="text" formControlName="CUSTOMER_CITY" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Zip/Postal Code*</label>
+                  <input type="text" formControlName="CUSTOMER_POSTAL_CODE" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Country*</label>
+                  <select class="custom-select" name="country" formControlName="CUSTOMER_COUNTRY" [(ngModel)]="country" (change)="selectStates(country)" required>
+                    <option *ngFor="let country of countries" value="{{country.geoId}}">{{country.geoName}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">State/Province*</label>
+                  <select class="custom-select" name="state" formControlName="CUSTOMER_STATE" required>
+                    <option *ngFor="let state of states" value="{{state.geoId}}">{{state.geoName}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-1">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" style="padding: 0px;">
+                      <label for="">Area Code</label>
+                      <input type="text" formControlName="CUSTOMER_HOME_AREA" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" style="padding: 0px;">
+                      <label for="">Phone Number</label>
+                      <input type="text" formControlName="CUSTOMER_HOME_CONTACT" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group" style="padding: 0px;">
+                      <label for="">Extension</label>
+                      <input type="text" formControlName="CUSTOMER_HOME_EXT" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Password*</label>
+                  <input type="password" formControlName="PASSWORD" class="form-control" required>
+                  <small><img src="img/required-icon.svg" alt=""> Required: At least one uppercase letter</small>
+                  <small><img src="img/required-icon.svg" alt=""> Required: At least one number</small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Confirm Password*</label>
+                  <input type="password" (focusout)="checkPassword()" formControlName="PASSWORD_CONFIRM" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Password Hint</label>
+                  <input type="password" formControlName="PASSWORD_HINT" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Allow Solicitation*</label>
+                  <select class="custom-select" required formControlName="CUSTOMER_EMAIL_ALLOW_SOL" name="featureTypes[feature]">
+                    <option value="Yes">Yes</option>
+                    <option value="Yes">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-check">
+                  <input type="checkbox" formControlName="TERMS_AND_CONDITIONS" class="form-check-input" id="check6">
+                  <label class="form-check-label" for="check6">I have read and agree to the <u>Terms &amp;
+                      Conditions</u></label>
+                </div>
+              </div>
+              <div class="col-12 formButton pxSpace">
+                <button [disabled]="!profileForm.valid" type="submit" (click)="addUser()">CONTINUE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
