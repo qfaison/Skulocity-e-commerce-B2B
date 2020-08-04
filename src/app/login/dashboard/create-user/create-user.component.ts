@@ -78,7 +78,7 @@ export class CreateUserComponent implements OnInit {
       else {
         let data = this.profileForm.value;
         delete data['TERMS_AND_CONDITIONS'];
-        data['USERNAME'] = this.profileForm.value['CUSTOMER_EMAIL'];
+        //data['USERNAME'] = this.profileForm.value['CUSTOMER_EMAIL'];
 
         this.service.createUser(data).subscribe((res) => {
           if (res['data'] === 'success') {
