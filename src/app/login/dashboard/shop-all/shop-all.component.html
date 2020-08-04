@@ -5,7 +5,7 @@
         <h1 class="mainSidebar__title mb-5">
           <img src="assets/img/mainSidebar__arrow.svg" class="mainSidebar__arrow desktop-dnone" alt=""> SHOP</h1>
         <div class="responsivedropdown">
-          <ul class="sidebarMenu">
+          <ul class="sidebarMenu" style="cursor: pointer;">
             <li *ngFor="let catalog of catalogsList; let i= index" id="{{catalog.prodCatalogId}}"
               [ngClass]="{'sidebarDropdown' : CatalogId == currentCatalogId && categoryList }">
               <a (click)='showCatData(catalog.prodCatalogId,i);'>{{catalog.catalogName}}</a>

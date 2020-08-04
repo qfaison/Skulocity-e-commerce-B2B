@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CreateUserServiceService } from './create-user-service.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -13,6 +14,8 @@ export class CreateUserComponent implements OnInit {
   countries;
   states;
   country;
+  errorList = [];
+  error: any;
 
   profileForm = new FormGroup({
     USER_FIRST_NAME: new FormControl(''),
@@ -28,7 +31,7 @@ export class CreateUserComponent implements OnInit {
     CUSTOMER_HOME_CONTACT: new FormControl(''),
     CUSTOMER_HOME_EXT: new FormControl(''),
     PASSWORD: new FormControl(''),
-    PASSWORD_CONFIRM: new FormControl(''),
+    CONFIRM_PASSWORD: new FormControl(''),
     PASSWORD_HINT: new FormControl(''),
     CUSTOMER_EMAIL_ALLOW_SOL: new FormControl(''),
     TERMS_AND_CONDITIONS: new FormControl(''),
@@ -36,7 +39,8 @@ export class CreateUserComponent implements OnInit {
 
 
   constructor(
-    readonly service : CreateUserServiceService
+    readonly service : CreateUserServiceService,
+    readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +61,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   checkPassword(): void {
-    if (this.profileForm.value['PASSWORD'] != this.profileForm.value['PASSWORD_CONFIRM']) {
+    if (this.profileForm.value['PASSWORD'] != this.profileForm.value['CONFIRM_PASSWORD']) {
       Swal.fire('Oops..!!', 'Password must match', 'error');
     }
   }
@@ -68,21 +72,32 @@ export class CreateUserComponent implements OnInit {
     }
     else {
 
-      if (this.profileForm.value['PASSWORD'] != this.profileForm.value['PASSWORD_CONFIRM']) {
+      if (this.profileForm.value['PASSWORD'] != this.profileForm.value['CONFIRM_PASSWORD']) {
         Swal.fire('Oops..!!', 'Password must match', 'error');
       }
       else {
         let data = this.profileForm.value;
         delete data['TERMS_AND_CONDITIONS'];
-        delete data['PASSWORD_CONFIRM'];
         data['USERNAME'] = this.profileForm.value['CUSTOMER_EMAIL'];
 
         this.service.createUser(data).subscribe((res) => {
           if (res['data'] === 'success') {
             Swal.fire('User created successfully...!!!');
+            this.router.navigate(['login']);
           }
-          else{
-            Swal.fire(res['data']['1']);
+          else {
+            if (res['error'] === true) {
+              this.error = res['data'];
+              for (let key in this.error) {
+                const data = this.error[key];
+                const isArray = data instanceof Array;
+                console.log(isArray); // false
+
+                if (!isArray) {
+                  this.errorList.push(this.error[key]['message']);
+                }
+              }
+            }
           }
         })
       }
