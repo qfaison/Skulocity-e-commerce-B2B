@@ -20,10 +20,11 @@ import { ViewQuotesComponent } from './login/dashboard/quotes/view-quotes/view-q
 import { ProductPageComponent } from './login/dashboard/product-page/product-page.component';
 import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
-
+import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent },
+  { path:'createUser', component: CreateUserComponent},
   { path:'dashboard', component: DashboardComponent, canActivate: [AuthGuardGuard], children: [
     { path:'', component: ShopAllComponent },
     { path:'home', component: IndexComponent },
