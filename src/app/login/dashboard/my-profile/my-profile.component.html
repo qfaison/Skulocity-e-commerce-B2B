@@ -1,37 +1,43 @@
 <section class="faqpagesection whiteBoxSection myAccount">
-    <div class="container">
-        <div class="headinghldr text-left">
-            <h1>MY ACCOUNT</h1>
-        </div>
-        <div class="comonformOuter">
-            <form action="">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-6 myAccount--Inner">
-                        <p><strong>Name:</strong> Monica Doe</p>
-                        <p><strong>Email:</strong> monica@email.com</p>
-                        <p>Phone Number: 000-000-0000</p>
-                        <p><strong>Birthday:</strong> 01/01/1990</p>
-                        <hr class="separator">
-                        <p class="mb-5"><strong>Shipping Address:</strong></p>
-                        <p>1234 Street,</p>
-                        <p>City, State, 12345</p>
-                        <div class="formButton">
-                            <!-- <input type="submit" value="EDIT" name=""> -->
-                            <a href="javascript:void(0)" class="blackBtn hoverblck blackBtn__large">EDIT</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-6 myAccount--Inner">
-                        <p><strong>Cosmetology/Business License Number: </strong> 12345678911</p>
-                        <p><strong>Country:</strong> USA </p>
-                        <hr class="separator">
-                        <p class="mb-5"><strong>Social Media Handles:</strong></p>
-                        <div class="inlineSocialmedia"><i class="fa fa-instagram"></i><span> @BizName</span></div>
-                        <div class="inlineSocialmedia"><i class="fa fa-twitter"></i><span>@BizName</span></div>
-                        <div class="inlineSocialmedia"><i class="fa fa-yelp"></i><span>www.yelp.com/biz/SalonName</span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+  <div class="container">
+    <div class="headinghldr text-left">
+      <h1>MY ACCOUNT</h1>
     </div>
+    <div class="comonformOuter" *ngIf="showData">
+      <form>
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-6 myAccount--Inner">
+            <p><strong>Name</strong></p>{{userData?.firstName}} {{userData?.middleName}} {{userData?.lastName}}
+            <p style="margin-top: 20px;"><strong>Email:</strong></p>
+            <div *ngFor="let email of emailDataList">
+              {{email?.infoString}}
+            </div>
+
+            <p><strong>Phone Number</strong></p>
+            <div style="margin-top: 20px;" *ngFor="let email of emailDataList">
+              <div *ngIf="email?.contactMechTypeId === 'TELECOM_NUMBER'">
+                {{email?.contactMechTypeId.tnContactNumber}}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-6 myAccount--Inner">
+            <p><strong>Shipping Method:</strong></p>
+
+            <hr class="separator">
+            <p class="mb-5"><strong>Shipping Address:</strong></p>
+            <select class="custom-select" *ngIf="emailDataList">
+              <option *ngFor="let address of emailDataList" value="{{address.contactMechId}}">
+                To: {{address.paToName}} {{address.paAddress1}} {{address.paAddress2}} {{address.paCity}}
+                {{address.paCountryGeoId}} {{address.paPostalCode}}
+              </option>
+            </select>
+            <div class="formButton">
+              <!-- <input type="submit" value="EDIT" name=""> -->
+              <a routerLink="/edit-profile" class="blackBtn hoverblck blackBtn__large">EDIT</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>

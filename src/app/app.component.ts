@@ -13,4 +13,8 @@ export class AppComponent {
   constructor(private service : AppService){
     this.showLoader = this.service.loaderObject
   }
+  
+  ngOnDestroy() {
+    this.showLoader.unsubscribe();
+  }
 }

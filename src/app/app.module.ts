@@ -28,6 +28,7 @@ import { ProductPageComponent } from './login/dashboard/product-page/product-pag
 import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
+import { CreateAccountComponent } from './login/dashboard/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CreateUserComponent } from './login/dashboard/create-user/create-user.c
     ViewRequestComponent,
     ViewOrderHistoryComponent,
     CreateUserComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
