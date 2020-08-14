@@ -14,6 +14,7 @@ export class EditProfileComponent implements OnInit {
   userData;
   country;
   state;
+  editPhoneNumberPurpose;
   emailDataList;
   showData = false;
   addresses;
