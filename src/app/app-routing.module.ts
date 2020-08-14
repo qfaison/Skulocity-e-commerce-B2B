@@ -20,12 +20,14 @@ import { ViewQuotesComponent } from './login/dashboard/quotes/view-quotes/view-q
 import { ProductPageComponent } from './login/dashboard/product-page/product-page.component';
 import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
-
+import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent },
+  { path:'createUser', component: CreateUserComponent},
   { path:'dashboard', component: DashboardComponent, canActivate: [AuthGuardGuard], children: [
-    { path:'', component: IndexComponent },
+    { path:'', component: ShopAllComponent },
+    { path:'home', component: IndexComponent },
     { path:'shopAll', component: ShopAllComponent },
     { path:'keratin', component: KeratinComponent },
     { path:'faq', component: FaqComponent },
@@ -39,7 +41,7 @@ const routes: Routes = [
     { path:'quotes', component: QuotesComponent },
     { path:'view-quotes/:quoteId', component: ViewQuotesComponent },
     { path:'messages', component: MessagesComponent },
-    { path:'product-page/:productId', component: ProductPageComponent},
+    { path:'product-page/:productId/:isVirtual', component: ProductPageComponent},
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
   ]}

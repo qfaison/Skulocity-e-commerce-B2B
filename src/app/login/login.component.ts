@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { AppService } from '../app-service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
   fontColor = '#005eba';
   customerPartyId;
   private cookieValue: string;
+  currentUrl;
+  tenantId;
 
   loginForm: FormGroup = this.formBuilder.group({
     'username': ['', Validators.required],
@@ -24,15 +27,29 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(
-    public router: Router,
-    public http: HttpClient,
-    private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private routeActivated: ActivatedRoute,
-    private cookie: CookieService
+    readonly router: Router,
+    readonly http: HttpClient,
+    readonly formBuilder: FormBuilder,
+    readonly loginService: LoginService,
+    readonly service: AppService,
+    readonly routeActivated: ActivatedRoute,
+    readonly cookie: CookieService
   ) { }
 
   ngOnInit(): void {
+    this.currentUrl = window.location.href;
+
+    let urlSplitted = (this.currentUrl).split('.');
+    let pos = urlSplitted[0].lastIndexOf('/');
+    this.tenantId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
+    if(this.tenantId != 'development'){
+      localStorage.setItem('tenantId',this.tenantId);
+      localStorage.setItem('urlTenant',this.tenantId);
+    }
+    else{
+      localStorage.setItem('urlTenant',this.tenantId);
+    }
+
     this.customerPartyId = this.routeActivated.snapshot.queryParamMap.get('customerPartyId');
     if (localStorage.getItem('isLogin')) {
       this.router.navigate(['/dashboard']);
@@ -48,11 +65,12 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin(): void {
-    console.log(this.loginForm.value);
+    //this.service.showLoader();
     this.loginService.login(this.loginForm.value).subscribe((response) => {
       console.log(response);
       localStorage.setItem("token", response['data']['authenticationToken']['token']);
       localStorage.setItem("isLogin", "true");
+      //this.service.hideLoader();
       this.router.navigate(['/dashboard']);
     })
 
@@ -64,25 +82,19 @@ export class LoginComponent implements OnInit {
 
     this.loginService.loginAppearance(customerData).subscribe((response: HttpResponse<any>) => {
 
-      let cookie = response.headers.get("Set-Cookie");
-      let cookie1 = response.body;
-      //this.cookie.set('cookie','');
-      //this.cookieValue = this.cookie.get('cookie');
-      console.log(cookie);
-      console.log(cookie1);
-      if (response['body']['data']) {
-        if (response['body']['data']['partyIdentifier'] == 'jma') {
-          this.logo = 'assets/img/JMA Logo_PNG.png';
+      if (response['data']) {
+        if (response['data']['partyIdentifier'] == 'jma') {
+          this.logo = response['data']['logoImageUrl'];
           this.color = `radial-gradient( #ffffff, #007d83)`;
           this.fontColor = '#007d83';
         }
-        else if (response['body']['data']['partyIdentifier'] == 'dw') {
-          this.logo = 'assets/img/dentwizard.png';
+        else if (response['data']['partyIdentifier'] == 'dw') {
+          this.logo = response['data']['logoImageUrl'];
           this.color = `radial-gradient( #ffffff, #0a4595)`;
           this.fontColor = '#0a4595';
         }
         else {
-          this.logo = 'assets/img/bluechip.jpg'
+          this.logo = 'assets/img/bluechip.jpg';
           this.color = `radial-gradient( #ffffff, #005eba)`;
           this.fontColor = '#005eba';
         }

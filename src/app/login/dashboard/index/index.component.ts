@@ -10,6 +10,7 @@ export class IndexComponent implements OnInit {
 
   color;
   CatalogId;
+  customerPartyId;
 
   constructor(
     readonly service : ShopAllService
@@ -17,6 +18,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.color = localStorage.getItem("fontColor");
+    this.customerPartyId = localStorage.getItem("customerPartyId");
     this.main();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductPageServiceService } from './product-page-service.service';
+import { ShopAllService } from '../shop-all/shop-all.service';
 
 
 @Component({
@@ -13,12 +14,31 @@ export class ProductPageComponent implements OnInit {
 
   productData;
   productId;
-  quantity;
+  quantity = 1;
   alsoBoughtProducts;
+  isVirtual;
+  featureList;
+  featureTypes;
+  variantTreeSampleKeys;
+  variantTree;
+  productIdVarient;
+  featuresModelVal = [];
+  dropDownData = ["NA"];
+
+  selectedVariantsData = [];
+  configurableProduct;
+  quesList;
+  comment = [];
+  commentCheckBox = [];
+  confDropdowns = [];
+  checkbox = [];
+  data = {};
+  price;
 
   constructor(
     readonly route: ActivatedRoute,
-    readonly service: ProductPageServiceService
+    readonly service: ProductPageServiceService,
+    readonly shopAllService: ShopAllService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +47,7 @@ export class ProductPageComponent implements OnInit {
 
   getProductDetails(): void {
     this.productId = this.route.snapshot.params['productId'];
+    this.isVirtual = this.route.snapshot.params['isVirtual'];
     const catalogId = localStorage.getItem("catalogId");
 
     const data = {
@@ -36,26 +57,172 @@ export class ProductPageComponent implements OnInit {
 
     this.service.openProduct(data).subscribe((res) => {
       this.productData = res['data'];
+      this.price = '$' + this.productData['price']['price'];
       this.alsoBoughtProducts = res['data']['alsoBoughtProducts'];
+      this.featureList = res['data']['featureOrder'];
+      this.configurableProduct = res['data']['productSummary']['product']['productTypeId'];
+      let List = res['data']['productSummary']['quesList'];
+      if (List.length > 0 && this.configurableProduct === 'AGGREGATED') {
+        this.quesList = res['data']['productSummary']['quesList'];
+      }
+      else if (List.length === 0 && this.configurableProduct === 'AGGREGATED') {
+        Swal.fire("Product is not configured properly");
+      }
+      if (this.featureList && this.featureList.length > 0) {
+        this.featureTypes = res['data']['featureOrder'];
+        this.variantTreeSampleKeys = res['data']['variantSampleKeys'];
+        this.variantTree = res['data']['variantTree'];
+      }
     })
+  }
+
+  getList(feature, index): void {
+    let Varient;
+
+    console.log("Feature -->> ", feature);
+    this.selectedVariantsData[index] = feature;
+    if (index === 0) {
+      Varient = this.variantTree[feature];
+    }
+    else {
+      let parentKey = this.selectedVariantsData[index - 1];
+      Varient = this.variantTree[parentKey][feature];
+    }
+
+
+    if (Array.isArray(Varient)) {
+      console.log("if statement", Varient);
+      this.productIdVarient = Varient[0];
+    }
+    else {
+      console.log("else statement", Varient);
+      console.log("featuresModelVal[0]", this.featuresModelVal[0]);
+      this.dropDownData.push(Varient);
+    }
+    console.log("selectedVariantsData --->> ", this.selectedVariantsData)
   }
 
   addToCart(quantity): void {
 
-    if (quantity === undefined || quantity === null) {
-      Swal.fire('Oops...', 'Please enter the quantity!', 'error')
-    }
-    else {
-      const data = {
-        'add_product_id': this.productId,
-        'quantity': quantity
+    if (this.configurableProduct === 'AGGREGATED') {
+      console.log("comment", this.comment);
+      console.log("commentCheckBox", this.commentCheckBox);
+      console.log("data", this.data);
+
+      if (Object.keys(this.data).length === 0) {
+        let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
+        this.data['add_product_id'] = Array(this.productId);
+        let Quantity = [];
+        Quantity.push(this.quantity)
+        this.data['quantity'] = Quantity;
+        this.data['currencyUsed'] = Array(currencyUsed);
+        this.data['product_id'] = Array(this.productId);
+
+      }
+      for (let key in this.quesList) {
+        if (!this.quesList[key]['isSingleChoice']) {
+          for (let option in this.quesList[key]['options']) {
+            if (this.quesList[key]['options'][option]['isSelected'] === true) {
+              let selectedOption = [];
+              selectedOption.push(Number(option));
+              this.data[key] = selectedOption;
+            }
+
+            if (!this.data['comments_' + key + '_' + option]) {
+              this.data['comments_' + key + '_' + option] = Array('');
+            }
+          }
+        }
       }
 
-      this.service.addProductToCart(data).subscribe((res) => {
-        this.productData = res['data'];
-        Swal.fire("Product added successfully..!!")
+
+      for (let key in this.quesList) {
+        if (this.quesList[key]['isSingleChoice']) {
+          if (this.quesList[key]['options'].length != 1) {
+            for (let option in this.quesList[key]['options']) {
+              if (this.quesList[key]['options'][option]['isSelected'] === true) {
+                let selectedOption = [];
+                selectedOption.push(Number(option));
+                this.data[key] = selectedOption;
+              }
+            }
+          }
+
+          if (!this.data['comments_' + key + '_0']) {
+            this.data['comments_' + key + '_0'] = Array('');
+          }
+        }
+      }
+
+      this.service.addConfProduct(this.data).subscribe((res) => {
+        if (res['data'] === "success") {
+          Swal.fire("Product added successfully..!!");
+		  this.getCartCount();
+        }
       })
+
     }
+    else {
+      if (quantity == undefined || quantity == null) {
+        Swal.fire('Oops...', 'Please enter the quantity!', 'error')
+      }
+      else {
+
+        let product;
+
+        if (this.isVirtual === 'Y') {
+          if (this.productIdVarient === undefined) {
+            Swal.fire("Oops..!!", "Please select varient", 'error');
+          }
+          else {
+            product = this.productIdVarient;
+            let data = {
+              'add_product_id': product,
+              'quantity': quantity
+            }
+
+            this.service.addProductToCart(data).subscribe((res) => {
+              if (res['data']['responseMessage'] != null) {
+                Swal.fire(res['data']['responseMessage']);
+              }
+              else if (res['data']['errorMessage'] != null) {
+                Swal.fire(res['data']['errorMessage']);
+              }
+              else {
+                this.productData = res['data'];
+                Swal.fire("Product added successfully..!!");
+                this.getCartCount();
+              }
+
+            })
+          }
+        }
+        else {
+          product = this.productId;
+          let data = {
+            'add_product_id': product,
+            'quantity': quantity
+          }
+
+          this.service.addProductToCart(data).subscribe((res) => {
+            if (res['data']['responseMessage'] != null) {
+              Swal.fire(res['data']['responseMessage']);
+            }
+            else if (res['data']['errorMessage'] != null) {
+              Swal.fire(res['data']['errorMessage']);
+            }
+            else {
+              this.productData = res['data'];
+              Swal.fire("Product added successfully..!!");
+              this.getCartCount();
+            }
+
+          })
+        }
+      }
+    }
+
+
 
   }
 
@@ -66,11 +233,82 @@ export class ProductPageComponent implements OnInit {
     }
 
     this.service.addProductToCart(data).subscribe((res) => {
-      this.productData = res['data'];
-      Swal.fire("Product added successfully..!!")
+      if (res['responseMessage'] != null) {
+        Swal.fire(res['responseMessage']);
+      }
+      else if (res['errorMessage'] != null) {
+        Swal.fire(res['errorMessage']);
+      }
+      else {
+        this.productData = res['data'];
+        Swal.fire("Product added successfully..!!")
+      }
+
     })
 
 
+  }
+
+  selectProductDetails(conf, index, isSingleChoice, checkboxIndex): void {
+
+    if (this.quantity === undefined) {
+      Swal.fire('Oops..!!', 'Please select Quantity', 'error');
+    }
+    else {
+
+      console.log(this.quesList);
+
+      let arr = this.quesList[index]['options'];
+
+      for (let key in arr) {
+        if (key != 'getIndexBy') {
+          if (arr[key]['description'] === conf) {
+            let arr = [];
+            let keyInt: number = +key;
+            arr.push(keyInt);
+            this.data[index] = arr;
+          }
+        }
+      }
+
+
+      if (isSingleChoice) {
+        for (let comm in this.comment) {
+          if (comm <= index) {
+            this.data['comments_' + comm + '_0'] = Array(this.comment[comm]);
+          }
+
+        }
+      }
+      else {
+        for (let comm in this.commentCheckBox) {
+          if (comm <= checkboxIndex) {
+            this.data['comments_' + index + '_' + checkboxIndex] = Array(this.commentCheckBox[comm]);
+          }
+        }
+      }
+
+      let currencyUsed = this.productData['productSummary']['price']['currencyUsed'];
+      this.data['add_product_id'] = Array(this.productId);
+      let Quantity = [];
+      Quantity.push(this.quantity)
+      this.data['quantity'] = Quantity;
+      this.data['currencyUsed'] = Array(currencyUsed);
+      this.data['product_id'] = Array(this.productId);
+      console.log(this.data);
+      this.service.getConfigDetailsEvent(this.data).subscribe((res) => {
+        if (res['data']['responseMessage'] === 'success')
+          this.price = res['data']['totalPrice'];
+      })
+
+    }
+  }
+
+  getCartCount(): void {
+    this.shopAllService.showCart().subscribe((res) => {
+      this.shopAllService.addValueToCart(res['data']['cart']['shoppingCartSize']);
+      this.getProductDetails();
+    })
   }
 
   scroll(id) {

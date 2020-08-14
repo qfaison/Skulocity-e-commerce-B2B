@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../../app-service';
+import { MyAccountServiceService } from './my-account-service.service';
+
 
 @Component({
   selector: 'app-my-profile',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor() { }
+  userData;
+  emailDataList;
+  showData = false;
 
-  ngOnInit(): void {
+  constructor(
+    readonly service : MyAccountServiceService,
+    readonly loaderService : AppService
+  ) { }
+
+  ngOnInit() {
+    this.loaderService.showLoader();
+    this.getUserDetails();
+  }
+
+  getUserDetails(): void {
+    this.service.getUserDetails().subscribe((res)=>{
+      if(res)
+      {
+        console.log(res);
+        this.userData = res['data']['person'];
+        this.emailDataList = res['data']['partyAndContactMechList'];
+        if(this.userData && this.emailDataList){
+          console.log("123456");
+          console.log(this.userData);
+          console.log(this.emailDataList);
+          this.loaderService.hideLoader();
+          this.showData = true;
+        }
+      }
+     
+    })
   }
 
 }

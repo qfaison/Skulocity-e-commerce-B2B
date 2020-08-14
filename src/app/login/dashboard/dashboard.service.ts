@@ -59,4 +59,20 @@ export class DashboardService {
     return this.http.delete('skulocity/api/v1/public/ecommerce/cart/emptycart');
   }
 
+  getCountriesAndStates(){
+    return this.http.get('skulocity/api/v1/getfinancialaccounttypes');
+  }
+
+  addAdress(data){
+    return this.http.post('skulocity/api/v1/ecommerce/checkout/create/postaladdress/andPurpose',data)
+  }
+
+  getPostalAddresses(){
+    return this.http.get('skulocity/api/v1/ecommerce/profile/editCreditCard')
+  }
+
+  createCreditCard(data){
+    return this.http.post('skulocity/api/v1/ecommerce/profile/createCreditCard',data)
+  }
+
 }

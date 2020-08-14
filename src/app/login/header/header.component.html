@@ -8,7 +8,7 @@
                         <a class="nav-link" [routerLink]="['/dashboard/shopAll']"
                             [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">shop</a>
                     </li>
-                    <li class="nav-item ">
+                    <!-- <li class="nav-item ">
                         <a class="nav-link" [routerLink]="['/dashboard/keratin']"
                             [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}"
                             data-id="upcomingsection">EDUCATION</a>
@@ -24,10 +24,10 @@
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['/dashboard/contact']"
                             [ngStyle]="logoDark ? {'color': 'white'} : {'color': 'black'}">contact</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <a class="navbar-brand navbarinside__logo logoshifting" href="javascript:void(0);">
-                    <img [routerLink]="['/dashboard/']" style="max-width: 230%;" [src]="logo" alt="">
+                    <img [routerLink]="['/dashboard/home']" style="max-width: 230%;" [src]="logo" alt="">
                 </a>
                 <ul class="navbar-nav ml-auto">
 
@@ -37,17 +37,17 @@
                         <div class="dropdown-menu">
                             <ul>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/quickAdd']">Quick Add</a></li>
+                                        [routerLink]="['/dashboard/quickAdd']">Quick Add</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/orderHistory']">Order History</a></li>
+                                        [routerLink]="['/dashboard/orderHistory']">Order History</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/shoppingList']">ShoppingLists</a></li>
+                                        [routerLink]="['/dashboard/shoppingList']">ShoppingLists</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/requests']">Requests</a></li>
+                                        [routerLink]="['/dashboard/requests']">Requests</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/quotes']">Quotes</a></li>
+                                        [routerLink]="['/dashboard/quotes']">Quotes</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item"
-                                    [routerLink]="['/dashboard/messages']">Messages</a></li>
+                                        [routerLink]="['/dashboard/messages']">Messages</a></li>
                             </ul>
                         </div>
                     </li>
@@ -58,7 +58,8 @@
                             ACCOUNT</a>
                         <div class="dropdown-menu">
                             <ul>
-                                <li style="list-style-type: none;"><a class="dropdown-item" *ngIf="isLogin" [routerLink]="['/dashboard/profile']">My Profile</a></li>
+                                <li style="list-style-type: none;"><a class="dropdown-item" *ngIf="isLogin"
+                                        [routerLink]="['/dashboard/profile']">My Profile</a></li>
                                 <li style="list-style-type: none;"><a class="dropdown-item" href="javascript:void(0)"
                                         (click)="signOut()">Sign Out</a></li>
                             </ul>
@@ -72,6 +73,9 @@
             </div>
         </div>
     </nav>
+</div>
+<div class="globalLoader" *ngIf="toggleShow || toggleShow1">
+
 </div>
 
 <!------- Checkout pages --------->
@@ -130,13 +134,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">First Name*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['toName']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['toName']}}">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Last Name*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['attnName']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['attnName']}}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -159,17 +165,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Shipping Street Address*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address1']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['address1']}}">
                         </div>
                         <div class="form-group">
                             <label for="">Apt/Suite</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['address2']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['address2']}}">
                         </div>
                         <div class="row no-gutters">
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     <label for="">City*</label>
-                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['city']}}">
+                                    <input type="text" class="form-control"
+                                        value="{{postalAddresses[0]['postalAddress']['city']}}">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +186,8 @@
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     <label for="">Zip/Postal Code*</label>
-                                    <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['postalCode']}}">
+                                    <input type="text" class="form-control"
+                                        value="{{postalAddresses[0]['postalAddress']['postalCode']}}">
                                 </div>
                             </div>
                         </div>
@@ -189,11 +199,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Country*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['countryGeoId']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['countryGeoId']}}">
                         </div>
                         <div class="form-group">
                             <label for="">State/Province*</label>
-                            <input type="text" class="form-control" value="{{postalAddresses[0]['postalAddress']['stateProvinceGeoId']}}">
+                            <input type="text" class="form-control"
+                                value="{{postalAddresses[0]['postalAddress']['stateProvinceGeoId']}}">
                         </div>
                     </div>
                 </div>
@@ -208,7 +220,8 @@
                     <div class="col-md-6 formButton slidepopBtn text-right">
                         <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
                         <a id="orderConfirmationPaymentClick" href="javascript:;"
-                            class="blackBtn hoverblck  blackBtn__large" (click)="checkoutOptionsCheckoutPageShippingAddress()">CONTINUE</a>
+                            class="blackBtn hoverblck  blackBtn__large"
+                            (click)="checkoutOptionsCheckoutPageShippingAddress()">CONTINUE</a>
                         <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
                     </div>
                 </div>
@@ -392,6 +405,9 @@
             <button class="closeShoppopup" (click)="hideBag()">X</button>
             <h6 class="shoppopupHeader__title"> MY BAG ({{cartSize}}) </h6>
         </div>
+        <div class="shoppopupHeader mob__Dnone">
+            <button class="blackBtn hoverblck" (click)="clearCart()">Clear Cart</button>
+        </div>
         <div class="shoppopup__row" *ngFor="let cart of cartDetailsList">
             <div class="shoppopup__producthldr">
                 <div class="shopprdct__img">
@@ -433,9 +449,13 @@
                 <h1>CHECKOUT</h1>
             </div>
         </div>
-        <div class="comonformOuter">
+        <div class="comonformOuter" *ngIf="!addAdressForm">
             <div class="col-md-12 subheading">
                 <h5>Who are we shipping this to?</h5>
+            </div>
+            <div class="col-md-12 subheading">
+                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addAddressPopup()">Add
+                    Address</button>
             </div>
             <form action="">
                 <div class="col-md-12 subheading ">
@@ -445,8 +465,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Shipping Address*</b></label>
-                            <select *ngIf="checkoutFormData" [(ngModel)]="contMechId" name="contMechId"
-                                (change)="checkoutOptionsCheckoutPageShippingAddress()">
+                            <select class="custom-select" *ngIf="checkoutFormData" [(ngModel)]="contMechId"
+                                name="contMechId" (change)="checkoutOptionsCheckoutPageShippingAddress()">
                                 <option *ngFor="let address of checkoutFormData"
                                     value="{{address.postalAddress.contactMechId}}">
                                     {{address.postalAddress.address1}} {{address.postalAddress.address2}}
@@ -456,12 +476,11 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row" *ngIf="shippingMethods">
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="shippingMethods">
                             <label for=""><b>Shipping Method*</b></label>
-                            <select *ngIf="checkoutFormData" [(ngModel)]="shippingMethod" name="shippingMethod">
+                            <select class="custom-select" *ngIf="checkoutFormData" [(ngModel)]="shippingMethod"
+                                name="shippingMethod">
                                 <option *ngFor="let method of shippingMethods"
                                     value="{{method.shipmentMethodTypeId}}@{{method.partyId}}">
                                     {{method.description}} ${{method.currencyValue}}
@@ -470,20 +489,133 @@
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center">
+
+                <div class="row" *ngIf="customerPartyId === 'dw'">
                     <div class="col-md-6">
-                        <div class="form-group form-check m-0">
-                            <input type="checkbox" class="form-check-input" id="Check3">
-                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
-                                    Conditions</u></label>
+                        <div class="form-group">
+                            <label for=""><b>* Region</b></label>
+                            <select class="custom-select">
+                                <option value="Andalucía">Andalucía</option>
+                                <option value="Oviedo">Oviedo</option>
+                                <option value="Cataluña">Cataluña</option>
+                                <option value="Madrid">Madrid</option>
+                                <option value="ComunidadValenciana">Comunidad Valenciana</option>
+                                <option value="PaísVasco">País Vasco</option>
+                                <option value="NordPasdeCalais">Nord-Pas-de-Calais</option>
+                            </select>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* District (for F&I only)</b></label>
+                            <select class="custom-select">
+                                <option value="District1">District 1</option>
+                                <option value="District1">District 2</option>
+                                <option value="District1">District 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="customerPartyId === 'dw'">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>* Zone (F&I agents="Agents")</b></label>
+                            <select class="custom-select">
+                                <option value="Zone1">Zone 1</option>
+                                <option value="Zone2">Zone 2</option>
+                                <option value="Zone3">Zone 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="!shippingMethod && !contMechId">
+                    <div class="col-md-12" style="text-align: center;">
+                        <p style="color: red;">{{errorMessage}}</p>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
                     <div class="col-md-6 formButton slidepopBtn text-right">
                         <!-- <input type="submit" class="blackBtn hoverblck" value="CONTINUE" name=""> -->
                         <a id="orderConfirmationPaymentClick" href="javascript:;"
                             class="blackBtn hoverblck  blackBtn__large"
                             (click)="checkoutOptionsCheckoutPageShippingOptions()">CONTINUE</a>
-                        <button class="blackBtn hoverblck desktop-dnone">SHOP MORE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="comonformOuter" *ngIf="addAdressForm">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <button class="blackBtn hoverblck" style="margin-left: 20px;"
+                        (click)="addAdressHide()">Cancel</button>
+                </div>
+            </div>
+            <form [formGroup]="addressForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">To Name</label>
+                            <input type="text" class="form-control" formControlName="toName">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Attention Name</label>
+                            <input type="text" class="form-control" formControlName="attnName">
+                        </div>
+                        <div class="form-group">
+                            <label for="">City</label>
+                            <input type="text" class="form-control" formControlName="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="">State/Province *</label>
+                            <select class="custom-select" formControlName="stateProvinceGeoId"
+                                name="stateProvinceGeoId">
+                                <option *ngFor="let state of states" value="{{state.geoId}}">
+                                    {{state.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Allow Solicitation?</label>
+                            <select class="custom-select" formControlName="allowSolicitation" name="allowSolicitation">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Address Line 1 *</label>
+                            <input type="text" class="form-control" formControlName="address1">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Address Line 2</label>
+                            <input type="text" class="form-control" formControlName="address2">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Zip/Postal Code *</label>
+                            <input type="text" class="form-control" formControlName="postalCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Country *</label>
+                            <select class="custom-select" formControlName="countryGeoId" name="countryGeoId">
+                                <option *ngFor="let country of countries" value="{{country.geoId}}">
+                                    {{country.geoName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 formButton m-0">
+                        <!-- <input type="submit" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPayment" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                            (click)="addAddress()">CONTINUE</a>
                     </div>
                 </div>
             </form>
@@ -500,10 +632,13 @@
                 <h1>ENTER PAYMENT INFO</h1>
             </div>
         </div>
-        <div class="comonformOuter paymentInfoSctn">
+        <div class="comonformOuter paymentInfoSctn" *ngIf="!addNewCard">
+            <div class="col-md-12 subheading">
+                <button class="blackBtn hoverblck" style="margin-left: 20px;" (click)="addCard()">Add Credit
+                    Card</button>
+            </div>
             <form action="">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="patmentinfo__Heading pl-15">
                             <h3>Pay with</h3>
@@ -512,65 +647,174 @@
                             <h5>Credit Card</h5>
                         </div>
                         <div class="form-group">
-                            <label for="">Card Holder Name</label>
-                            <input type="text" class="form-control"
-                                value="{{paymentFormData[0]['firstNameOnCard']}} {{paymentFormData[0]['middleNameOnCard']}} {{paymentFormData[0]['lastNameOnCard']}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Card Number</label>
-                            <input type="text" class="form-control" value="{{paymentFormData[0]['cardNumber']}}">
-                        </div>
-                        <div class="DOB">
-                            <div class="form-group">
-                                <div class="row no-gutters justify-content-between">
-                                    <div class="col-md-6 col-8">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label>Expiration Date</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group px-0">
-                                                    <input type="text" class="form-control"
-                                                        value="{{paymentFormData[0]['expireDate']}}">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <label class="no-padding mb5">Select Credit Card</label>
+                            <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let payment of paymentFormData">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <input type="radio" name="checkOutPaymentId"
+                                            (click)="setPaymentMethodId(payment.paymentMethodId)" style="opacity: 1;">
                                     </div>
-                                    <div class="col-md-3 col-4">
-                                        <div class="col-12 pr-0">
-                                            <label for="">CVV</label>
-                                        </div>
-                                        <div class="col-12 pr-0">
-                                            <div class="form-group px-0">
-                                                <input type="text" class="form-control" value="">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-11">
+                                        <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                            {{payment.firstNameOnCard}} {{payment.middleNameOnCard}}
+                                            {{payment.lastNameOnCard}}&nbsp;&nbsp;
+                                            {{payment.cardType}}&nbsp;&nbsp;
+                                            {{payment.cardNumber}}&nbsp;&nbsp;
+                                            {{payment.expireDate}}
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
+                            </label>
+
+                            <label class="mb10 col-md-12 pl0 ng-scope" *ngIf="EXT_OFFLINE">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <input type="radio" name="checkOutPaymentId"
+                                            (click)="setPaymentMethodId('EXT_OFFLINE')" style="opacity: 1;">
+                                    </div>
+                                    <div class="col-md-11">
+                                        <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                            Offline Payment
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                            <div class="separator"></div>
                         </div>
-                        <!-- <div class="patmentinfo__Heading pl-15">
-                            <h5>- OR -</h5>
-                        </div>
-                        <div class="othrpymntoptn">
-                            <ul class="othrpymntoptn__list">
-                                <li> <button class="btntransparent"><img src="../../../assets/img/apple_pay.svg"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/samsungpay.png"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/PayPal.svg"
-                                            alt=""></button></li>
-                                <li> <button class="btntransparent"><img src="../../../assets/img/affirm.png"
-                                            alt=""></button></li>
-                            </ul>
-                        </div> -->
-                        <div class="separator"></div>
                     </div>
                 </div>
                 <div class="formButton m-0">
                     <!-- <input type="submit" value="PLACE OrDER" name=""> -->
                     <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
-                        (click)="checkoutPayment()">PLACE OrDER</a>
+                        (click)="checkoutPayment()">PLACE ORDER</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="comonformOuter" *ngIf="addNewCard">
+            <div class="shoppopup__headingHldr">
+                <div class="headinghldr text-left">
+                    <button class="blackBtn hoverblck" style="margin-left: 20px;"
+                        (click)="addCardHide()">Cancel</button>
+                </div>
+            </div>
+            <form [formGroup]="cardForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Company Name On Card</label>
+                            <input type="text" class="form-control" formControlName="companyNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">First Name Card *</label>
+                            <input type="text" class="form-control" formControlName="firstNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Last Name Card *</label>
+                            <input type="text" class="form-control" formControlName="lastNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Type *</label>
+                            <select class="custom-select" formControlName="cardType" name="cardType">
+                                <option value="Visa" class="ng-binding">Visa </option>
+                                <option value="MasterCard" class="ng-binding">Master Card </option>
+                                <option value="AmericanExpress" class="ng-binding">American Express </option>
+                                <option value="DinersClub" class="ng-binding">Diners Club </option>
+                                <option value="Discover" class="ng-binding">Discover </option>
+                                <option value="EnRoute" class="ng-binding">EnRoute </option>
+                                <option value="JCB" class="ng-binding">JCB </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Expiration Date *</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select name="expMonth" formControlName="expMonth">
+                                        <option *ngFor="let month of months" [ngValue]="month">
+                                            {{month}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="expYear" formControlName="expYear">
+                                        <option *ngFor="let year of years" [ngValue]="year">
+                                            {{year}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Prefix Card</label>
+                            <select class="custom-select" formControlName="titleOnCard" name="titleOnCard">
+                                <option value="Mr." class="ng-binding">Mr. </option>
+                                <option value="Mrs." class="ng-binding">Mrs. </option>
+                                <option value="Ms." class="ng-binding">Ms.. </option>
+                                <option value="Dr." class="ng-binding">Dr. </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Middle Name Card</label>
+                            <input type="text" class="form-control" formControlName="middleNameOnCard">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Suffix On Card</label>
+                            <select class="custom-select" formControlName="suffixOnCard" name="suffixOnCard">
+                                <option value="Jr." class="ng-binding">Jr. </option>
+                                <option value="Sr." class="ng-binding">Sr. </option>
+                                <option value="I" class="ng-binding">I </option>
+                                <option value="II" class="ng-binding">II </option>
+                                <option value="III" class="ng-binding">III </option>
+                                <option value="IV" class="ng-binding">IV </option>
+                                <option value="V" class="ng-binding">V </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Card Number *</label>
+                            <input type="text" class="form-control" formControlName="cardNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <input type="text" class="form-control" formControlName="description">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="no-padding mb5"><b>Select Billing Address</b></label>
+                        <label class="mb10 col-md-12 pl0 ng-scope" *ngFor="let address of billingAddresses">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <input type="radio" name="contactMechId" formControlName="contactMechId"
+                                        value="{{address.partyContactMech.contactMechId}}"
+                                        (click)="setContactMechId(address.partyContactMech.contactMechId)"
+                                        style="opacity: 1;">
+                                </div>
+                                <div class="col-md-11">
+                                    <span class="lbl padding-8 ng-binding" style="line-height: 2.9;padding: 0px;">
+                                        To: Attn: {{address.postalAddress.address1}} {{address.postalAddress.address2}}
+                                        {{address.postalAddress.city}}&nbsp;&nbsp;
+                                        {{address.postalAddress.stateProvinceGeoId}}&nbsp;&nbsp;
+                                        {{address.postalAddress.postalCode}}&nbsp;&nbsp;
+                                        ({{address.postalAddress.lastUpdatedStamp | date}})
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="separator"></div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 formButton m-0">
+                        <!-- <input type="submit" value="CONTINUE" name=""> -->
+                        <a id="orderConfirmationPayment" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                            (click)="addNewCardDetails()">CONTINUE</a>
+                    </div>
                 </div>
             </form>
         </div>
@@ -624,11 +868,12 @@
                         <table id="myTable">
                             <thead>
                                 <tr>
-                                    <th [style.background]="color" style="width: 20%;color:white">Product</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Quantity Ordered</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Unit Price</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Adjustments</th>
-                                    <th [style.background]="color" style="width: 20%;color:white">Sub Total</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Product</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Quantity Ordered
+                                    </th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Unit Price</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Adjustments</th>
+                                    <th [style.background]="thColor" style="width: 20%;color:white">Sub Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -667,9 +912,28 @@
                         </table>
                     </div>
                 </div>
-                <div class="formButton m-0">
-                    <!-- <input type="submit" value="PLACE OrDER" name=""> -->
-                    <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large" (click)="submitOrder()">SUBMIT OrDER</a>
+                <div class="row" style="margin:0px; padding-top: 20px;">
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="form-check m-0">
+                            <p style="color: red;"><i>{{errorMessageTermsAndConditions}}</i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0px; padding-top: 20px;">
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="form-check m-0">
+                            <input type="checkbox" class="form-check-input" id="Check3" (click)="termsChecked();">
+                            <label class="form-check-label" for="Check3">I have read and agree to the <u>Terms &amp;
+                                    Conditions</u></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pr-30 sepratorborder">
+                        <div class="formButton m-0">
+                            <!-- <input type="submit" value="PLACE OrDER" name=""> -->
+                            <a id="bagFinish" href="javascript:;" class="blackBtn hoverblck  blackBtn__large"
+                                (click)="submitOrder()">SUBMIT OrDER</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

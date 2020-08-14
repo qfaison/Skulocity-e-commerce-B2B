@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ShopAllService } from './shop-all.service';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-shop-all',
@@ -20,11 +21,15 @@ export class ShopAllComponent implements OnInit {
   productListCatalog;
   subCategoryList;
   subCategoryProductsList;
-  showSubCategory: boolean = false;
   quantity = [];
   quantityProduct = [];
   customerPartyId;
   urlSubscriber: any;
+
+  showSubCategorySpecial: boolean = false;
+  showProductsSpecial: boolean = false;
+  showSubCatInner: boolean = false;
+  showSubCatInnerProducts: boolean = false;
 
   constructor(
     private service: ShopAllService,
@@ -34,7 +39,6 @@ export class ShopAllComponent implements OnInit {
   ngOnInit(): void {
     this.customerPartyId = localStorage.getItem("customerPartyId");
     this.main();
-    this.getSpecialCategory();
   }
 
   mouseon() {
@@ -54,6 +58,7 @@ export class ShopAllComponent implements OnInit {
         this.categoryList = res['data']['categoryList'];
         this.CatalogId = res['data']['currentCatalogId'];
         localStorage.setItem('catalogId', res['data']['currentCatalogId']);
+        this.getSpecialCategory();
       })
     }
     else {
@@ -64,6 +69,7 @@ export class ShopAllComponent implements OnInit {
         this.catalogsList = res['data']['catalogCol'];
         this.categoryList = res['data']['categoryList'];
         this.CatalogId = res['data']['currentCatalogId'];
+        this.getSpecialCategory();
       })
     }
   }
@@ -99,8 +105,9 @@ export class ShopAllComponent implements OnInit {
     }, 0);
   }
 
-  openProduct(productId): void {
-    this.router.navigate(['/dashboard/product-page', productId]);
+  openProduct(productId,isVirtual): void {
+    this.router.navigate(['/dashboard/product-page', productId, isVirtual]);
+
   }
 
   getSpecialCategory(): void {
@@ -108,16 +115,34 @@ export class ShopAllComponent implements OnInit {
     this.service.getSpecialCategory(catalogId).subscribe((res) => {
       this.categoryListCatalog = res['data']['categoryList'];
       this.productListCatalog = res['data']['productList'];
+      if (this.categoryListCatalog.length != 0) {
+        this.showSubCategorySpecial = true;
+      }
+      if (this.productListCatalog.length != 0) {
+        this.showProductsSpecial = true;
+      }
     })
   }
 
   getSubcategories(categoryId): void {
 
     this.service.getSubCategory(categoryId).subscribe((res) => {
-      console.log("getSubCategory --->> ", res);
-      this.showSubCategory = true;
       this.subCategoryList = res['data']['subCategory'];
       this.subCategoryProductsList = res['data']['productDetails']['productCategoryMembers'];
+      if (this.subCategoryList.length != 0) {
+        this.showSubCatInner = true;
+      }
+      else{
+        this.showSubCatInner = false;
+      }
+      if (this.subCategoryProductsList.length != 0) {
+        this.showSubCatInnerProducts = true;
+      }
+      else{
+        this.showSubCatInnerProducts = false;
+      }
+      this.showSubCategorySpecial = false;
+      this.showProductsSpecial = false;
     })
 
   }
@@ -133,9 +158,16 @@ export class ShopAllComponent implements OnInit {
       }
       this.service.addProductToCart(data).subscribe((res) => {
         console.log(res);
-        if (res['message']) {
-          Swal.fire('Product added to cart..!!')
+        if (res['responseMessage'] != null) {
+          Swal.fire(res['responseMessage']);
           this.showCart();
+        }
+        else if (res['errorMessage'] != null) {
+          Swal.fire(res['errorMessage']);
+          this.showCart();
+        }
+        else{
+          Swal.fire('Product added to cart..!!');
         }
       })
     }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from './app-service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'B2B';
+  showLoader : any;
+
+  constructor(private service : AppService){
+    this.showLoader = this.service.loaderObject
+  }
+  
+  ngOnDestroy() {
+    this.showLoader.unsubscribe();
+  }
 }
