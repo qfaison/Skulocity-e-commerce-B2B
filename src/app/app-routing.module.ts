@@ -44,6 +44,7 @@ const routes: Routes = [
     { path:'product-page/:productId/:isVirtual', component: ProductPageComponent},
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
+    { path:'edit-Profile', component: ViewOrderHistoryComponent},
   ]}
 ];
 
