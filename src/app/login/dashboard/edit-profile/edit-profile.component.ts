@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class EditProfileComponent implements OnInit {
 
   userData;
+  country;
   emailDataList;
   showData = false;
   addresses;
