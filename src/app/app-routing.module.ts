@@ -21,6 +21,7 @@ import { ProductPageComponent } from './login/dashboard/product-page/product-pag
 import { ViewRequestComponent } from './login/dashboard/requests/view-request/view-request.component';
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
+import { EditProfileComponent } from './login/dashboard/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent },
@@ -44,7 +45,7 @@ const routes: Routes = [
     { path:'product-page/:productId/:isVirtual', component: ProductPageComponent},
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
-    { path:'edit-Profile', component: ViewOrderHistoryComponent},
+    { path:'edit-Profile', component: EditProfileComponent},
   ]}
 ];
 
