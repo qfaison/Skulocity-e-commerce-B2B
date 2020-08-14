@@ -13,6 +13,7 @@ export class EditProfileComponent implements OnInit {
 
   userData;
   country;
+  state;
   emailDataList;
   showData = false;
   addresses;
