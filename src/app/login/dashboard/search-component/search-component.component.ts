@@ -23,7 +23,7 @@ export class SearchComponentComponent implements OnInit {
   ngOnInit() {
     this.color = localStorage.getItem('fontColor');
     this.sub = this.route.params.subscribe(params => {
-      this.keyword =params['keyword'];
+      this.keyword =params['productId'];
       this.getProducts(this.keyword);
      
     });
@@ -36,7 +36,7 @@ export class SearchComponentComponent implements OnInit {
   }
 
   openProduct(productId,isVirtual):void{
-    this.router.navigate(['/product-page', productId, isVirtual]);
+    this.router.navigate(['/dashboard/product-page', productId, isVirtual]);
   }
 
 }
