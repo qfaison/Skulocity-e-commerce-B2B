@@ -1,0 +1,26 @@
+<section class="findSaloon">
+    <div class="sidebarholder sidebarholder--shoppage">
+        <div class="sidebarholder__cntnt" style="width:100%;">
+            <div>
+                <div class="shopcontainer">
+                    <h3 class="heading" [style.background]='color'>Search Result</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-6" *ngFor="let product of productList">
+                            <div class="shopprdct" (click)="openProduct(product.productId,product.isVirtual);" >
+                                <a href="javascript:void(0)">
+                                    <div class="shopprdct__img">
+                                        <img *ngIf="product.mediumImageUrl" alt="{{product.productName}}" src="{{product.mediumImageUrl}}">
+                                        <img *ngIf="!product.mediumImageUrl" alt="{{product.productName}}" src="assets/img/no_product_image.png">
+                                    </div>
+                                    <div class="shopprdct__cntnt">
+                                        <h6><b>{{product.productName}}</b></h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

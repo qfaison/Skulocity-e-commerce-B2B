@@ -29,6 +29,7 @@ import { ViewRequestComponent } from './login/dashboard/requests/view-request/vi
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
 import { EditProfileComponent } from './login/dashboard/edit-profile/edit-profile.component';
+import { SearchComponentComponent } from './login/dashboard/search-component/search-component.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { EditProfileComponent } from './login/dashboard/edit-profile/edit-profil
     ViewOrderHistoryComponent,
     CreateUserComponent,
     EditProfileComponent,
+    SearchComponentComponent,
   ],
   imports: [
     BrowserModule,

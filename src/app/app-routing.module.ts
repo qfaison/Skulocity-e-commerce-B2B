@@ -22,6 +22,7 @@ import { ViewRequestComponent } from './login/dashboard/requests/view-request/vi
 import { ViewOrderHistoryComponent } from './login/dashboard/order-history/view-order-history/view-order-history.component';
 import { CreateUserComponent } from './login/dashboard/create-user/create-user.component';
 import { EditProfileComponent } from './login/dashboard/edit-profile/edit-profile.component';
+import { SearchComponentComponent } from './login/dashboard/search-component/search-component.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent },
@@ -46,6 +47,7 @@ const routes: Routes = [
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
     { path:'edit-Profile', component: EditProfileComponent},
+    { path:'searchProduct', component: SearchComponentComponent}
   ]}
 ];
 

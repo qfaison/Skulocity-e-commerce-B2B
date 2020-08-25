@@ -64,6 +64,8 @@ export class HeaderComponent implements OnInit {
   customerPartyId;
   EXT_OFFLINE:boolean = false;
 
+  searchKeyword;
+
   getDates() {
     var date = new Date();
     var currentYear = date.getFullYear();
@@ -361,6 +363,13 @@ export class HeaderComponent implements OnInit {
 
   setContactMechId(contactMechIdVal){
     this.contactMechId = contactMechIdVal;
+  }
+
+  searchProducts(keyword){
+    if(keyword!='' && keyword!= undefined && keyword!= null)
+    {
+      this.router.navigate(['/dashboard/searchProduct',keyword]);
+    }
   }
 
   @HostListener("window:scroll", [""])
