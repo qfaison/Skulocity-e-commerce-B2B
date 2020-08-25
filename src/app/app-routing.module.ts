@@ -47,7 +47,7 @@ const routes: Routes = [
     { path:'view-request/:requestId', component: ViewRequestComponent},
     { path:'view-order/:ordrid', component: ViewOrderHistoryComponent},
     { path:'edit-Profile', component: EditProfileComponent},
-    { path:'searchProduct', component: SearchComponentComponent}
+    { path:'searchProduct/:productId', component: SearchComponentComponent}
   ]}
 ];
 
