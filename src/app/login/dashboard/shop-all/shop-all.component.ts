@@ -159,11 +159,11 @@ export class ShopAllComponent implements OnInit {
       this.service.addProductToCart(data).subscribe((res) => {
         console.log(res);
         if (res['data']['responseMessage'] != null) {
-          Swal.fire(res['responseMessage']);
+          Swal.fire(res['data']['responseMessage']);
           this.showCart();
         }
         else if (res['data']['errorMessage'] != null) {
-          Swal.fire(res['errorMessage']);
+          Swal.fire(res['data']['errorMessage']);
           this.showCart();
         }
         else{
