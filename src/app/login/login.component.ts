@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     let urlSplitted = (this.currentUrl).split('.');
     let pos = urlSplitted[0].lastIndexOf('/');
     this.tenantId = urlSplitted[0].substring(pos+1,urlSplitted[0].length);
-    if(this.tenantId != 'development'){
+    if(this.tenantId != 'staging'){
       localStorage.setItem('tenantId',this.tenantId);
       localStorage.setItem('urlTenant',this.tenantId);
     }

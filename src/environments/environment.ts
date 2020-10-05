@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: "https://development.skulocity.org/b2b"
+  host: "https://staging.skulocity.org/b2b"
 };
 
 /*
