@@ -21,10 +21,10 @@ export class APIInterceptor implements HttpInterceptor {
         }
         if (localStorage.getItem('tenantId')) {
             headers = headers.append('tenantId', localStorage.getItem('tenantId'));
-            this.url =  'https://'+localStorage.getItem('tenantId')+'.skulocity.org';
+            this.url =  'https://'+localStorage.getItem('tenantId')+'.enterprisehub.io';
         }
         else{
-            this.url =  'https://'+localStorage.getItem('urlTenant')+'.skulocity.org';
+            this.url =  'https://'+localStorage.getItem('urlTenant')+'.enterprisehub.io';
         }
         
         let request = localStorage.getItem("token");
